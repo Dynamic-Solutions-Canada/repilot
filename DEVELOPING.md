@@ -45,6 +45,10 @@ reflection-heavy code).
 
 ## Building
 
+Run the build commands from the repository or its project/package directories so `global.json` selects the SDK. It requires stable .NET SDK 10.0.403 or a later 10.0 feature band/patch. Both packaging workflows install the version from that file. The SDK continues to choose runtime packs for each architecture; `Directory.Build.targets` rejects resolved .NET 10 runtime packs older than 10.0.14, including explicit overrides.
+
+This is the minimum build baseline for [CVE-2026-111497](https://github.com/dotnet/runtime/security/advisories/GHSA-p3jp-9v83-76w9). It does not establish that Repilot processes attacker-controlled Brotli input. Both executables in the MSIX are self-contained, so an existing package needs a fresh restore, rebuild and Store update to receive the runtime fix. Updating the machine's shared runtime alone does not update either packaged executable.
+
 **Settings app (dev):**
 ```powershell
 dotnet build Repilot/Repilot.csproj -c Debug
@@ -68,7 +72,7 @@ Before Store submission, set `<Identity>` `Name`/`Publisher` in
 ## Requirements
 
 - Windows 11 (build 22621+)
-- .NET 10 SDK
+- Stable .NET 10 SDK 10.0.403 or newer, selected by `global.json`
 - Windows SDK packaging tools to build the MSIX
 - Full Native AOT for the handler additionally needs the VC++ build tools (optional)
 
