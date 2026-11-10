@@ -1,9 +1,5 @@
 # Developing Repilot
 
-Repilot remaps the Windows 11 Copilot key via the official Microsoft "Copilot
-hardware key provider" model. It ships as a signed **MSIX** (required for it to be
-assignable in Settings).
-
 ## Working with Codex
 
 Open this repository in Codex. Project instructions live in [AGENTS.md](AGENTS.md),
@@ -50,8 +46,8 @@ Run the build commands from the repository or its project/package directories so
 This is the minimum build baseline for [CVE-2026-111497](https://github.com/dotnet/runtime/security/advisories/GHSA-p3jp-9v83-76w9). It does not establish that Repilot processes attacker-controlled Brotli input. Both executables in the MSIX are self-contained, so an existing package needs a fresh restore, rebuild and Store update to receive the runtime fix. Updating the machine's shared runtime alone does not update either packaged executable.
 
 **Settings app (dev):**
-```powershell
-dotnet build Repilot/Repilot.csproj -c Debug
+```bash
+npm run verify:desktop
 ```
 
 **MSIX package (assignable / Store):**
@@ -59,15 +55,14 @@ dotnet build Repilot/Repilot.csproj -c Debug
 # Needs the Windows SDK packaging tools (makeappx/makepri/signtool). The build
 # script finds them in an installed SDK or the Microsoft.Windows.SDK.BuildTools
 # NuGet package (acquiring it if needed).
-powershell -File RepilotMSIX/generate-msix-images.ps1   # regenerate the icon/tile art + the .ico
-powershell -File RepilotMSIX/build-msix.ps1             # sideload (dev-signed)
-powershell -File RepilotMSIX/build-msix.ps1 -NoSign     # Store upload
+npm run build:desktop             # sideload (dev-signed)
+npm run package:desktop     # Store upload
 ```
 
 The script publishes both exes (WinUI self-contained + the handler) into the package.
 Before Store submission, set `<Identity>` `Name`/`Publisher` in
 `RepilotMSIX/Package.appxmanifest` to your Partner Center values. Bump `<Version>` in
-`Directory.Build.props` for each update (MSIX blocks same-version re-installs).
+`Directory.Build.props` for releases; the shared helper allocates dev revisions in staging.
 
 ## Requirements
 
@@ -153,3 +148,13 @@ comes from Partner Center account settings.
 To create the linked app: Partner Center > Account settings > User management >
 Azure AD applications > Add Azure AD application. Give it the Manager role, then create
 its client secret in Entra. Renew the secret before expiry.
+
+## Windows desktop workflow
+
+Source is authoritative in WSL. Read `.codex/docs/windows-development.md` and use
+`npm run build:desktop`, `npm run verify:desktop`, `npm run install:desktop`, and
+`npm run package:desktop` from the repository root. The common bridge builds in
+a disposable C: Windows TEMP directory and cleans it after use. Never use a D:
+checkout or build directly against WSL source with Windows tools. Dev install
+versions change only in the temporary copy; never uninstall to bypass an update
+error. Store releases keep their existing project-specific release workflow.

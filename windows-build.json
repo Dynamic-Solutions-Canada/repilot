@@ -1,0 +1,11 @@
+{
+  "project": "Repilot/Repilot.csproj",
+  "package_script": "RepilotMSIX/build-msix.ps1",
+  "package_output": "RepilotMSIX/bin/msix-output",
+  "certificate": ".windows-build/signing.pfx",
+  "version_file": "Directory.Build.props",
+  "dev_identity": "27766TechnicallyReal.CopilotKeyRemapper",
+  "application_id": "Settings",
+  "signing": "shared-dev",
+  "trusted_certificate": true
+}
