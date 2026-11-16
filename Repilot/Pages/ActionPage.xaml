@@ -2,7 +2,6 @@
     x:Class="Repilot.Pages.ActionPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:models="using:Repilot.Models"
     xmlns:vm="using:Repilot.ViewModels">
 
     <Grid Padding="32,16,32,0" RowSpacing="14">
@@ -13,23 +12,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Copilot key action" Style="{StaticResource TitleTextBlockStyle}" />
+        <TextBlock Grid.Row="0" x:Uid="ActionTitle" Style="{StaticResource TitleTextBlockStyle}" />
 
         <!-- Mode -->
         <SelectorBar Grid.Row="1" x:Name="ModeBar" SelectionChanged="ModeBar_SelectionChanged">
-            <SelectorBarItem Text="Shortcut" Tag="KeyCombo">
+            <SelectorBarItem x:Uid="ActionShortcut" Tag="KeyCombo">
                 <SelectorBarItem.Icon><FontIcon Glyph="&#xE765;" /></SelectorBarItem.Icon>
             </SelectorBarItem>
-            <SelectorBarItem Text="Text" Tag="Text">
+            <SelectorBarItem x:Uid="ActionText" Tag="Text">
                 <SelectorBarItem.Icon><FontIcon Glyph="&#xE8D2;" /></SelectorBarItem.Icon>
             </SelectorBarItem>
-            <SelectorBarItem Text="App or link" Tag="LaunchApp">
+            <SelectorBarItem x:Uid="ActionApp" Tag="LaunchApp">
                 <SelectorBarItem.Icon><FontIcon Glyph="&#xE8E5;" /></SelectorBarItem.Icon>
             </SelectorBarItem>
-            <SelectorBarItem Text="Windows function" Tag="WindowsFunction">
+            <SelectorBarItem x:Uid="ActionFunction" Tag="WindowsFunction">
                 <SelectorBarItem.Icon><FontIcon Glyph="&#xE71D;" /></SelectorBarItem.Icon>
             </SelectorBarItem>
-            <SelectorBarItem Text="Nothing" Tag="None">
+            <SelectorBarItem x:Uid="ActionNone" Tag="None">
                 <SelectorBarItem.Icon><FontIcon Glyph="&#xE711;" /></SelectorBarItem.Icon>
             </SelectorBarItem>
         </SelectorBar>
@@ -39,26 +38,24 @@
 
             <!-- Text -->
             <StackPanel x:Name="TextPanel" Spacing="12" Visibility="Collapsed" VerticalAlignment="Top">
-                <TextBlock TextWrapping="Wrap" Opacity="0.8"
-                           Text="Enter the character or text to type, such as ç. Press the Copilot key while a text field in another app is focused. This works independently of your keyboard layout." />
-                <TextBox x:Name="TextBox" Header="Text to type" PlaceholderText="e.g. ç"
+                <TextBlock x:Uid="TextInstructions" TextWrapping="Wrap" Opacity="0.8" />
+                <TextBox x:Name="TextBox" x:Uid="TextToType"
                          TextChanged="TextBox_TextChanged" MaxWidth="520" HorizontalAlignment="Stretch" />
             </StackPanel>
 
             <!-- KeyCombo -->
             <StackPanel x:Name="ComboPanel" Spacing="12" Visibility="Collapsed" VerticalAlignment="Top">
-                <TextBlock TextWrapping="Wrap" Opacity="0.8"
-                           Text="Click Record, then press the shortcut you want (e.g. Alt+Tab). The keys are captured here, not actually triggered. Press Esc to cancel." />
+                <TextBlock x:Uid="ShortcutInstructions" TextWrapping="Wrap" Opacity="0.8" />
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <Border x:Name="ComboBorder" MinWidth="240" Height="40" VerticalAlignment="Center"
                             Background="{ThemeResource ControlFillColorDefaultBrush}"
                             BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1"
                             CornerRadius="6" Padding="12,0">
-                        <TextBlock x:Name="ComboDisplay" VerticalAlignment="Center" Text="(not set)" />
+                        <TextBlock x:Name="ComboDisplay" VerticalAlignment="Center" />
                     </Border>
-                    <Button x:Name="RecordButton" Content="Record shortcut" Click="RecordButton_Click"
+                    <Button x:Name="RecordButton" Click="RecordButton_Click"
                             LostFocus="RecordButton_LostFocus" />
-                    <Button x:Name="ClearComboButton" Content="Clear" Click="ClearComboButton_Click" />
+                    <Button x:Name="ClearComboButton" x:Uid="Clear" Click="ClearComboButton_Click" />
                 </StackPanel>
             </StackPanel>
 
@@ -70,7 +67,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <AutoSuggestBox Grid.Row="0" x:Name="AppSearch" QueryIcon="Find"
-                                PlaceholderText="Search apps…" TextChanged="AppSearch_TextChanged" />
+                                x:Uid="SearchApps" TextChanged="AppSearch_TextChanged" />
                 <ListView Grid.Row="1" x:Name="AppList" SelectionMode="Single"
                           SelectionChanged="AppList_SelectionChanged"
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -88,26 +85,25 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Expander Grid.Row="2" Header="Open a file or link instead" HorizontalAlignment="Stretch">
+                <Expander Grid.Row="2" x:Uid="OpenFileOrLink" HorizontalAlignment="Stretch">
                     <StackPanel Spacing="8" Width="520" HorizontalAlignment="Left">
                         <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="LaunchPathBox" Header="Path or link"
-                                     PlaceholderText="C:\… or https://… or ms-settings:…" TextChanged="LaunchPathBox_TextChanged" />
-                            <Button x:Name="BrowseButton" Grid.Column="1" Content="Browse…" VerticalAlignment="Bottom"
+                            <TextBox x:Name="LaunchPathBox" x:Uid="PathOrLink" TextChanged="LaunchPathBox_TextChanged" />
+                            <Button x:Name="BrowseButton" Grid.Column="1" x:Uid="Browse" VerticalAlignment="Bottom"
                                     Click="BrowseButton_Click" />
                         </Grid>
-                        <TextBox x:Name="LaunchArgsBox" Header="Arguments (optional)" TextChanged="LaunchArgsBox_TextChanged" />
+                        <TextBox x:Name="LaunchArgsBox" x:Uid="OptionalArguments" TextChanged="LaunchArgsBox_TextChanged" />
                     </StackPanel>
                 </Expander>
             </Grid>
 
             <!-- None -->
             <TextBlock x:Name="NonePanel" Visibility="Collapsed" VerticalAlignment="Top" Opacity="0.8"
-                       TextWrapping="Wrap" Text="Nothing happens for this gesture." />
+                       TextWrapping="Wrap" x:Uid="NothingHappens" />
 
             <!-- WindowsFunction -->
             <Grid x:Name="FunctionPanel" Visibility="Collapsed" RowSpacing="10">
@@ -116,7 +112,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <AutoSuggestBox Grid.Row="0" x:Name="FunctionSearch" QueryIcon="Find"
-                                PlaceholderText="Search functions (e.g. lock, snip, magnifier)…"
+                                x:Uid="SearchFunctions"
                                 TextChanged="FunctionSearch_TextChanged" />
                 <ListView Grid.Row="1" x:Name="FunctionList" SelectionMode="Single"
                           SelectionChanged="FunctionList_SelectionChanged"
@@ -131,7 +127,7 @@
                         </GroupStyle>
                     </ListView.GroupStyle>
                     <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="models:WindowsFunction">
+                        <DataTemplate x:DataType="vm:WindowsFunctionItem">
                             <StackPanel Spacing="1" Padding="0,4">
                                 <TextBlock Text="{x:Bind Name}" />
                                 <TextBlock Text="{x:Bind Description}" FontSize="12" Opacity="0.6" TextWrapping="Wrap" />

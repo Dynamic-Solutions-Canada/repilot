@@ -64,6 +64,14 @@ Before Store submission, set `<Identity>` `Name`/`Publisher` in
 `RepilotMSIX/Package.appxmanifest` to your Partner Center values. Bump `<Version>` in
 `Directory.Build.props` for releases; the shared helper allocates dev revisions in staging.
 
+## App language
+
+The settings app follows the Windows display language by default. **Settings > App
+language** saves an override; close and reopen the settings app to apply it. Strings are
+in `Repilot/Strings/<lang>/Resources.resw`; see the Localization section of `AGENTS.md`
+for the rules, and run `dotnet run --project tests/Repilot.LocalizationTests -c Release`
+after changing any text.
+
 ## Requirements
 
 - Windows 11 (build 22621+)

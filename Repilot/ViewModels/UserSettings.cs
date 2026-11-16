@@ -18,6 +18,13 @@ public partial class UserSettings : ObservableObject
     [ObservableProperty]
     public partial bool Startup { get; set; }
 
+    /// <summary>
+    /// Settings-app language tag (for example "fr-CA"), or "" to follow Windows.
+    /// Applied at startup by <see cref="Repilot.Classes.AppLanguage"/>.
+    /// </summary>
+    [ObservableProperty]
+    public partial string LanguageOverride { get; set; } = "";
+
     /// <summary>The action run when the Copilot key is pressed.</summary>
     public CopilotActionData Action { get; set; } = new();
 
@@ -35,5 +42,6 @@ public partial class UserSettings : ObservableObject
     public void CompleteInitialization()
     {
         Action ??= new CopilotActionData();
+        LanguageOverride ??= "";
     }
 }

@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NavHome.Content" xml:space="preserve">
+    <value>Início</value>
+  </data>
+  <data name="NavAction.Content" xml:space="preserve">
+    <value>Ação da tecla Copilot</value>
+  </data>
+  <data name="ActionTitle.Text" xml:space="preserve">
+    <value>Ação da tecla Copilot</value>
+  </data>
+  <data name="NavOtherApps.Content" xml:space="preserve">
+    <value>Nossos outros aplicativos</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="HomeDescription.Text" xml:space="preserve">
+    <value>Escolha o que a tecla Copilot do seu teclado faz.</value>
+  </data>
+  <data name="AssignInSettings.Content" xml:space="preserve">
+    <value>Atribuir nas Configurações do Windows</value>
+  </data>
+  <data name="OnCopilotPress.Text" xml:space="preserve">
+    <value>Ao pressionar a tecla Copilot</value>
+  </data>
+  <data name="ChangeAction.Text" xml:space="preserve">
+    <value>Alterar ação</value>
+  </data>
+  <data name="TestAction.Text" xml:space="preserve">
+    <value>Testar agora</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Escolha o que a tecla Copilot do seu teclado faz: enviar um atalho personalizado, abrir um aplicativo ou executar uma função do Windows.</value>
+  </data>
+  <data name="HowItWorks.Text" xml:space="preserve">
+    <value>Como funciona</value>
+  </data>
+  <data name="HowItWorksDescription.Text" xml:space="preserve">
+    <value>Registra-se como um provedor oficial da tecla de hardware Copilot da Microsoft. Pressionar a tecla inicia um pequeno programa que executa sua ação e é encerrado. Sem serviço em segundo plano, ícone na bandeja ou processo residente.</value>
+  </data>
+  <data name="BuiltWith.Text" xml:space="preserve">
+    <value>Tecnologias utilizadas</value>
+  </data>
+  <data name="SourceCode.Text" xml:space="preserve">
+    <value>Código-fonte</value>
+  </data>
+  <data name="SourceDescription.Text" xml:space="preserve">
+    <value>Ver o projeto no GitHub</value>
+  </data>
+  <data name="GitHubRepository.Content" xml:space="preserve">
+    <value>Repositório no GitHub</value>
+  </data>
+  <data name="Updates.Text" xml:space="preserve">
+    <value>Atualizações</value>
+  </data>
+  <data name="CheckUpdatesHint.Text" xml:space="preserve">
+    <value>Clique para verificar atualizações</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>Verificar atualizações</value>
+  </data>
+  <data name="AppTheme.Text" xml:space="preserve">
+    <value>Tema do aplicativo</value>
+  </data>
+  <data name="AppThemeDescription.Text" xml:space="preserve">
+    <value>Aparência desta janela de configurações.</value>
+  </data>
+  <data name="SystemTheme.Content" xml:space="preserve">
+    <value>Padrão do sistema</value>
+  </data>
+  <data name="LightTheme.Content" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="DarkTheme.Content" xml:space="preserve">
+    <value>Escuro</value>
+  </data>
+  <data name="NoBackground.Title" xml:space="preserve">
+    <value>Sem processo em segundo plano</value>
+  </data>
+  <data name="NoBackground.Message" xml:space="preserve">
+    <value>O Repilot não é executado em segundo plano. Ao pressionar a tecla Copilot, o Windows inicia brevemente um pequeno programa que executa sua ação e é encerrado. Esta janela serve apenas para configuração.</value>
+  </data>
+  <data name="ActionShortcut.Text" xml:space="preserve">
+    <value>Atalho</value>
+  </data>
+  <data name="ActionText.Text" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="ActionApp.Text" xml:space="preserve">
+    <value>Aplicativo ou link</value>
+  </data>
+  <data name="ActionFunction.Text" xml:space="preserve">
+    <value>Função do Windows</value>
+  </data>
+  <data name="ActionNone.Text" xml:space="preserve">
+    <value>Nenhuma</value>
+  </data>
+  <data name="TextInstructions.Text" xml:space="preserve">
+    <value>Digite o caractere ou texto a inserir, como ç. Pressione a tecla Copilot com um campo de texto em outro aplicativo em foco. Isso funciona independentemente do layout do teclado.</value>
+  </data>
+  <data name="TextToType.Header" xml:space="preserve">
+    <value>Texto a inserir</value>
+  </data>
+  <data name="TextToType.PlaceholderText" xml:space="preserve">
+    <value>por ex. ç</value>
+  </data>
+  <data name="ShortcutInstructions.Text" xml:space="preserve">
+    <value>Clique em Gravar e pressione o atalho desejado (por ex., Alt+Tab). As teclas são capturadas aqui sem acionar o atalho. Pressione Esc para cancelar.</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>(não definido)</value>
+  </data>
+  <data name="RecordShortcut" xml:space="preserve">
+    <value>Gravar atalho</value>
+  </data>
+  <data name="Clear.Content" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="SearchApps.PlaceholderText" xml:space="preserve">
+    <value>Pesquisar aplicativos…</value>
+  </data>
+  <data name="OpenFileOrLink.Header" xml:space="preserve">
+    <value>Abrir um arquivo ou link</value>
+  </data>
+  <data name="PathOrLink.Header" xml:space="preserve">
+    <value>Caminho ou link</value>
+  </data>
+  <data name="PathOrLink.PlaceholderText" xml:space="preserve">
+    <value>C:\… ou https://… ou ms-settings:…</value>
+  </data>
+  <data name="Browse.Content" xml:space="preserve">
+    <value>Procurar…</value>
+  </data>
+  <data name="OptionalArguments.Header" xml:space="preserve">
+    <value>Argumentos (opcional)</value>
+  </data>
+  <data name="NothingHappens.Text" xml:space="preserve">
+    <value>Nada acontece com este gesto.</value>
+  </data>
+  <data name="SearchFunctions.PlaceholderText" xml:space="preserve">
+    <value>Pesquisar funções (por ex., bloquear, captura, lupa)…</value>
+  </data>
+  <data name="StatusUnpackaged" xml:space="preserve">
+    <value>Não instalado como aplicativo empacotado</value>
+  </data>
+  <data name="StatusUnpackagedDescription" xml:space="preserve">
+    <value>A tecla Copilot só pode ser atribuída a uma versão assinada e instalada (MSIX). Esta versão não empacotada é para desenvolvimento.</value>
+  </data>
+  <data name="StatusAssigned" xml:space="preserve">
+    <value>Atribuída</value>
+  </data>
+  <data name="StatusAssignedDescription" xml:space="preserve">
+    <value>O Repilot está atribuído à sua tecla Copilot. Pressione a tecla para executar sua ação.</value>
+  </data>
+  <data name="ChangeAssignment" xml:space="preserve">
+    <value>Alterar nas Configurações do Windows</value>
+  </data>
+  <data name="StatusOtherApp" xml:space="preserve">
+    <value>A tecla Copilot está atribuída a outro aplicativo</value>
+  </data>
+  <data name="StatusChooseRepilot" xml:space="preserve">
+    <value>Abra as Configurações do Windows e escolha Repilot para usar a ação abaixo.</value>
+  </data>
+  <data name="StatusSearch" xml:space="preserve">
+    <value>A tecla Copilot abre a pesquisa</value>
+  </data>
+  <data name="StatusNotAssigned" xml:space="preserve">
+    <value>Ainda não atribuída</value>
+  </data>
+  <data name="StatusAssignInstructions" xml:space="preserve">
+    <value>Abra as Configurações do Windows → Personalizar tecla Copilot, escolha “Personalizado” e selecione Repilot.</value>
+  </data>
+  <data name="RecordPrompt" xml:space="preserve">
+    <value>Pressione o atalho…</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>Gravando… (Esc)</value>
+  </data>
+  <data name="StoreOpened" xml:space="preserve">
+    <value>A Microsoft Store está aberta em Atualizações e downloads. Verifique lá as atualizações disponíveis.</value>
+  </data>
+  <data name="StoreOpenFailed" xml:space="preserve">
+    <value>Não foi possível abrir a Microsoft Store.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Verificando…</value>
+  </data>
+  <data name="CheckingUpdates" xml:space="preserve">
+    <value>Verificando atualizações…</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>Não foi possível verificar atualizações. Verifique sua conexão com a internet.</value>
+  </data>
+  <data name="ViewRelease" xml:space="preserve">
+    <value>Ver versão</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versão {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>A versão {0} está disponível (você tem a {1}).</value>
+  </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>Você está em dia ({0}).</value>
+  </data>
+  <data name="SummaryNone" xml:space="preserve">
+    <value>Não fazer nada</value>
+  </data>
+  <data name="SummaryTextUnset" xml:space="preserve">
+    <value>Inserir texto (não definido)</value>
+  </data>
+  <data name="SummaryKeysUnset" xml:space="preserve">
+    <value>Enviar uma combinação de teclas (não definida)</value>
+  </data>
+  <data name="SummaryAppUnset" xml:space="preserve">
+    <value>Abrir um aplicativo (não definido)</value>
+  </data>
+  <data name="SummaryFunctionUnset" xml:space="preserve">
+    <value>Executar uma função do Windows (não definida)</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconhecido</value>
+  </data>
+  <data name="SummaryText" xml:space="preserve">
+    <value>Inserir texto: {0}</value>
+  </data>
+  <data name="SummaryKeys" xml:space="preserve">
+    <value>Enviar teclas: {0}</value>
+  </data>
+  <data name="SummaryOpen" xml:space="preserve">
+    <value>Abrir: {0}</value>
+  </data>
+  <data name="SummaryFunction" xml:space="preserve">
+    <value>Função do Windows: {0}</value>
+  </data>
+  <data name="LanguageTitle.Text" xml:space="preserve">
+    <value>Idioma do aplicativo</value>
+  </data>
+  <data name="LanguageDescription.Text" xml:space="preserve">
+    <value>Idioma deste aplicativo de configurações. Os formatos regionais de números e datas do Windows permanecem inalterados.</value>
+  </data>
+  <data name="FollowWindows" xml:space="preserve">
+    <value>Seguir o Windows</value>
+  </data>
+  <data name="LanguageRestartPending" xml:space="preserve">
+    <value>Idioma salvo. Feche e reabra o aplicativo de configurações do Repilot para aplicá-lo.</value>
+  </data>
+  <data name="Function_task-view_Name" xml:space="preserve">
+    <value>Visão de Tarefas</value>
+  </data>
+  <data name="Function_task-view_Description" xml:space="preserve">
+    <value>Mostrar todas as janelas abertas e áreas de trabalho virtuais.</value>
+  </data>
+  <data name="Function_snap-left_Name" xml:space="preserve">
+    <value>Ajustar janela à esquerda</value>
+  </data>
+  <data name="Function_snap-left_Description" xml:space="preserve">
+    <value>Ajustar a janela ativa à metade esquerda.</value>
+  </data>
+  <data name="Function_snap-right_Name" xml:space="preserve">
+    <value>Ajustar janela à direita</value>
+  </data>
+  <data name="Function_snap-right_Description" xml:space="preserve">
+    <value>Ajustar a janela ativa à metade direita.</value>
+  </data>
+  <data name="Function_maximize_Name" xml:space="preserve">
+    <value>Maximizar janela</value>
+  </data>
+  <data name="Function_maximize_Description" xml:space="preserve">
+    <value>Maximizar a janela ativa.</value>
+  </data>
+  <data name="Function_minimize_Name" xml:space="preserve">
+    <value>Minimizar janela</value>
+  </data>
+  <data name="Function_minimize_Description" xml:space="preserve">
+    <value>Minimizar a janela ativa.</value>
+  </data>
+  <data name="Function_show-desktop_Name" xml:space="preserve">
+    <value>Mostrar área de trabalho</value>
+  </data>
+  <data name="Function_show-desktop_Description" xml:space="preserve">
+    <value>Minimizar tudo e mostrar a área de trabalho.</value>
+  </data>
+  <data name="Function_snap-layouts_Name" xml:space="preserve">
+    <value>Layouts de ajuste</value>
+  </data>
+  <data name="Function_snap-layouts_Description" xml:space="preserve">
+    <value>Abrir o seletor de layouts de ajuste para a janela ativa.</value>
+  </data>
+  <data name="Function_new-desktop_Name" xml:space="preserve">
+    <value>Nova área de trabalho virtual</value>
+  </data>
+  <data name="Function_new-desktop_Description" xml:space="preserve">
+    <value>Criar uma nova área de trabalho virtual.</value>
+  </data>
+  <data name="Function_next-desktop_Name" xml:space="preserve">
+    <value>Próxima área de trabalho virtual</value>
+  </data>
+  <data name="Function_next-desktop_Description" xml:space="preserve">
+    <value>Alternar para a próxima área de trabalho virtual.</value>
+  </data>
+  <data name="Function_prev-desktop_Name" xml:space="preserve">
+    <value>Área de trabalho virtual anterior</value>
+  </data>
+  <data name="Function_prev-desktop_Description" xml:space="preserve">
+    <value>Alternar para a área de trabalho virtual anterior.</value>
+  </data>
+  <data name="Function_lock-pc_Name" xml:space="preserve">
+    <value>Bloquear computador</value>
+  </data>
+  <data name="Function_lock-pc_Description" xml:space="preserve">
+    <value>Bloquear o computador.</value>
+  </data>
+  <data name="Function_file-explorer_Name" xml:space="preserve">
+    <value>Explorador de Arquivos</value>
+  </data>
+  <data name="Function_file-explorer_Description" xml:space="preserve">
+    <value>Abrir uma nova janela do Explorador de Arquivos.</value>
+  </data>
+  <data name="Function_run-dialog_Name" xml:space="preserve">
+    <value>Caixa de diálogo Executar</value>
+  </data>
+  <data name="Function_run-dialog_Description" xml:space="preserve">
+    <value>Abrir a caixa de diálogo Executar.</value>
+  </data>
+  <data name="Function_task-manager_Name" xml:space="preserve">
+    <value>Gerenciador de Tarefas</value>
+  </data>
+  <data name="Function_task-manager_Description" xml:space="preserve">
+    <value>Abrir o Gerenciador de Tarefas.</value>
+  </data>
+  <data name="Function_power-user-menu_Name" xml:space="preserve">
+    <value>Menu de Links Rápidos (Win+X)</value>
+  </data>
+  <data name="Function_power-user-menu_Description" xml:space="preserve">
+    <value>Abrir o menu de usuário avançado ou de Links Rápidos.</value>
+  </data>
+  <data name="Function_project_Name" xml:space="preserve">
+    <value>Projetar / segunda tela</value>
+  </data>
+  <data name="Function_project_Description" xml:space="preserve">
+    <value>Abrir o painel de projeção (modo de exibição).</value>
+  </data>
+  <data name="Function_cast-connect_Name" xml:space="preserve">
+    <value>Transmitir para um dispositivo</value>
+  </data>
+  <data name="Function_cast-connect_Description" xml:space="preserve">
+    <value>Abrir o painel Conectar (vídeo sem fio).</value>
+  </data>
+  <data name="Function_screen-snip_Name" xml:space="preserve">
+    <value>Recorte de tela (Captura e Esboço)</value>
+  </data>
+  <data name="Function_screen-snip_Description" xml:space="preserve">
+    <value>Iniciar um recorte retangular da tela.</value>
+  </data>
+  <data name="Function_print-screen_Name" xml:space="preserve">
+    <value>Print Screen</value>
+  </data>
+  <data name="Function_print-screen_Description" xml:space="preserve">
+    <value>Capturar a tela inteira na área de transferência.</value>
+  </data>
+  <data name="Function_game-bar_Name" xml:space="preserve">
+    <value>Xbox Game Bar</value>
+  </data>
+  <data name="Function_game-bar_Description" xml:space="preserve">
+    <value>Abrir a sobreposição da Game Bar.</value>
+  </data>
+  <data name="Function_record-screen_Name" xml:space="preserve">
+    <value>Gravar tela</value>
+  </data>
+  <data name="Function_record-screen_Description" xml:space="preserve">
+    <value>Iniciar ou parar a gravação da tela pela Game Bar.</value>
+  </data>
+  <data name="Function_notifications_Name" xml:space="preserve">
+    <value>Central de Notificações</value>
+  </data>
+  <data name="Function_notifications_Description" xml:space="preserve">
+    <value>Abrir a Central de Notificações e o calendário.</value>
+  </data>
+  <data name="Function_context-menu_Name" xml:space="preserve">
+    <value>Tecla Menu (menu de contexto)</value>
+  </data>
+  <data name="Function_context-menu_Description" xml:space="preserve">
+    <value>Abrir o menu de contexto do elemento em foco, como a antiga tecla Menu.</value>
+  </data>
+  <data name="Function_quick-settings_Name" xml:space="preserve">
+    <value>Configurações Rápidas</value>
+  </data>
+  <data name="Function_quick-settings_Description" xml:space="preserve">
+    <value>Abrir o painel de Configurações Rápidas (Wi-Fi, volume etc.).</value>
+  </data>
+  <data name="Function_clipboard-history_Name" xml:space="preserve">
+    <value>Histórico da área de transferência</value>
+  </data>
+  <data name="Function_clipboard-history_Description" xml:space="preserve">
+    <value>Abrir o histórico da área de transferência.</value>
+  </data>
+  <data name="Function_emoji-panel_Name" xml:space="preserve">
+    <value>Painel de emojis e símbolos</value>
+  </data>
+  <data name="Function_emoji-panel_Description" xml:space="preserve">
+    <value>Abrir o seletor de emojis, kaomojis e símbolos.</value>
+  </data>
+  <data name="Function_voice-typing_Name" xml:space="preserve">
+    <value>Digitação por voz</value>
+  </data>
+  <data name="Function_voice-typing_Description" xml:space="preserve">
+    <value>Iniciar a digitação por voz ou o ditado.</value>
+  </data>
+  <data name="Function_widgets_Name" xml:space="preserve">
+    <value>Painel de widgets</value>
+  </data>
+  <data name="Function_widgets_Description" xml:space="preserve">
+    <value>Abrir o painel de widgets.</value>
+  </data>
+  <data name="Function_magnifier_Name" xml:space="preserve">
+    <value>Lupa</value>
+  </data>
+  <data name="Function_magnifier_Description" xml:space="preserve">
+    <value>Ativar a Lupa ou ampliar.</value>
+  </data>
+  <data name="Function_narrator_Name" xml:space="preserve">
+    <value>Narrador</value>
+  </data>
+  <data name="Function_narrator_Description" xml:space="preserve">
+    <value>Ativar ou desativar o leitor de tela Narrador.</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Name" xml:space="preserve">
+    <value>Teclado Virtual</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Description" xml:space="preserve">
+    <value>Ativar ou desativar o teclado virtual.</value>
+  </data>
+  <data name="Function_color-filters_Name" xml:space="preserve">
+    <value>Filtros de cor</value>
+  </data>
+  <data name="Function_color-filters_Description" xml:space="preserve">
+    <value>Ativar ou desativar os filtros de cor.</value>
+  </data>
+  <data name="Function_live-captions_Name" xml:space="preserve">
+    <value>Legendas ao vivo</value>
+  </data>
+  <data name="Function_live-captions_Description" xml:space="preserve">
+    <value>Ativar ou desativar as legendas ao vivo do sistema.</value>
+  </data>
+  <data name="Function_search_Name" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="Function_search_Description" xml:space="preserve">
+    <value>Abrir a Pesquisa do Windows.</value>
+  </data>
+  <data name="Function_settings-home_Name" xml:space="preserve">
+    <value>Todas as configurações</value>
+  </data>
+  <data name="Function_settings-home_Description" xml:space="preserve">
+    <value>Abrir o aplicativo Configurações.</value>
+  </data>
+  <data name="Function_settings-display_Name" xml:space="preserve">
+    <value>Configurações de tela</value>
+  </data>
+  <data name="Function_settings-display_Description" xml:space="preserve">
+    <value>Abrir as configurações de tela.</value>
+  </data>
+  <data name="Function_settings-sound_Name" xml:space="preserve">
+    <value>Configurações de som</value>
+  </data>
+  <data name="Function_settings-sound_Description" xml:space="preserve">
+    <value>Abrir as configurações de som.</value>
+  </data>
+  <data name="Function_settings-bluetooth_Name" xml:space="preserve">
+    <value>Bluetooth e dispositivos</value>
+  </data>
+  <data name="Function_settings-bluetooth_Description" xml:space="preserve">
+    <value>Abrir as configurações de Bluetooth e dispositivos.</value>
+  </data>
+  <data name="Function_settings-apps_Name" xml:space="preserve">
+    <value>Aplicativos instalados</value>
+  </data>
+  <data name="Function_settings-apps_Description" xml:space="preserve">
+    <value>Abrir as configurações dos aplicativos instalados.</value>
+  </data>
+  <data name="FunctionGroup_Windowmanagement" xml:space="preserve">
+    <value>Gerenciamento de janelas</value>
+  </data>
+  <data name="FunctionGroup_System" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="FunctionGroup_Capturerecording" xml:space="preserve">
+    <value>Captura e gravação</value>
+  </data>
+  <data name="FunctionGroup_Notificationsinput" xml:space="preserve">
+    <value>Notificações e entrada</value>
+  </data>
+  <data name="FunctionGroup_Accessibility" xml:space="preserve">
+    <value>Acessibilidade</value>
+  </data>
+  <data name="FunctionGroup_Search" xml:space="preserve">
+    <value>Pesquisa</value>
+  </data>
+  <data name="FunctionGroup_Settings" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="PromoSubtitle" xml:space="preserve">
+    <value>Mais aplicativos da Dynamic Solutions Canada na Microsoft Store.</value>
+  </data>
+  <data name="PromoVisitWebsite" xml:space="preserve">
+    <value>Visitar site</value>
+  </data>
+  <data name="PromoViewInStore" xml:space="preserve">
+    <value>Ver na loja</value>
+  </data>
+  <data name="PromoPrintStream" xml:space="preserve">
+    <value>Gerencie suas impressoras 3D, uma ou uma fazenda inteira, de qualquer dispositivo.</value>
+  </data>
+  <data name="PromoImmichDrive" xml:space="preserve">
+    <value>O ImmichDrive traz sua biblioteca de fotos e vídeos do Immich auto-hospedado para o Explorador de Arquivos do Windows como uma unidade de nuvem nativa. Toda a sua linha do tempo aparece como arquivos que você pode...</value>
+  </data>
+  <data name="PromoPersistent" xml:space="preserve">
+    <value>Lembretes que não desistem.</value>
+  </data>
+  <data name="PromoTitle" xml:space="preserve">
+    <value>Nossos outros aplicativos</value>
+  </data>
+  <data name="PromoLittleLauncher" xml:space="preserve">
+    <value>Abra aplicativos e sites pela bandeja do sistema no Windows e no Linux. A versão para Windows está na Microsoft Store; a do Linux usa AppImage.</value>
+  </data>
+</root>

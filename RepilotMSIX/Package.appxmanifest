@@ -28,8 +28,19 @@
     <PackageDependency Name="Microsoft.WindowsAppRuntime.1.8" MinVersion="8000.770.947.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
 
+  <!-- Settings-app languages (see Repilot/Strings). en-CA and fr-CA reuse the en-US and
+       fr-FR text; build-msix.ps1 indexes those copies so every declared language resolves.
+       Display names stay literal brand names, so no ms-resource lookups are needed here. -->
   <Resources>
     <Resource Language="en-US" />
+    <Resource Language="en-CA" />
+    <Resource Language="es-ES" />
+    <Resource Language="fr-FR" />
+    <Resource Language="fr-CA" />
+    <Resource Language="de-DE" />
+    <Resource Language="zh-CN" />
+    <Resource Language="pt-BR" />
+    <Resource Language="ja-JP" />
   </Resources>
 
   <Applications>

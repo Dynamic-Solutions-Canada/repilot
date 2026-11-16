@@ -4,29 +4,51 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ScrollViewer Padding="32,16,32,32">
         <StackPanel Spacing="8" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Settings" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,8" />
+            <TextBlock x:Uid="SettingsTitle" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,8" />
 
             <!-- Theme -->
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                     CornerRadius="8" Padding="16,12">
-                <Grid>
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="App theme" FontWeight="SemiBold" />
-                        <TextBlock Text="Appearance of this settings window." Opacity="0.7" />
+                        <TextBlock x:Uid="AppTheme" FontWeight="SemiBold" />
+                        <TextBlock x:Uid="AppThemeDescription" Opacity="0.7" TextWrapping="Wrap" />
                     </StackPanel>
-                    <ComboBox x:Name="ThemeCombo" HorizontalAlignment="Right" MinWidth="160"
+                    <ComboBox x:Name="ThemeCombo" Grid.Column="1" VerticalAlignment="Center" MinWidth="160"
                               SelectionChanged="ThemeCombo_SelectionChanged">
-                        <ComboBoxItem Content="System default" />
-                        <ComboBoxItem Content="Light" />
-                        <ComboBoxItem Content="Dark" />
+                        <ComboBoxItem x:Uid="SystemTheme" />
+                        <ComboBoxItem x:Uid="LightTheme" />
+                        <ComboBoxItem x:Uid="DarkTheme" />
                     </ComboBox>
                 </Grid>
             </Border>
 
-            <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
-                     Title="No background process"
-                     Message="Repilot doesn't run in the background. When you press the Copilot key, Windows briefly launches a tiny handler that performs your action and exits. This window is only for configuration." />
+            <!-- Language: options are labelled in their own language and filled in code. -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    CornerRadius="8" Padding="16,12">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Uid="LanguageTitle" FontWeight="SemiBold" />
+                        <TextBlock x:Uid="LanguageDescription" Opacity="0.7" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ComboBox x:Name="LanguageCombo" Grid.Column="1" VerticalAlignment="Center" MinWidth="160"
+                              SelectionChanged="LanguageCombo_SelectionChanged" />
+                </Grid>
+            </Border>
+
+            <InfoBar x:Name="LanguageRestartBar" IsOpen="False" IsClosable="False" Severity="Informational" />
+
+            <InfoBar x:Uid="NoBackground" IsOpen="True" IsClosable="False" Severity="Informational" />
         </StackPanel>
     </ScrollViewer>
 </Page>

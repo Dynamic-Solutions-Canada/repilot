@@ -22,9 +22,13 @@ public sealed partial class ActionPage : Page
 {
     private bool _loading;
     private ShortcutRecorder? _recorder;
-    private string _comboBeforeRecording = "(not set)";
+    private string _comboBeforeRecording = "";
 
     private List<InstalledApp> _allApps = new();
+
+    // Catalog rows with text resolved once in the current app language.
+    private readonly List<WindowsFunctionItem> _functionItems =
+        WindowsFunctionCatalog.All.Select(f => new WindowsFunctionItem(f)).ToList();
     private bool _appsLoaded;
 
     private CopilotActionData Action => SettingsManager.Current.Action;
@@ -32,6 +36,7 @@ public sealed partial class ActionPage : Page
     public ActionPage()
     {
         InitializeComponent();
+        RecordButton.Content = UiStrings.Get("RecordShortcut");
         BuildFunctionList(null);
         LoadFromAction();
     }
@@ -69,7 +74,7 @@ public sealed partial class ActionPage : Page
             _ => "None",
         });
 
-        ComboDisplay.Text = a.Combo is { IsEmpty: false } c ? c.ToString() : "(not set)";
+        ComboDisplay.Text = a.Combo is { IsEmpty: false } c ? c.ToString() : UiStrings.Get("NotSet");
         TextBox.Text = a.Text;
 
         // Launch box shows only custom (non-app) targets.
@@ -164,10 +169,10 @@ public sealed partial class ActionPage : Page
         if (_recorder?.IsRecording == true) { _recorder.Stop(); EndRecordingUi(restore: true); return; }
         _recorder ??= CreateRecorder();
         _comboBeforeRecording = ComboDisplay.Text;
-        ComboDisplay.Text = "Press the shortcut…";
+        ComboDisplay.Text = UiStrings.Get("RecordPrompt");
         ComboBorder.BorderBrush = (Brush)Application.Current.Resources["AccentFillColorDefaultBrush"];
         ComboBorder.BorderThickness = new Thickness(2);
-        RecordButton.Content = "Recording… (Esc)";
+        RecordButton.Content = UiStrings.Get("Recording");
         RecordButton.Focus(FocusState.Programmatic);
         _recorder.Start();
     }
@@ -178,7 +183,7 @@ public sealed partial class ActionPage : Page
         r.ModifiersChanged += mods =>
         {
             if (_recorder?.IsRecording != true) return;
-            ComboDisplay.Text = mods == KeyMods.None ? "Press the shortcut…" : $"{new KeyCombo(mods, 0)} + …";
+            ComboDisplay.Text = mods == KeyMods.None ? UiStrings.Get("RecordPrompt") : $"{new KeyCombo(mods, 0)} + …";
         };
         r.Captured += combo =>
         {
@@ -193,7 +198,7 @@ public sealed partial class ActionPage : Page
 
     private void EndRecordingUi(bool restore)
     {
-        RecordButton.Content = "Record shortcut";
+        RecordButton.Content = UiStrings.Get("RecordShortcut");
         ComboBorder.BorderBrush = (Brush)Application.Current.Resources["ControlStrokeColorDefaultBrush"];
         ComboBorder.BorderThickness = new Thickness(1);
         if (restore) ComboDisplay.Text = _comboBeforeRecording;
@@ -207,7 +212,7 @@ public sealed partial class ActionPage : Page
     private void ClearComboButton_Click(object sender, RoutedEventArgs e)
     {
         Action.Combo = new KeyCombo();
-        ComboDisplay.Text = "(not set)";
+        ComboDisplay.Text = UiStrings.Get("NotSet");
         SettingsManager.SaveSettings();
     }
 
@@ -266,18 +271,16 @@ public sealed partial class ActionPage : Page
 
     private void BuildFunctionList(string? filter)
     {
-        IEnumerable<WindowsFunction> items = WindowsFunctionCatalog.All;
+        IEnumerable<WindowsFunctionItem> items = _functionItems;
         if (!string.IsNullOrWhiteSpace(filter))
         {
             string f = filter.Trim();
-            items = items.Where(x =>
-                x.Name.Contains(f, StringComparison.OrdinalIgnoreCase) ||
-                x.Group.Contains(f, StringComparison.OrdinalIgnoreCase) ||
-                x.Description.Contains(f, StringComparison.OrdinalIgnoreCase));
+            items = items.Where(x => x.Matches(f));
         }
 
+        // GroupBy keeps the catalog's group order, so headings stay in their curated sequence.
         var groups = items.GroupBy(x => x.Group)
-            .Select(g => new Grouping<string, WindowsFunction>(g.Key, g)).ToList();
+            .Select(g => new Grouping<string, WindowsFunctionItem>(g.Key, g)).ToList();
         FunctionList.ItemsSource = new CollectionViewSource { IsSourceGrouped = true, Source = groups }.View;
     }
 
@@ -290,9 +293,9 @@ public sealed partial class ActionPage : Page
     private void FunctionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_loading) return;
-        if (FunctionList.SelectedItem is not WindowsFunction fn) return;
-        if (fn.Id == Action.WindowsFunctionId) return;
-        Action.WindowsFunctionId = fn.Id; // Type is owned by the mode bar
+        if (FunctionList.SelectedItem is not WindowsFunctionItem item) return;
+        if (item.Function.Id == Action.WindowsFunctionId) return;
+        Action.WindowsFunctionId = item.Function.Id; // Type is owned by the mode bar
         SettingsManager.SaveSettings();
     }
 
@@ -301,8 +304,8 @@ public sealed partial class ActionPage : Page
         if (WindowsFunctionCatalog.TryGet(id) == null) return;
         if (FunctionList.ItemsSource is Microsoft.UI.Xaml.Data.ICollectionView view)
             foreach (var group in view)
-                if (group is IEnumerable<WindowsFunction> g)
+                if (group is IEnumerable<WindowsFunctionItem> g)
                     foreach (var item in g)
-                        if (item.Id == id) { FunctionList.SelectedItem = item; return; }
+                        if (item.Function.Id == id) { FunctionList.SelectedItem = item; return; }
     }
 }

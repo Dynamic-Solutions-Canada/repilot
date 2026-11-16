@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NavHome.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NavAction.Content" xml:space="preserve">
+    <value>Copilot key action</value>
+  </data>
+  <data name="ActionTitle.Text" xml:space="preserve">
+    <value>Copilot key action</value>
+  </data>
+  <data name="NavOtherApps.Content" xml:space="preserve">
+    <value>Our other apps</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="HomeDescription.Text" xml:space="preserve">
+    <value>Choose what your keyboard's Copilot key does.</value>
+  </data>
+  <data name="AssignInSettings.Content" xml:space="preserve">
+    <value>Assign in Windows Settings</value>
+  </data>
+  <data name="OnCopilotPress.Text" xml:space="preserve">
+    <value>When the Copilot key is pressed</value>
+  </data>
+  <data name="ChangeAction.Text" xml:space="preserve">
+    <value>Change action</value>
+  </data>
+  <data name="TestAction.Text" xml:space="preserve">
+    <value>Test it now</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Choose what your keyboard's Copilot key does: send a custom shortcut, open an app, or run a Windows function.</value>
+  </data>
+  <data name="HowItWorks.Text" xml:space="preserve">
+    <value>How it works</value>
+  </data>
+  <data name="HowItWorksDescription.Text" xml:space="preserve">
+    <value>Registers as an official Microsoft Copilot hardware-key provider. Pressing the key launches a tiny handler that runs your action and exits. No background service, no tray icon, nothing resident.</value>
+  </data>
+  <data name="BuiltWith.Text" xml:space="preserve">
+    <value>Built With</value>
+  </data>
+  <data name="SourceCode.Text" xml:space="preserve">
+    <value>Source Code</value>
+  </data>
+  <data name="SourceDescription.Text" xml:space="preserve">
+    <value>View the project on GitHub</value>
+  </data>
+  <data name="GitHubRepository.Content" xml:space="preserve">
+    <value>GitHub Repository</value>
+  </data>
+  <data name="Updates.Text" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="CheckUpdatesHint.Text" xml:space="preserve">
+    <value>Click to check for updates</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
+  <data name="AppTheme.Text" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="AppThemeDescription.Text" xml:space="preserve">
+    <value>Appearance of this settings window.</value>
+  </data>
+  <data name="SystemTheme.Content" xml:space="preserve">
+    <value>System default</value>
+  </data>
+  <data name="LightTheme.Content" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="DarkTheme.Content" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="NoBackground.Title" xml:space="preserve">
+    <value>No background process</value>
+  </data>
+  <data name="NoBackground.Message" xml:space="preserve">
+    <value>Repilot doesn't run in the background. When you press the Copilot key, Windows briefly launches a tiny handler that performs your action and exits. This window is only for configuration.</value>
+  </data>
+  <data name="ActionShortcut.Text" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="ActionText.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ActionApp.Text" xml:space="preserve">
+    <value>App or link</value>
+  </data>
+  <data name="ActionFunction.Text" xml:space="preserve">
+    <value>Windows function</value>
+  </data>
+  <data name="ActionNone.Text" xml:space="preserve">
+    <value>Nothing</value>
+  </data>
+  <data name="TextInstructions.Text" xml:space="preserve">
+    <value>Enter the character or text to type, such as ç. Press the Copilot key while a text field in another app is focused. This works independently of your keyboard layout.</value>
+  </data>
+  <data name="TextToType.Header" xml:space="preserve">
+    <value>Text to type</value>
+  </data>
+  <data name="TextToType.PlaceholderText" xml:space="preserve">
+    <value>e.g. ç</value>
+  </data>
+  <data name="ShortcutInstructions.Text" xml:space="preserve">
+    <value>Click Record, then press the shortcut you want (e.g. Alt+Tab). The keys are captured here, not actually triggered. Press Esc to cancel.</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>(not set)</value>
+  </data>
+  <data name="RecordShortcut" xml:space="preserve">
+    <value>Record shortcut</value>
+  </data>
+  <data name="Clear.Content" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SearchApps.PlaceholderText" xml:space="preserve">
+    <value>Search apps…</value>
+  </data>
+  <data name="OpenFileOrLink.Header" xml:space="preserve">
+    <value>Open a file or link instead</value>
+  </data>
+  <data name="PathOrLink.Header" xml:space="preserve">
+    <value>Path or link</value>
+  </data>
+  <data name="PathOrLink.PlaceholderText" xml:space="preserve">
+    <value>C:\… or https://… or ms-settings:…</value>
+  </data>
+  <data name="Browse.Content" xml:space="preserve">
+    <value>Browse…</value>
+  </data>
+  <data name="OptionalArguments.Header" xml:space="preserve">
+    <value>Arguments (optional)</value>
+  </data>
+  <data name="NothingHappens.Text" xml:space="preserve">
+    <value>Nothing happens for this gesture.</value>
+  </data>
+  <data name="SearchFunctions.PlaceholderText" xml:space="preserve">
+    <value>Search functions (e.g. lock, snip, magnifier)…</value>
+  </data>
+  <data name="StatusUnpackaged" xml:space="preserve">
+    <value>Not installed as a packaged app</value>
+  </data>
+  <data name="StatusUnpackagedDescription" xml:space="preserve">
+    <value>The Copilot key can only be assigned to a signed, installed (MSIX) build. This unpackaged build is for development.</value>
+  </data>
+  <data name="StatusAssigned" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="StatusAssignedDescription" xml:space="preserve">
+    <value>Repilot is set as your Copilot key. Press the key to run your action.</value>
+  </data>
+  <data name="ChangeAssignment" xml:space="preserve">
+    <value>Change in Windows Settings</value>
+  </data>
+  <data name="StatusOtherApp" xml:space="preserve">
+    <value>The Copilot key is assigned to a different app</value>
+  </data>
+  <data name="StatusChooseRepilot" xml:space="preserve">
+    <value>Open Windows Settings and choose Repilot to use the action below.</value>
+  </data>
+  <data name="StatusSearch" xml:space="preserve">
+    <value>The Copilot key opens Search</value>
+  </data>
+  <data name="StatusNotAssigned" xml:space="preserve">
+    <value>Not assigned yet</value>
+  </data>
+  <data name="StatusAssignInstructions" xml:space="preserve">
+    <value>Open Windows Settings → Customize Copilot key, choose "Custom", and pick Repilot.</value>
+  </data>
+  <data name="RecordPrompt" xml:space="preserve">
+    <value>Press the shortcut…</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>Recording… (Esc)</value>
+  </data>
+  <data name="StoreOpened" xml:space="preserve">
+    <value>The Microsoft Store is open to Updates &amp; downloads. Check there for available updates.</value>
+  </data>
+  <data name="StoreOpenFailed" xml:space="preserve">
+    <value>Unable to open the Microsoft Store.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Checking…</value>
+  </data>
+  <data name="CheckingUpdates" xml:space="preserve">
+    <value>Checking for updates…</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>Unable to check for updates. Check your internet connection.</value>
+  </data>
+  <data name="ViewRelease" xml:space="preserve">
+    <value>View Release</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Version {0} is available (you have {1}).</value>
+  </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>You're up to date ({0}).</value>
+  </data>
+  <data name="SummaryNone" xml:space="preserve">
+    <value>Do nothing</value>
+  </data>
+  <data name="SummaryTextUnset" xml:space="preserve">
+    <value>Type text (not set)</value>
+  </data>
+  <data name="SummaryKeysUnset" xml:space="preserve">
+    <value>Send a key combination (not set)</value>
+  </data>
+  <data name="SummaryAppUnset" xml:space="preserve">
+    <value>Open an app (not set)</value>
+  </data>
+  <data name="SummaryFunctionUnset" xml:space="preserve">
+    <value>Run a Windows function (not set)</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="SummaryText" xml:space="preserve">
+    <value>Type text: {0}</value>
+  </data>
+  <data name="SummaryKeys" xml:space="preserve">
+    <value>Send keys: {0}</value>
+  </data>
+  <data name="SummaryOpen" xml:space="preserve">
+    <value>Open: {0}</value>
+  </data>
+  <data name="SummaryFunction" xml:space="preserve">
+    <value>Windows function: {0}</value>
+  </data>
+  <data name="LanguageTitle.Text" xml:space="preserve">
+    <value>App language</value>
+  </data>
+  <data name="LanguageDescription.Text" xml:space="preserve">
+    <value>Language of this settings app. Your Windows regional number and date formats stay the same.</value>
+  </data>
+  <data name="FollowWindows" xml:space="preserve">
+    <value>Follow Windows</value>
+  </data>
+  <data name="LanguageRestartPending" xml:space="preserve">
+    <value>Language saved. Close and reopen the Repilot settings app to apply it.</value>
+  </data>
+  <data name="Function_task-view_Name" xml:space="preserve">
+    <value>Task View</value>
+  </data>
+  <data name="Function_task-view_Description" xml:space="preserve">
+    <value>Show all open windows and virtual desktops.</value>
+  </data>
+  <data name="Function_snap-left_Name" xml:space="preserve">
+    <value>Snap window left</value>
+  </data>
+  <data name="Function_snap-left_Description" xml:space="preserve">
+    <value>Dock the active window to the left half.</value>
+  </data>
+  <data name="Function_snap-right_Name" xml:space="preserve">
+    <value>Snap window right</value>
+  </data>
+  <data name="Function_snap-right_Description" xml:space="preserve">
+    <value>Dock the active window to the right half.</value>
+  </data>
+  <data name="Function_maximize_Name" xml:space="preserve">
+    <value>Maximize window</value>
+  </data>
+  <data name="Function_maximize_Description" xml:space="preserve">
+    <value>Maximize the active window.</value>
+  </data>
+  <data name="Function_minimize_Name" xml:space="preserve">
+    <value>Minimize window</value>
+  </data>
+  <data name="Function_minimize_Description" xml:space="preserve">
+    <value>Minimize the active window.</value>
+  </data>
+  <data name="Function_show-desktop_Name" xml:space="preserve">
+    <value>Show desktop</value>
+  </data>
+  <data name="Function_show-desktop_Description" xml:space="preserve">
+    <value>Minimize everything and show the desktop.</value>
+  </data>
+  <data name="Function_snap-layouts_Name" xml:space="preserve">
+    <value>Snap layouts</value>
+  </data>
+  <data name="Function_snap-layouts_Description" xml:space="preserve">
+    <value>Open the snap-layouts picker for the active window.</value>
+  </data>
+  <data name="Function_new-desktop_Name" xml:space="preserve">
+    <value>New virtual desktop</value>
+  </data>
+  <data name="Function_new-desktop_Description" xml:space="preserve">
+    <value>Create a new virtual desktop.</value>
+  </data>
+  <data name="Function_next-desktop_Name" xml:space="preserve">
+    <value>Next virtual desktop</value>
+  </data>
+  <data name="Function_next-desktop_Description" xml:space="preserve">
+    <value>Switch to the next virtual desktop.</value>
+  </data>
+  <data name="Function_prev-desktop_Name" xml:space="preserve">
+    <value>Previous virtual desktop</value>
+  </data>
+  <data name="Function_prev-desktop_Description" xml:space="preserve">
+    <value>Switch to the previous virtual desktop.</value>
+  </data>
+  <data name="Function_lock-pc_Name" xml:space="preserve">
+    <value>Lock PC</value>
+  </data>
+  <data name="Function_lock-pc_Description" xml:space="preserve">
+    <value>Lock the computer.</value>
+  </data>
+  <data name="Function_file-explorer_Name" xml:space="preserve">
+    <value>File Explorer</value>
+  </data>
+  <data name="Function_file-explorer_Description" xml:space="preserve">
+    <value>Open a new File Explorer window.</value>
+  </data>
+  <data name="Function_run-dialog_Name" xml:space="preserve">
+    <value>Run dialog</value>
+  </data>
+  <data name="Function_run-dialog_Description" xml:space="preserve">
+    <value>Open the Run dialog.</value>
+  </data>
+  <data name="Function_task-manager_Name" xml:space="preserve">
+    <value>Task Manager</value>
+  </data>
+  <data name="Function_task-manager_Description" xml:space="preserve">
+    <value>Open Task Manager.</value>
+  </data>
+  <data name="Function_power-user-menu_Name" xml:space="preserve">
+    <value>Quick Link menu (Win+X)</value>
+  </data>
+  <data name="Function_power-user-menu_Description" xml:space="preserve">
+    <value>Open the power-user / Quick Link menu.</value>
+  </data>
+  <data name="Function_project_Name" xml:space="preserve">
+    <value>Project / second screen</value>
+  </data>
+  <data name="Function_project_Description" xml:space="preserve">
+    <value>Open the projection (display mode) flyout.</value>
+  </data>
+  <data name="Function_cast-connect_Name" xml:space="preserve">
+    <value>Cast to a device</value>
+  </data>
+  <data name="Function_cast-connect_Description" xml:space="preserve">
+    <value>Open the Connect (wireless display) flyout.</value>
+  </data>
+  <data name="Function_screen-snip_Name" xml:space="preserve">
+    <value>Screen snip (Snip &amp; Sketch)</value>
+  </data>
+  <data name="Function_screen-snip_Description" xml:space="preserve">
+    <value>Start a rectangular screen snip.</value>
+  </data>
+  <data name="Function_print-screen_Name" xml:space="preserve">
+    <value>Print Screen</value>
+  </data>
+  <data name="Function_print-screen_Description" xml:space="preserve">
+    <value>Capture the whole screen to the clipboard.</value>
+  </data>
+  <data name="Function_game-bar_Name" xml:space="preserve">
+    <value>Xbox Game Bar</value>
+  </data>
+  <data name="Function_game-bar_Description" xml:space="preserve">
+    <value>Open the Game Bar overlay.</value>
+  </data>
+  <data name="Function_record-screen_Name" xml:space="preserve">
+    <value>Record screen</value>
+  </data>
+  <data name="Function_record-screen_Description" xml:space="preserve">
+    <value>Start/stop screen recording via Game Bar.</value>
+  </data>
+  <data name="Function_notifications_Name" xml:space="preserve">
+    <value>Notification center</value>
+  </data>
+  <data name="Function_notifications_Description" xml:space="preserve">
+    <value>Open the notification center and calendar.</value>
+  </data>
+  <data name="Function_context-menu_Name" xml:space="preserve">
+    <value>Menu key (context menu)</value>
+  </data>
+  <data name="Function_context-menu_Description" xml:space="preserve">
+    <value>Open the right-click menu for whatever has focus, like the old Menu key.</value>
+  </data>
+  <data name="Function_quick-settings_Name" xml:space="preserve">
+    <value>Quick settings</value>
+  </data>
+  <data name="Function_quick-settings_Description" xml:space="preserve">
+    <value>Open the quick-settings flyout (Wi-Fi, volume, etc.).</value>
+  </data>
+  <data name="Function_clipboard-history_Name" xml:space="preserve">
+    <value>Clipboard history</value>
+  </data>
+  <data name="Function_clipboard-history_Description" xml:space="preserve">
+    <value>Open clipboard history.</value>
+  </data>
+  <data name="Function_emoji-panel_Name" xml:space="preserve">
+    <value>Emoji &amp; symbols panel</value>
+  </data>
+  <data name="Function_emoji-panel_Description" xml:space="preserve">
+    <value>Open the emoji, kaomoji, and symbols picker.</value>
+  </data>
+  <data name="Function_voice-typing_Name" xml:space="preserve">
+    <value>Voice typing</value>
+  </data>
+  <data name="Function_voice-typing_Description" xml:space="preserve">
+    <value>Start voice typing / dictation.</value>
+  </data>
+  <data name="Function_widgets_Name" xml:space="preserve">
+    <value>Widgets board</value>
+  </data>
+  <data name="Function_widgets_Description" xml:space="preserve">
+    <value>Open the widgets panel.</value>
+  </data>
+  <data name="Function_magnifier_Name" xml:space="preserve">
+    <value>Magnifier</value>
+  </data>
+  <data name="Function_magnifier_Description" xml:space="preserve">
+    <value>Turn on the Magnifier / zoom in.</value>
+  </data>
+  <data name="Function_narrator_Name" xml:space="preserve">
+    <value>Narrator</value>
+  </data>
+  <data name="Function_narrator_Description" xml:space="preserve">
+    <value>Toggle the Narrator screen reader.</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Name" xml:space="preserve">
+    <value>On-Screen Keyboard</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Description" xml:space="preserve">
+    <value>Toggle the on-screen keyboard.</value>
+  </data>
+  <data name="Function_color-filters_Name" xml:space="preserve">
+    <value>Color filters</value>
+  </data>
+  <data name="Function_color-filters_Description" xml:space="preserve">
+    <value>Toggle color filters.</value>
+  </data>
+  <data name="Function_live-captions_Name" xml:space="preserve">
+    <value>Live captions</value>
+  </data>
+  <data name="Function_live-captions_Description" xml:space="preserve">
+    <value>Toggle system-wide live captions.</value>
+  </data>
+  <data name="Function_search_Name" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Function_search_Description" xml:space="preserve">
+    <value>Open Windows Search.</value>
+  </data>
+  <data name="Function_settings-home_Name" xml:space="preserve">
+    <value>All Settings</value>
+  </data>
+  <data name="Function_settings-home_Description" xml:space="preserve">
+    <value>Open the Settings app.</value>
+  </data>
+  <data name="Function_settings-display_Name" xml:space="preserve">
+    <value>Display settings</value>
+  </data>
+  <data name="Function_settings-display_Description" xml:space="preserve">
+    <value>Open Display settings.</value>
+  </data>
+  <data name="Function_settings-sound_Name" xml:space="preserve">
+    <value>Sound settings</value>
+  </data>
+  <data name="Function_settings-sound_Description" xml:space="preserve">
+    <value>Open Sound settings.</value>
+  </data>
+  <data name="Function_settings-bluetooth_Name" xml:space="preserve">
+    <value>Bluetooth &amp; devices</value>
+  </data>
+  <data name="Function_settings-bluetooth_Description" xml:space="preserve">
+    <value>Open Bluetooth &amp; devices settings.</value>
+  </data>
+  <data name="Function_settings-apps_Name" xml:space="preserve">
+    <value>Installed apps</value>
+  </data>
+  <data name="Function_settings-apps_Description" xml:space="preserve">
+    <value>Open the installed-apps settings.</value>
+  </data>
+  <data name="FunctionGroup_Windowmanagement" xml:space="preserve">
+    <value>Window management</value>
+  </data>
+  <data name="FunctionGroup_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="FunctionGroup_Capturerecording" xml:space="preserve">
+    <value>Capture &amp; recording</value>
+  </data>
+  <data name="FunctionGroup_Notificationsinput" xml:space="preserve">
+    <value>Notifications &amp; input</value>
+  </data>
+  <data name="FunctionGroup_Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="FunctionGroup_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="FunctionGroup_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="PromoSubtitle" xml:space="preserve">
+    <value>More from Dynamic Solutions Canada on the Microsoft Store.</value>
+  </data>
+  <data name="PromoVisitWebsite" xml:space="preserve">
+    <value>Visit website</value>
+  </data>
+  <data name="PromoViewInStore" xml:space="preserve">
+    <value>View in Store</value>
+  </data>
+  <data name="PromoPrintStream" xml:space="preserve">
+    <value>Manage your 3D printers, one or a whole farm, from any device.</value>
+  </data>
+  <data name="PromoImmichDrive" xml:space="preserve">
+    <value>ImmichDrive brings your self-hosted Immich photo and video library straight into Windows File Explorer as a native cloud drive. Your whole timeline appears as files you can...</value>
+  </data>
+  <data name="PromoPersistent" xml:space="preserve">
+    <value>Reminders that don't give up.</value>
+  </data>
+  <data name="PromoTitle" xml:space="preserve">
+    <value>Our other apps</value>
+  </data>
+  <data name="PromoLittleLauncher" xml:space="preserve">
+    <value>Launch apps and websites from your tray on Windows and Linux. Windows is available in the Store; Linux uses AppImage.</value>
+  </data>
+</root>

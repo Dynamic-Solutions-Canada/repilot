@@ -12,5 +12,9 @@
     <Compile Include="../../Repilot/Services/ActionExecutor.cs" Link="Shared/ActionExecutor.cs" />
     <Compile Include="../../Repilot/Services/ActionSummary.cs" Link="Shared/ActionSummary.cs" />
     <Compile Include="../../Repilot/Services/WindowsFunctionCatalog.cs" Link="Shared/WindowsFunctionCatalog.cs" />
+    <Compile Include="../../Repilot/Services/WindowsFunctionText.cs" Link="Shared/WindowsFunctionText.cs" />
+    <!-- ActionSummary reads localized text; the stub serves the English resources. -->
+    <Compile Include="../Shared/UiStrings.cs" Link="Shared/UiStrings.cs" />
+    <None Include="../../Repilot/Strings/en-US/Resources.resw" Link="Resources.resw" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

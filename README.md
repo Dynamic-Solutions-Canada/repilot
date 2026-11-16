@@ -38,6 +38,8 @@ Idle footprint: zero.
 4. **A Windows function**: choose from a curated, searchable catalog (Task View, snap, lock, Snip & Sketch, Magnifier, and more).
 5. **Nothing**: quietly disable the key.
 
+The settings app follows your Windows display language, or you can choose one in Settings: English (United States or Canada), Spanish, French (France or Canada), German, Simplified Chinese, Brazilian Portuguese, or Japanese. Translations are machine-generated.
+
 ## Installing
 
 1. Get Repilot from the **[Microsoft Store](https://apps.microsoft.com/detail/9pb5fj08pnvj)** — it installs and stays up to date automatically.

@@ -13,7 +13,8 @@ public sealed partial class AboutPage : Page
         InitializeComponent();
 
         var v = typeof(AboutPage).Assembly.GetName().Version!;
-        VersionText.Text = $"Version {v.Major}.{v.Minor}.{v.Build}";
+        VersionText.Text = UiStrings.Format("Version", $"{v.Major}.{v.Minor}.{v.Build}");
+        CheckUpdateButton.Content = UiStrings.Get("CheckUpdates");
     }
 
     /// <summary>Checks GitHub releases for an unpackaged development build.</summary>
@@ -22,25 +23,25 @@ public sealed partial class AboutPage : Page
         if (UpdateService.IsPackaged)
         {
             UpdateStatusText.Text = UpdateService.OpenStoreUpdates()
-                ? "The Microsoft Store is open to Updates & downloads. Check there for available updates."
-                : "Unable to open the Microsoft Store.";
+                ? UiStrings.Get("StoreOpened")
+                : UiStrings.Get("StoreOpenFailed");
             return;
         }
 
         CheckUpdateButton.IsEnabled = false;
-        CheckUpdateButton.Content = "Checking...";
-        UpdateStatusText.Text = "Checking for updates...";
+        CheckUpdateButton.Content = UiStrings.Get("Checking");
+        UpdateStatusText.Text = UiStrings.Get("CheckingUpdates");
 
         var result = await UpdateService.CheckForUpdateAsync();
         if (result == null)
         {
-            UpdateStatusText.Text = "Unable to check for updates. Check your internet connection.";
+            UpdateStatusText.Text = UiStrings.Get("UpdateCheckFailed");
         }
         else if (result.UpdateAvailable)
         {
             _update = result;
-            UpdateStatusText.Text = $"Version {result.LatestVersion} is available (you have {result.CurrentVersion}).";
-            CheckUpdateButton.Content = "View Release";
+            UpdateStatusText.Text = UiStrings.Format("UpdateAvailable", result.LatestVersion, result.CurrentVersion);
+            CheckUpdateButton.Content = UiStrings.Get("ViewRelease");
             CheckUpdateButton.Click -= CheckForUpdates_Click;
             CheckUpdateButton.Click += ViewRelease_Click;
             CheckUpdateButton.IsEnabled = true;
@@ -48,10 +49,10 @@ public sealed partial class AboutPage : Page
         }
         else
         {
-            UpdateStatusText.Text = $"You're up to date ({result.CurrentVersion}).";
+            UpdateStatusText.Text = UiStrings.Format("UpToDate", result.CurrentVersion);
         }
 
-        CheckUpdateButton.Content = "Check for Updates";
+        CheckUpdateButton.Content = UiStrings.Get("CheckUpdates");
         CheckUpdateButton.IsEnabled = true;
     }
 

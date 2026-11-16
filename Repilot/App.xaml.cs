@@ -24,7 +24,15 @@ public partial class App : Application
 
     private static readonly Mutex Singleton = new(true, "Repilot.Settings");
 
-    public App() => InitializeComponent();
+    public App()
+    {
+        // The language override must be in place before any XAML or string resource loads,
+        // so settings are read here rather than in OnLaunched.
+        SettingsManager.RestoreSettings();
+        Classes.AppLanguage.ApplySaved();
+
+        InitializeComponent();
+    }
 
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
@@ -51,8 +59,6 @@ public partial class App : Application
         };
 
         ActionExecutor.ErrorSink = ex => Logger.Error(ex, "Action execution failed");
-
-        SettingsManager.RestoreSettings();
 
         m_window = new SettingsWindow();
         m_window.Activate();

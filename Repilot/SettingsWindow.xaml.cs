@@ -31,6 +31,13 @@ public sealed partial class SettingsWindow : Window
         instance = this;
         Closed += (s, e) => instance = null;
 
+        // The shared promo page lives in a submodule with English copy; translate it here.
+        ContentFrame.Navigated += (_, _) =>
+        {
+            if (ContentFrame.Content is TechnicallyReal.Promo.PromotedAppsPage promo)
+                promo.EnableLocalization();
+        };
+
         SystemBackdrop = new MicaBackdrop();
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);

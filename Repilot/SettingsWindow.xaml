@@ -28,18 +28,18 @@
                         IsSettingsVisible="True"
                         SelectionChanged="RootNavigation_SelectionChanged">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Home" Tag="HomePage">
+                <NavigationViewItem x:Uid="NavHome" Tag="HomePage">
                     <NavigationViewItem.Icon><SymbolIcon Symbol="Home" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Copilot key action" Tag="ActionPage">
+                <NavigationViewItem x:Uid="NavAction" Tag="ActionPage">
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE765;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Our other apps" Tag="PromotedAppsPage">
+                <NavigationViewItem x:Uid="NavOtherApps" Tag="PromotedAppsPage">
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE719;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="About" Tag="AboutPage">
+                <NavigationViewItem x:Uid="NavAbout" Tag="AboutPage">
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE946;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>

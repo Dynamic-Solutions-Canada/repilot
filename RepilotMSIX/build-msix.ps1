@@ -195,13 +195,59 @@ Write-Host "  Layout ready: $layoutDir"
 # ── Step 3: resources.pri ─────────────────────────────────────────────────────────
 Write-Host "`n=== Generating resources.pri ===" -ForegroundColor Cyan
 $existingPri = Join-Path $layoutDir "resources.pri"
-if (Test-Path $existingPri) { Remove-Item $existingPri -Force }
+# Remove the publish output's index, including any language-split files.
+Get-ChildItem $layoutDir -Filter "resources*.pri" | Remove-Item -Force
+
+# Stage the settings app's strings (Repilot\Strings\<lang>\Resources.resw) in the layout
+# so the RESW indexer finds them. en-CA and fr-CA are copies of en-US and fr-FR: the
+# Canadian wording is shared today, but every language the manifest declares gets its
+# own candidates. The staged .resw files are removed again before packing.
+$stringsSrc   = Join-Path $repoRoot "Repilot\Strings"
+$stringsStage = Join-Path $layoutDir "Strings"
+Copy-Item $stringsSrc $stringsStage -Recurse -Force
+foreach ($alias in @(@("en-CA", "en-US"), @("fr-CA", "fr-FR"))) {
+    Copy-Item (Join-Path $stringsSrc $alias[1]) (Join-Path $stringsStage $alias[0]) -Recurse -Force
+}
+
 $priconfigFile = Join-Path $layoutDir "priconfig.xml"
 & $makepri createconfig /cf $priconfigFile /dq en-US /o
 if ($LASTEXITCODE -ne 0) { Write-Error "makepri createconfig failed"; exit 1 }
+
+# Language splitting writes resources.language-*.pri files that only a bundle's resource
+# packs load. This flat MSIX would silently lose every translation, so remove the
+# <packaging> section and keep all languages in the one resources.pri.
+[xml]$priConfig = Get-Content $priconfigFile -Raw
+$packagingNode = $priConfig.resources.SelectSingleNode("packaging")
+if ($packagingNode) { [void]$priConfig.resources.RemoveChild($packagingNode) }
+$priConfig.Save($priconfigFile)
+
 & $makepri new /pr $layoutDir /cf $priconfigFile /mn (Join-Path $layoutDir "AppxManifest.xml") /of $existingPri /o
 if ($LASTEXITCODE -ne 0) { Write-Error "makepri new failed"; exit 1 }
 Remove-Item $priconfigFile -Force -ErrorAction SilentlyContinue
+Remove-Item $stringsStage -Recurse -Force
+
+# Verify the index before packing: no split files, and a known string resolves in every
+# declared language. This is the check that fails loudly instead of shipping English only.
+if (Get-ChildItem $layoutDir -Filter "resources.*.pri") {
+    Write-Error "makepri produced language-split PRI files; translations would be lost"; exit 1
+}
+$priDump = Join-Path $msixDir "bin\resources-$Platform.pri.xml"
+& $makepri dump /if $existingPri /of $priDump /dt detailed /o
+if ($LASTEXITCODE -ne 0) { Write-Error "makepri dump failed"; exit 1 }
+[xml]$dump = Get-Content $priDump -Raw
+# Dump shape: NamedResource(uri) > Candidate > QualifierSet > Qualifier(name="Language", value).
+$probeXPath = "//NamedResource[contains(@uri, '/Resources/NavHome/Content')]/Candidate/QualifierSet/Qualifier[@name='Language']/@value"
+$probeLanguages = @($dump.SelectNodes($probeXPath) | ForEach-Object { $_.Value })
+if ($probeLanguages.Count -eq 0) {
+    Write-Error "resources.pri has no settings-app strings (NavHome.Content missing)"; exit 1
+}
+[xml]$stampedManifest = Get-Content (Join-Path $layoutDir "AppxManifest.xml") -Raw
+foreach ($resource in $stampedManifest.Package.Resources.Resource) {
+    if (-not ($probeLanguages | Where-Object { $_ -eq $resource.Language })) {
+        Write-Error "resources.pri has no $($resource.Language) strings (looked for NavHome.Content)"; exit 1
+    }
+}
+Write-Host "  Strings indexed for: $(($stampedManifest.Package.Resources.Resource | ForEach-Object { $_.Language }) -join ', ')"
 
 # ── Step 4: Package ────────────────────────────────────────────────────────────────
 Write-Host "`n=== Packaging MSIX ===" -ForegroundColor Cyan

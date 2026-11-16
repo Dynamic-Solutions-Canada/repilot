@@ -19,8 +19,8 @@ public sealed partial class HomePage : Page
         if (!CopilotKeyProvider.IsPackaged)
         {
             StatusBar.Severity = InfoBarSeverity.Informational;
-            StatusBar.Title = "Not installed as a packaged app";
-            StatusBar.Message = "The Copilot key can only be assigned to a signed, installed (MSIX) build. This unpackaged build is for development.";
+            StatusBar.Title = UiStrings.Get("StatusUnpackaged");
+            StatusBar.Message = UiStrings.Get("StatusUnpackagedDescription");
             AssignButton.Visibility = Visibility.Collapsed;
             return;
         }
@@ -30,24 +30,24 @@ public sealed partial class HomePage : Page
             case ProviderStatus.Assigned:
             case ProviderStatus.AssignedByPolicy:
                 StatusBar.Severity = InfoBarSeverity.Success;
-                StatusBar.Title = "Assigned";
-                StatusBar.Message = "Repilot is set as your Copilot key. Press the key to run your action.";
-                AssignButton.Content = "Change in Windows Settings";
+                StatusBar.Title = UiStrings.Get("StatusAssigned");
+                StatusBar.Message = UiStrings.Get("StatusAssignedDescription");
+                AssignButton.Content = UiStrings.Get("ChangeAssignment");
                 break;
             case ProviderStatus.AssignedToOtherApp:
                 StatusBar.Severity = InfoBarSeverity.Warning;
-                StatusBar.Title = "The Copilot key is assigned to a different app";
-                StatusBar.Message = "Open Windows Settings and choose Repilot to use the action below.";
+                StatusBar.Title = UiStrings.Get("StatusOtherApp");
+                StatusBar.Message = UiStrings.Get("StatusChooseRepilot");
                 break;
             case ProviderStatus.SetToSearch:
                 StatusBar.Severity = InfoBarSeverity.Warning;
-                StatusBar.Title = "The Copilot key opens Search";
-                StatusBar.Message = "Open Windows Settings and choose Repilot to use the action below.";
+                StatusBar.Title = UiStrings.Get("StatusSearch");
+                StatusBar.Message = UiStrings.Get("StatusChooseRepilot");
                 break;
             default:
                 StatusBar.Severity = InfoBarSeverity.Warning;
-                StatusBar.Title = "Not assigned yet";
-                StatusBar.Message = "Open Windows Settings → Customize Copilot key, choose \"Custom\", and pick Repilot.";
+                StatusBar.Title = UiStrings.Get("StatusNotAssigned");
+                StatusBar.Message = UiStrings.Get("StatusAssignInstructions");
                 break;
         }
     }

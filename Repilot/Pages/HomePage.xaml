@@ -5,11 +5,11 @@
     <ScrollViewer Padding="32,16,32,32">
         <StackPanel Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
             <TextBlock Text="Repilot" Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="Choose what your keyboard's Copilot key does." Opacity="0.7" Margin="0,-8,0,0" />
+            <TextBlock x:Uid="HomeDescription" Opacity="0.7" Margin="0,-8,0,0" />
 
             <InfoBar x:Name="StatusBar" IsOpen="True" IsClosable="False">
                 <InfoBar.ActionButton>
-                    <Button x:Name="AssignButton" Content="Assign in Windows Settings" Click="AssignButton_Click" />
+                    <Button x:Name="AssignButton" x:Uid="AssignInSettings" Click="AssignButton_Click" />
                 </InfoBar.ActionButton>
             </InfoBar>
 
@@ -20,7 +20,7 @@
                     <StackPanel Orientation="Horizontal" Spacing="12">
                         <FontIcon Glyph="&#xE765;" FontSize="22" VerticalAlignment="Center" />
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="When the Copilot key is pressed" Opacity="0.7" FontSize="12" />
+                            <TextBlock x:Uid="OnCopilotPress" Opacity="0.7" FontSize="12" />
                             <TextBlock x:Name="ActionText" Style="{StaticResource SubtitleTextBlockStyle}" />
                         </StackPanel>
                     </StackPanel>
@@ -28,13 +28,13 @@
                         <Button x:Name="ChangeButton" Click="ChangeButton_Click" Style="{StaticResource AccentButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE70F;" FontSize="14" />
-                                <TextBlock Text="Change action" />
+                                <TextBlock x:Uid="ChangeAction" />
                             </StackPanel>
                         </Button>
                         <Button x:Name="TestButton" Click="TestButton_Click">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE768;" FontSize="14" />
-                                <TextBlock Text="Test it now" />
+                                <TextBlock x:Uid="TestAction" />
                             </StackPanel>
                         </Button>
                     </StackPanel>

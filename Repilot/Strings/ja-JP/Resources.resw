@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NavHome.Content" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="NavAction.Content" xml:space="preserve">
+    <value>Copilot キーの操作</value>
+  </data>
+  <data name="ActionTitle.Text" xml:space="preserve">
+    <value>Copilot キーの操作</value>
+  </data>
+  <data name="NavOtherApps.Content" xml:space="preserve">
+    <value>その他のアプリ</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="HomeDescription.Text" xml:space="preserve">
+    <value>キーボードの Copilot キーの動作を選択します。</value>
+  </data>
+  <data name="AssignInSettings.Content" xml:space="preserve">
+    <value>Windows の設定で割り当てる</value>
+  </data>
+  <data name="OnCopilotPress.Text" xml:space="preserve">
+    <value>Copilot キーを押したとき</value>
+  </data>
+  <data name="ChangeAction.Text" xml:space="preserve">
+    <value>操作を変更</value>
+  </data>
+  <data name="TestAction.Text" xml:space="preserve">
+    <value>今すぐテスト</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Copilot キーでカスタムショートカットの送信、アプリの起動、Windows 機能の実行ができます。</value>
+  </data>
+  <data name="HowItWorks.Text" xml:space="preserve">
+    <value>仕組み</value>
+  </data>
+  <data name="HowItWorksDescription.Text" xml:space="preserve">
+    <value>Microsoft の公式 Copilot ハードウェアキーのプロバイダーとして登録します。キーを押すと小さなプログラムが起動し、操作を実行して終了します。バックグラウンドサービス、トレイアイコン、常駐プロセスはありません。</value>
+  </data>
+  <data name="BuiltWith.Text" xml:space="preserve">
+    <value>使用技術</value>
+  </data>
+  <data name="SourceCode.Text" xml:space="preserve">
+    <value>ソースコード</value>
+  </data>
+  <data name="SourceDescription.Text" xml:space="preserve">
+    <value>GitHub でプロジェクトを見る</value>
+  </data>
+  <data name="GitHubRepository.Content" xml:space="preserve">
+    <value>GitHub リポジトリ</value>
+  </data>
+  <data name="Updates.Text" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CheckUpdatesHint.Text" xml:space="preserve">
+    <value>クリックして更新を確認</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>更新を確認</value>
+  </data>
+  <data name="AppTheme.Text" xml:space="preserve">
+    <value>アプリのテーマ</value>
+  </data>
+  <data name="AppThemeDescription.Text" xml:space="preserve">
+    <value>この設定ウィンドウの外観です。</value>
+  </data>
+  <data name="SystemTheme.Content" xml:space="preserve">
+    <value>システムの既定</value>
+  </data>
+  <data name="LightTheme.Content" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="DarkTheme.Content" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="NoBackground.Title" xml:space="preserve">
+    <value>バックグラウンドプロセスなし</value>
+  </data>
+  <data name="NoBackground.Message" xml:space="preserve">
+    <value>Repilot はバックグラウンドで動作しません。Copilot キーを押すと、Windows が小さなプログラムを起動し、操作を実行して終了します。このウィンドウは設定専用です。</value>
+  </data>
+  <data name="ActionShortcut.Text" xml:space="preserve">
+    <value>ショートカット</value>
+  </data>
+  <data name="ActionText.Text" xml:space="preserve">
+    <value>テキスト</value>
+  </data>
+  <data name="ActionApp.Text" xml:space="preserve">
+    <value>アプリまたはリンク</value>
+  </data>
+  <data name="ActionFunction.Text" xml:space="preserve">
+    <value>Windows の機能</value>
+  </data>
+  <data name="ActionNone.Text" xml:space="preserve">
+    <value>何もしない</value>
+  </data>
+  <data name="TextInstructions.Text" xml:space="preserve">
+    <value>入力する文字やテキスト（例：ç）を指定します。別のアプリのテキスト欄にフォーカスがある状態で Copilot キーを押してください。キーボード配列に関係なく動作します。</value>
+  </data>
+  <data name="TextToType.Header" xml:space="preserve">
+    <value>入力するテキスト</value>
+  </data>
+  <data name="TextToType.PlaceholderText" xml:space="preserve">
+    <value>例：ç</value>
+  </data>
+  <data name="ShortcutInstructions.Text" xml:space="preserve">
+    <value>記録をクリックして、使いたいショートカット（例：Alt+Tab）を押します。ここではキーを記録するだけで実行しません。Esc でキャンセルします。</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>（未設定）</value>
+  </data>
+  <data name="RecordShortcut" xml:space="preserve">
+    <value>ショートカットを記録</value>
+  </data>
+  <data name="Clear.Content" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="SearchApps.PlaceholderText" xml:space="preserve">
+    <value>アプリを検索…</value>
+  </data>
+  <data name="OpenFileOrLink.Header" xml:space="preserve">
+    <value>ファイルまたはリンクを開く</value>
+  </data>
+  <data name="PathOrLink.Header" xml:space="preserve">
+    <value>パスまたはリンク</value>
+  </data>
+  <data name="PathOrLink.PlaceholderText" xml:space="preserve">
+    <value>C:\…、https://…、ms-settings:…</value>
+  </data>
+  <data name="Browse.Content" xml:space="preserve">
+    <value>参照…</value>
+  </data>
+  <data name="OptionalArguments.Header" xml:space="preserve">
+    <value>引数（任意）</value>
+  </data>
+  <data name="NothingHappens.Text" xml:space="preserve">
+    <value>この操作では何も起こりません。</value>
+  </data>
+  <data name="SearchFunctions.PlaceholderText" xml:space="preserve">
+    <value>機能を検索（ロック、切り取り、拡大鏡など）…</value>
+  </data>
+  <data name="StatusUnpackaged" xml:space="preserve">
+    <value>パッケージ版として未インストール</value>
+  </data>
+  <data name="StatusUnpackagedDescription" xml:space="preserve">
+    <value>Copilot キーは署名済みでインストールされた MSIX 版にのみ割り当てられます。この非パッケージ版は開発用です。</value>
+  </data>
+  <data name="StatusAssigned" xml:space="preserve">
+    <value>割り当て済み</value>
+  </data>
+  <data name="StatusAssignedDescription" xml:space="preserve">
+    <value>Repilot が Copilot キーに割り当てられています。キーを押すと操作を実行します。</value>
+  </data>
+  <data name="ChangeAssignment" xml:space="preserve">
+    <value>Windows の設定で変更</value>
+  </data>
+  <data name="StatusOtherApp" xml:space="preserve">
+    <value>Copilot キーは別のアプリに割り当てられています</value>
+  </data>
+  <data name="StatusChooseRepilot" xml:space="preserve">
+    <value>Windows の設定を開き、Repilot を選択して以下の操作を使用してください。</value>
+  </data>
+  <data name="StatusSearch" xml:space="preserve">
+    <value>Copilot キーは検索を開きます</value>
+  </data>
+  <data name="StatusNotAssigned" xml:space="preserve">
+    <value>未割り当て</value>
+  </data>
+  <data name="StatusAssignInstructions" xml:space="preserve">
+    <value>Windows の設定 → Copilot キーのカスタマイズを開き、「カスタム」を選択して Repilot を選んでください。</value>
+  </data>
+  <data name="RecordPrompt" xml:space="preserve">
+    <value>ショートカットを押してください…</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>記録中… (Esc)</value>
+  </data>
+  <data name="StoreOpened" xml:space="preserve">
+    <value>Microsoft Store の「更新とダウンロード」を開きました。利用可能な更新をそこで確認してください。</value>
+  </data>
+  <data name="StoreOpenFailed" xml:space="preserve">
+    <value>Microsoft Store を開けませんでした。</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>確認中…</value>
+  </data>
+  <data name="CheckingUpdates" xml:space="preserve">
+    <value>更新を確認中…</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>更新を確認できませんでした。インターネット接続を確認してください。</value>
+  </data>
+  <data name="ViewRelease" xml:space="preserve">
+    <value>リリースを見る</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>バージョン {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>バージョン {0} が利用可能です（現在は {1}）。</value>
+  </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>最新の状態です（{0}）。</value>
+  </data>
+  <data name="SummaryNone" xml:space="preserve">
+    <value>何もしない</value>
+  </data>
+  <data name="SummaryTextUnset" xml:space="preserve">
+    <value>テキスト入力（未設定）</value>
+  </data>
+  <data name="SummaryKeysUnset" xml:space="preserve">
+    <value>キーの組み合わせを送信（未設定）</value>
+  </data>
+  <data name="SummaryAppUnset" xml:space="preserve">
+    <value>アプリを開く（未設定）</value>
+  </data>
+  <data name="SummaryFunctionUnset" xml:space="preserve">
+    <value>Windows の機能を実行（未設定）</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="SummaryText" xml:space="preserve">
+    <value>テキスト入力：{0}</value>
+  </data>
+  <data name="SummaryKeys" xml:space="preserve">
+    <value>キーを送信：{0}</value>
+  </data>
+  <data name="SummaryOpen" xml:space="preserve">
+    <value>開く：{0}</value>
+  </data>
+  <data name="SummaryFunction" xml:space="preserve">
+    <value>Windows の機能：{0}</value>
+  </data>
+  <data name="LanguageTitle.Text" xml:space="preserve">
+    <value>アプリの言語</value>
+  </data>
+  <data name="LanguageDescription.Text" xml:space="preserve">
+    <value>この設定アプリの言語です。Windows の地域に基づく数値と日付の形式は変わりません。</value>
+  </data>
+  <data name="FollowWindows" xml:space="preserve">
+    <value>Windows に従う</value>
+  </data>
+  <data name="LanguageRestartPending" xml:space="preserve">
+    <value>言語を保存しました。適用するには Repilot 設定アプリを閉じて開き直してください。</value>
+  </data>
+  <data name="Function_task-view_Name" xml:space="preserve">
+    <value>タスクビュー</value>
+  </data>
+  <data name="Function_task-view_Description" xml:space="preserve">
+    <value>開いているすべてのウィンドウと仮想デスクトップを表示します。</value>
+  </data>
+  <data name="Function_snap-left_Name" xml:space="preserve">
+    <value>ウィンドウを左にスナップ</value>
+  </data>
+  <data name="Function_snap-left_Description" xml:space="preserve">
+    <value>アクティブなウィンドウを左半分に配置します。</value>
+  </data>
+  <data name="Function_snap-right_Name" xml:space="preserve">
+    <value>ウィンドウを右にスナップ</value>
+  </data>
+  <data name="Function_snap-right_Description" xml:space="preserve">
+    <value>アクティブなウィンドウを右半分に配置します。</value>
+  </data>
+  <data name="Function_maximize_Name" xml:space="preserve">
+    <value>ウィンドウを最大化</value>
+  </data>
+  <data name="Function_maximize_Description" xml:space="preserve">
+    <value>アクティブなウィンドウを最大化します。</value>
+  </data>
+  <data name="Function_minimize_Name" xml:space="preserve">
+    <value>ウィンドウを最小化</value>
+  </data>
+  <data name="Function_minimize_Description" xml:space="preserve">
+    <value>アクティブなウィンドウを最小化します。</value>
+  </data>
+  <data name="Function_show-desktop_Name" xml:space="preserve">
+    <value>デスクトップを表示</value>
+  </data>
+  <data name="Function_show-desktop_Description" xml:space="preserve">
+    <value>すべてのウィンドウを最小化してデスクトップを表示します。</value>
+  </data>
+  <data name="Function_snap-layouts_Name" xml:space="preserve">
+    <value>スナップレイアウト</value>
+  </data>
+  <data name="Function_snap-layouts_Description" xml:space="preserve">
+    <value>アクティブなウィンドウのスナップレイアウト選択を開きます。</value>
+  </data>
+  <data name="Function_new-desktop_Name" xml:space="preserve">
+    <value>新しい仮想デスクトップ</value>
+  </data>
+  <data name="Function_new-desktop_Description" xml:space="preserve">
+    <value>新しい仮想デスクトップを作成します。</value>
+  </data>
+  <data name="Function_next-desktop_Name" xml:space="preserve">
+    <value>次の仮想デスクトップ</value>
+  </data>
+  <data name="Function_next-desktop_Description" xml:space="preserve">
+    <value>次の仮想デスクトップに切り替えます。</value>
+  </data>
+  <data name="Function_prev-desktop_Name" xml:space="preserve">
+    <value>前の仮想デスクトップ</value>
+  </data>
+  <data name="Function_prev-desktop_Description" xml:space="preserve">
+    <value>前の仮想デスクトップに切り替えます。</value>
+  </data>
+  <data name="Function_lock-pc_Name" xml:space="preserve">
+    <value>PC をロック</value>
+  </data>
+  <data name="Function_lock-pc_Description" xml:space="preserve">
+    <value>コンピューターをロックします。</value>
+  </data>
+  <data name="Function_file-explorer_Name" xml:space="preserve">
+    <value>エクスプローラー</value>
+  </data>
+  <data name="Function_file-explorer_Description" xml:space="preserve">
+    <value>新しいエクスプローラーのウィンドウを開きます。</value>
+  </data>
+  <data name="Function_run-dialog_Name" xml:space="preserve">
+    <value>ファイル名を指定して実行</value>
+  </data>
+  <data name="Function_run-dialog_Description" xml:space="preserve">
+    <value>「ファイル名を指定して実行」を開きます。</value>
+  </data>
+  <data name="Function_task-manager_Name" xml:space="preserve">
+    <value>タスクマネージャー</value>
+  </data>
+  <data name="Function_task-manager_Description" xml:space="preserve">
+    <value>タスクマネージャーを開きます。</value>
+  </data>
+  <data name="Function_power-user-menu_Name" xml:space="preserve">
+    <value>クイックリンクメニュー (Win+X)</value>
+  </data>
+  <data name="Function_power-user-menu_Description" xml:space="preserve">
+    <value>クイックリンクメニューを開きます。</value>
+  </data>
+  <data name="Function_project_Name" xml:space="preserve">
+    <value>映す / セカンドスクリーン</value>
+  </data>
+  <data name="Function_project_Description" xml:space="preserve">
+    <value>映写（表示モード）のパネルを開きます。</value>
+  </data>
+  <data name="Function_cast-connect_Name" xml:space="preserve">
+    <value>デバイスにキャスト</value>
+  </data>
+  <data name="Function_cast-connect_Description" xml:space="preserve">
+    <value>接続（ワイヤレスディスプレイ）のパネルを開きます。</value>
+  </data>
+  <data name="Function_screen-snip_Name" xml:space="preserve">
+    <value>画面の切り取り（切り取り＆スケッチ）</value>
+  </data>
+  <data name="Function_screen-snip_Description" xml:space="preserve">
+    <value>四角形の画面切り取りを開始します。</value>
+  </data>
+  <data name="Function_print-screen_Name" xml:space="preserve">
+    <value>Print Screen</value>
+  </data>
+  <data name="Function_print-screen_Description" xml:space="preserve">
+    <value>画面全体をクリップボードにキャプチャします。</value>
+  </data>
+  <data name="Function_game-bar_Name" xml:space="preserve">
+    <value>Xbox Game Bar</value>
+  </data>
+  <data name="Function_game-bar_Description" xml:space="preserve">
+    <value>Game Bar のオーバーレイを開きます。</value>
+  </data>
+  <data name="Function_record-screen_Name" xml:space="preserve">
+    <value>画面を録画</value>
+  </data>
+  <data name="Function_record-screen_Description" xml:space="preserve">
+    <value>Game Bar で画面録画を開始または停止します。</value>
+  </data>
+  <data name="Function_notifications_Name" xml:space="preserve">
+    <value>通知センター</value>
+  </data>
+  <data name="Function_notifications_Description" xml:space="preserve">
+    <value>通知センターとカレンダーを開きます。</value>
+  </data>
+  <data name="Function_context-menu_Name" xml:space="preserve">
+    <value>メニューキー（コンテキストメニュー）</value>
+  </data>
+  <data name="Function_context-menu_Description" xml:space="preserve">
+    <value>従来のメニューキーのように、フォーカスがある項目の右クリックメニューを開きます。</value>
+  </data>
+  <data name="Function_quick-settings_Name" xml:space="preserve">
+    <value>クイック設定</value>
+  </data>
+  <data name="Function_quick-settings_Description" xml:space="preserve">
+    <value>クイック設定（Wi-Fi、音量など）を開きます。</value>
+  </data>
+  <data name="Function_clipboard-history_Name" xml:space="preserve">
+    <value>クリップボードの履歴</value>
+  </data>
+  <data name="Function_clipboard-history_Description" xml:space="preserve">
+    <value>クリップボードの履歴を開きます。</value>
+  </data>
+  <data name="Function_emoji-panel_Name" xml:space="preserve">
+    <value>絵文字と記号パネル</value>
+  </data>
+  <data name="Function_emoji-panel_Description" xml:space="preserve">
+    <value>絵文字、顔文字、記号の選択を開きます。</value>
+  </data>
+  <data name="Function_voice-typing_Name" xml:space="preserve">
+    <value>音声入力</value>
+  </data>
+  <data name="Function_voice-typing_Description" xml:space="preserve">
+    <value>音声入力を開始します。</value>
+  </data>
+  <data name="Function_widgets_Name" xml:space="preserve">
+    <value>ウィジェットボード</value>
+  </data>
+  <data name="Function_widgets_Description" xml:space="preserve">
+    <value>ウィジェットパネルを開きます。</value>
+  </data>
+  <data name="Function_magnifier_Name" xml:space="preserve">
+    <value>拡大鏡</value>
+  </data>
+  <data name="Function_magnifier_Description" xml:space="preserve">
+    <value>拡大鏡を有効にするか拡大します。</value>
+  </data>
+  <data name="Function_narrator_Name" xml:space="preserve">
+    <value>ナレーター</value>
+  </data>
+  <data name="Function_narrator_Description" xml:space="preserve">
+    <value>ナレーターのスクリーンリーダーを切り替えます。</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Name" xml:space="preserve">
+    <value>スクリーンキーボード</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Description" xml:space="preserve">
+    <value>スクリーンキーボードを切り替えます。</value>
+  </data>
+  <data name="Function_color-filters_Name" xml:space="preserve">
+    <value>カラーフィルター</value>
+  </data>
+  <data name="Function_color-filters_Description" xml:space="preserve">
+    <value>カラーフィルターを切り替えます。</value>
+  </data>
+  <data name="Function_live-captions_Name" xml:space="preserve">
+    <value>ライブキャプション</value>
+  </data>
+  <data name="Function_live-captions_Description" xml:space="preserve">
+    <value>システム全体のライブキャプションを切り替えます。</value>
+  </data>
+  <data name="Function_search_Name" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="Function_search_Description" xml:space="preserve">
+    <value>Windows の検索を開きます。</value>
+  </data>
+  <data name="Function_settings-home_Name" xml:space="preserve">
+    <value>すべての設定</value>
+  </data>
+  <data name="Function_settings-home_Description" xml:space="preserve">
+    <value>設定アプリを開きます。</value>
+  </data>
+  <data name="Function_settings-display_Name" xml:space="preserve">
+    <value>ディスプレイ設定</value>
+  </data>
+  <data name="Function_settings-display_Description" xml:space="preserve">
+    <value>ディスプレイ設定を開きます。</value>
+  </data>
+  <data name="Function_settings-sound_Name" xml:space="preserve">
+    <value>サウンド設定</value>
+  </data>
+  <data name="Function_settings-sound_Description" xml:space="preserve">
+    <value>サウンド設定を開きます。</value>
+  </data>
+  <data name="Function_settings-bluetooth_Name" xml:space="preserve">
+    <value>Bluetooth とデバイス</value>
+  </data>
+  <data name="Function_settings-bluetooth_Description" xml:space="preserve">
+    <value>Bluetooth とデバイスの設定を開きます。</value>
+  </data>
+  <data name="Function_settings-apps_Name" xml:space="preserve">
+    <value>インストールされているアプリ</value>
+  </data>
+  <data name="Function_settings-apps_Description" xml:space="preserve">
+    <value>インストールされているアプリの設定を開きます。</value>
+  </data>
+  <data name="FunctionGroup_Windowmanagement" xml:space="preserve">
+    <value>ウィンドウ管理</value>
+  </data>
+  <data name="FunctionGroup_System" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="FunctionGroup_Capturerecording" xml:space="preserve">
+    <value>キャプチャと録画</value>
+  </data>
+  <data name="FunctionGroup_Notificationsinput" xml:space="preserve">
+    <value>通知と入力</value>
+  </data>
+  <data name="FunctionGroup_Accessibility" xml:space="preserve">
+    <value>アクセシビリティ</value>
+  </data>
+  <data name="FunctionGroup_Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="FunctionGroup_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="PromoSubtitle" xml:space="preserve">
+    <value>Microsoft Store で Dynamic Solutions Canada の他のアプリをご覧ください。</value>
+  </data>
+  <data name="PromoVisitWebsite" xml:space="preserve">
+    <value>Web サイトを見る</value>
+  </data>
+  <data name="PromoViewInStore" xml:space="preserve">
+    <value>ストアで見る</value>
+  </data>
+  <data name="PromoPrintStream" xml:space="preserve">
+    <value>1 台からファーム全体まで、どのデバイスからでも 3D プリンターを管理できます。</value>
+  </data>
+  <data name="PromoImmichDrive" xml:space="preserve">
+    <value>ImmichDrive は、セルフホストの Immich の写真と動画ライブラリを、ネイティブのクラウドドライブとして Windows エクスプローラーに表示します。タイムライン全体をファイルとして扱い…</value>
+  </data>
+  <data name="PromoPersistent" xml:space="preserve">
+    <value>あきらめないリマインダー。</value>
+  </data>
+  <data name="PromoTitle" xml:space="preserve">
+    <value>その他のアプリ</value>
+  </data>
+  <data name="PromoLittleLauncher" xml:space="preserve">
+    <value>Windows と Linux で、システムトレイからアプリや Web サイトを起動できます。Windows 版は Microsoft Store で入手でき、Linux 版は AppImage を使用します。</value>
+  </data>
+</root>

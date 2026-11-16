@@ -119,7 +119,36 @@ Neither route downloads or installs a package inside Repilot.
 
 Add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`,
 `Description`, and a `Combo` or `ShellTarget`). It appears in the picker and is usable
-by the handler automatically (the file is linked into both projects).
+by the handler automatically (the file is linked into both projects). Also add its
+`Function_<id>_Name` and `Function_<id>_Description` strings (and a `FunctionGroup_*`
+string for a new group) to every `Repilot/Strings/*/Resources.resw`; the localization
+test fails until they exist and the en-US text matches the catalog.
+
+## Localization (settings app only)
+
+- **Nine languages, matching Persistent:** en-US, en-CA, es-ES, fr-FR, fr-CA, de-DE, zh-CN,
+  pt-BR, ja-JP. Text lives in `Repilot/Strings/<lang>/Resources.resw` for the seven
+  distinct wordings; `build-msix.ps1` packages en-CA and fr-CA as copies of en-US and
+  fr-FR. The manifest, the picker (`Classes/AppLanguage.cs`) and the test list must agree.
+- **XAML uses `x:Uid`** (`Name.Property` entries); **code uses `UiStrings.Get/Format`**.
+  Never give a plain code key the same name as an `x:Uid`: Windows turns the dot into a
+  path, so `A` and `A.Content` collide.
+- **Stored data never changes language.** Settings keep function Ids; `WindowsFunctionText`
+  translates at display time. The catalog stays English because the handler links it.
+- **The handler shows no text**, so nothing localization-related goes into `RepilotKey/`
+  or the linked shared files.
+- **Language picker:** "Follow Windows" or a saved tag in `settings.json`, applied in the
+  `App` constructor via `ApplicationLanguages.PrimaryLanguageOverride` before any XAML
+  loads. A change needs the settings app reopened; there is no live relabelling.
+- **Packaging:** `build-msix.ps1` strips makepri's language splitting (split PRIs are
+  dropped from a flat MSIX, silently losing every translation) and fails the build unless
+  a probe string resolves in every declared language.
+- **"Our other apps":** `Pages/PromotedAppsPage.Localization.cs` translates exact known
+  English copy from the promo submodule; unknown remote copy stays English. Leave the
+  submodule itself unchanged.
+- **Check:** `dotnet run --project tests/Repilot.LocalizationTests -c Release` (portable;
+  runs in a `mcr.microsoft.com/dotnet/sdk:10.0` container). Translations are
+  machine-generated with no native-speaker review.
 
 ## Windows desktop workflow
 

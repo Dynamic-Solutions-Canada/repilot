@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Portable string-resource checks: run on Linux (Docker) or Windows, no Windows App SDK. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Repilot/Models/*.cs" Link="Shared/%(Filename)%(Extension)" />
+    <Compile Include="../../Repilot/Services/WindowsFunctionCatalog.cs" Link="Shared/WindowsFunctionCatalog.cs" />
+    <Compile Include="../../Repilot/Services/WindowsFunctionText.cs" Link="Shared/WindowsFunctionText.cs" />
+    <Compile Include="../../Repilot/Services/ActionSummary.cs" Link="Shared/ActionSummary.cs" />
+    <Compile Include="../Shared/UiStrings.cs" Link="Shared/UiStrings.cs" />
+    <None Include="../../Repilot/Strings/en-US/Resources.resw" Link="Resources.resw" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

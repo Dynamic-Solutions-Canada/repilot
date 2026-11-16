@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NavHome.Content" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="NavAction.Content" xml:space="preserve">
+    <value>Copilot 键操作</value>
+  </data>
+  <data name="ActionTitle.Text" xml:space="preserve">
+    <value>Copilot 键操作</value>
+  </data>
+  <data name="NavOtherApps.Content" xml:space="preserve">
+    <value>我们的其他应用</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="HomeDescription.Text" xml:space="preserve">
+    <value>选择键盘上的 Copilot 键执行的操作。</value>
+  </data>
+  <data name="AssignInSettings.Content" xml:space="preserve">
+    <value>在 Windows 设置中分配</value>
+  </data>
+  <data name="OnCopilotPress.Text" xml:space="preserve">
+    <value>按下 Copilot 键时</value>
+  </data>
+  <data name="ChangeAction.Text" xml:space="preserve">
+    <value>更改操作</value>
+  </data>
+  <data name="TestAction.Text" xml:space="preserve">
+    <value>立即测试</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>选择键盘上的 Copilot 键执行的操作：发送自定义快捷键、打开应用或执行 Windows 功能。</value>
+  </data>
+  <data name="HowItWorks.Text" xml:space="preserve">
+    <value>工作原理</value>
+  </data>
+  <data name="HowItWorksDescription.Text" xml:space="preserve">
+    <value>注册为 Microsoft 官方 Copilot 硬件键提供程序。按键会启动一个小程序，执行操作后立即退出。没有后台服务、托盘图标或常驻进程。</value>
+  </data>
+  <data name="BuiltWith.Text" xml:space="preserve">
+    <value>所用技术</value>
+  </data>
+  <data name="SourceCode.Text" xml:space="preserve">
+    <value>源代码</value>
+  </data>
+  <data name="SourceDescription.Text" xml:space="preserve">
+    <value>在 GitHub 上查看项目</value>
+  </data>
+  <data name="GitHubRepository.Content" xml:space="preserve">
+    <value>GitHub 仓库</value>
+  </data>
+  <data name="Updates.Text" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CheckUpdatesHint.Text" xml:space="preserve">
+    <value>点击检查更新</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="AppTheme.Text" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="AppThemeDescription.Text" xml:space="preserve">
+    <value>此设置窗口的外观。</value>
+  </data>
+  <data name="SystemTheme.Content" xml:space="preserve">
+    <value>系统默认</value>
+  </data>
+  <data name="LightTheme.Content" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="DarkTheme.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="NoBackground.Title" xml:space="preserve">
+    <value>无后台进程</value>
+  </data>
+  <data name="NoBackground.Message" xml:space="preserve">
+    <value>Repilot 不会在后台运行。按下 Copilot 键时，Windows 会短暂启动一个小程序，执行操作后退出。此窗口仅用于配置。</value>
+  </data>
+  <data name="ActionShortcut.Text" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+  <data name="ActionText.Text" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="ActionApp.Text" xml:space="preserve">
+    <value>应用或链接</value>
+  </data>
+  <data name="ActionFunction.Text" xml:space="preserve">
+    <value>Windows 功能</value>
+  </data>
+  <data name="ActionNone.Text" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="TextInstructions.Text" xml:space="preserve">
+    <value>输入要键入的字符或文本，例如 ç。在其他应用的文本框获得焦点时按下 Copilot 键。此功能不受键盘布局影响。</value>
+  </data>
+  <data name="TextToType.Header" xml:space="preserve">
+    <value>要键入的文本</value>
+  </data>
+  <data name="TextToType.PlaceholderText" xml:space="preserve">
+    <value>例如 ç</value>
+  </data>
+  <data name="ShortcutInstructions.Text" xml:space="preserve">
+    <value>点击录制，然后按下所需快捷键（例如 Alt+Tab）。此处只捕获按键，不会触发快捷键。按 Esc 取消。</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>（未设置）</value>
+  </data>
+  <data name="RecordShortcut" xml:space="preserve">
+    <value>录制快捷键</value>
+  </data>
+  <data name="Clear.Content" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SearchApps.PlaceholderText" xml:space="preserve">
+    <value>搜索应用…</value>
+  </data>
+  <data name="OpenFileOrLink.Header" xml:space="preserve">
+    <value>改为打开文件或链接</value>
+  </data>
+  <data name="PathOrLink.Header" xml:space="preserve">
+    <value>路径或链接</value>
+  </data>
+  <data name="PathOrLink.PlaceholderText" xml:space="preserve">
+    <value>C:\…、https://… 或 ms-settings:…</value>
+  </data>
+  <data name="Browse.Content" xml:space="preserve">
+    <value>浏览…</value>
+  </data>
+  <data name="OptionalArguments.Header" xml:space="preserve">
+    <value>参数（可选）</value>
+  </data>
+  <data name="NothingHappens.Text" xml:space="preserve">
+    <value>此手势不执行任何操作。</value>
+  </data>
+  <data name="SearchFunctions.PlaceholderText" xml:space="preserve">
+    <value>搜索功能（例如锁定、截图、放大镜）…</value>
+  </data>
+  <data name="StatusUnpackaged" xml:space="preserve">
+    <value>未作为打包应用安装</value>
+  </data>
+  <data name="StatusUnpackagedDescription" xml:space="preserve">
+    <value>Copilot 键只能分配给已签名并安装的 MSIX 版本。此未打包版本仅用于开发。</value>
+  </data>
+  <data name="StatusAssigned" xml:space="preserve">
+    <value>已分配</value>
+  </data>
+  <data name="StatusAssignedDescription" xml:space="preserve">
+    <value>Repilot 已分配给 Copilot 键。按下该键即可执行操作。</value>
+  </data>
+  <data name="ChangeAssignment" xml:space="preserve">
+    <value>在 Windows 设置中更改</value>
+  </data>
+  <data name="StatusOtherApp" xml:space="preserve">
+    <value>Copilot 键已分配给其他应用</value>
+  </data>
+  <data name="StatusChooseRepilot" xml:space="preserve">
+    <value>打开 Windows 设置并选择 Repilot，以使用下方操作。</value>
+  </data>
+  <data name="StatusSearch" xml:space="preserve">
+    <value>Copilot 键会打开搜索</value>
+  </data>
+  <data name="StatusNotAssigned" xml:space="preserve">
+    <value>尚未分配</value>
+  </data>
+  <data name="StatusAssignInstructions" xml:space="preserve">
+    <value>打开 Windows 设置 → 自定义 Copilot 键，选择“自定义”，然后选择 Repilot。</value>
+  </data>
+  <data name="RecordPrompt" xml:space="preserve">
+    <value>按下快捷键…</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>正在录制… (Esc)</value>
+  </data>
+  <data name="StoreOpened" xml:space="preserve">
+    <value>Microsoft Store 已打开“更新和下载”。请在那里检查可用更新。</value>
+  </data>
+  <data name="StoreOpenFailed" xml:space="preserve">
+    <value>无法打开 Microsoft Store。</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>正在检查…</value>
+  </data>
+  <data name="CheckingUpdates" xml:space="preserve">
+    <value>正在检查更新…</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>无法检查更新。请检查网络连接。</value>
+  </data>
+  <data name="ViewRelease" xml:space="preserve">
+    <value>查看版本</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>版本 {0} 已可用（当前为 {1}）。</value>
+  </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>已是最新版本（{0}）。</value>
+  </data>
+  <data name="SummaryNone" xml:space="preserve">
+    <value>不执行操作</value>
+  </data>
+  <data name="SummaryTextUnset" xml:space="preserve">
+    <value>键入文本（未设置）</value>
+  </data>
+  <data name="SummaryKeysUnset" xml:space="preserve">
+    <value>发送组合键（未设置）</value>
+  </data>
+  <data name="SummaryAppUnset" xml:space="preserve">
+    <value>打开应用（未设置）</value>
+  </data>
+  <data name="SummaryFunctionUnset" xml:space="preserve">
+    <value>执行 Windows 功能（未设置）</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="SummaryText" xml:space="preserve">
+    <value>键入文本：{0}</value>
+  </data>
+  <data name="SummaryKeys" xml:space="preserve">
+    <value>发送按键：{0}</value>
+  </data>
+  <data name="SummaryOpen" xml:space="preserve">
+    <value>打开：{0}</value>
+  </data>
+  <data name="SummaryFunction" xml:space="preserve">
+    <value>Windows 功能：{0}</value>
+  </data>
+  <data name="LanguageTitle.Text" xml:space="preserve">
+    <value>应用语言</value>
+  </data>
+  <data name="LanguageDescription.Text" xml:space="preserve">
+    <value>此设置应用的语言。Windows 的区域数字和日期格式保持不变。</value>
+  </data>
+  <data name="FollowWindows" xml:space="preserve">
+    <value>跟随 Windows</value>
+  </data>
+  <data name="LanguageRestartPending" xml:space="preserve">
+    <value>语言已保存。关闭并重新打开 Repilot 设置应用以应用更改。</value>
+  </data>
+  <data name="Function_task-view_Name" xml:space="preserve">
+    <value>任务视图</value>
+  </data>
+  <data name="Function_task-view_Description" xml:space="preserve">
+    <value>显示所有打开的窗口和虚拟桌面。</value>
+  </data>
+  <data name="Function_snap-left_Name" xml:space="preserve">
+    <value>窗口贴靠左侧</value>
+  </data>
+  <data name="Function_snap-left_Description" xml:space="preserve">
+    <value>将活动窗口贴靠到屏幕左半部分。</value>
+  </data>
+  <data name="Function_snap-right_Name" xml:space="preserve">
+    <value>窗口贴靠右侧</value>
+  </data>
+  <data name="Function_snap-right_Description" xml:space="preserve">
+    <value>将活动窗口贴靠到屏幕右半部分。</value>
+  </data>
+  <data name="Function_maximize_Name" xml:space="preserve">
+    <value>最大化窗口</value>
+  </data>
+  <data name="Function_maximize_Description" xml:space="preserve">
+    <value>最大化活动窗口。</value>
+  </data>
+  <data name="Function_minimize_Name" xml:space="preserve">
+    <value>最小化窗口</value>
+  </data>
+  <data name="Function_minimize_Description" xml:space="preserve">
+    <value>最小化活动窗口。</value>
+  </data>
+  <data name="Function_show-desktop_Name" xml:space="preserve">
+    <value>显示桌面</value>
+  </data>
+  <data name="Function_show-desktop_Description" xml:space="preserve">
+    <value>最小化所有窗口并显示桌面。</value>
+  </data>
+  <data name="Function_snap-layouts_Name" xml:space="preserve">
+    <value>贴靠布局</value>
+  </data>
+  <data name="Function_snap-layouts_Description" xml:space="preserve">
+    <value>打开活动窗口的贴靠布局选择器。</value>
+  </data>
+  <data name="Function_new-desktop_Name" xml:space="preserve">
+    <value>新建虚拟桌面</value>
+  </data>
+  <data name="Function_new-desktop_Description" xml:space="preserve">
+    <value>创建新的虚拟桌面。</value>
+  </data>
+  <data name="Function_next-desktop_Name" xml:space="preserve">
+    <value>下一个虚拟桌面</value>
+  </data>
+  <data name="Function_next-desktop_Description" xml:space="preserve">
+    <value>切换到下一个虚拟桌面。</value>
+  </data>
+  <data name="Function_prev-desktop_Name" xml:space="preserve">
+    <value>上一个虚拟桌面</value>
+  </data>
+  <data name="Function_prev-desktop_Description" xml:space="preserve">
+    <value>切换到上一个虚拟桌面。</value>
+  </data>
+  <data name="Function_lock-pc_Name" xml:space="preserve">
+    <value>锁定电脑</value>
+  </data>
+  <data name="Function_lock-pc_Description" xml:space="preserve">
+    <value>锁定计算机。</value>
+  </data>
+  <data name="Function_file-explorer_Name" xml:space="preserve">
+    <value>文件资源管理器</value>
+  </data>
+  <data name="Function_file-explorer_Description" xml:space="preserve">
+    <value>打开新的文件资源管理器窗口。</value>
+  </data>
+  <data name="Function_run-dialog_Name" xml:space="preserve">
+    <value>运行对话框</value>
+  </data>
+  <data name="Function_run-dialog_Description" xml:space="preserve">
+    <value>打开“运行”对话框。</value>
+  </data>
+  <data name="Function_task-manager_Name" xml:space="preserve">
+    <value>任务管理器</value>
+  </data>
+  <data name="Function_task-manager_Description" xml:space="preserve">
+    <value>打开任务管理器。</value>
+  </data>
+  <data name="Function_power-user-menu_Name" xml:space="preserve">
+    <value>快捷链接菜单 (Win+X)</value>
+  </data>
+  <data name="Function_power-user-menu_Description" xml:space="preserve">
+    <value>打开高级用户快捷链接菜单。</value>
+  </data>
+  <data name="Function_project_Name" xml:space="preserve">
+    <value>投影 / 第二屏幕</value>
+  </data>
+  <data name="Function_project_Description" xml:space="preserve">
+    <value>打开投影（显示模式）面板。</value>
+  </data>
+  <data name="Function_cast-connect_Name" xml:space="preserve">
+    <value>投放到设备</value>
+  </data>
+  <data name="Function_cast-connect_Description" xml:space="preserve">
+    <value>打开连接（无线显示器）面板。</value>
+  </data>
+  <data name="Function_screen-snip_Name" xml:space="preserve">
+    <value>屏幕截图（截图和草图）</value>
+  </data>
+  <data name="Function_screen-snip_Description" xml:space="preserve">
+    <value>开始矩形屏幕截图。</value>
+  </data>
+  <data name="Function_print-screen_Name" xml:space="preserve">
+    <value>截屏</value>
+  </data>
+  <data name="Function_print-screen_Description" xml:space="preserve">
+    <value>将整个屏幕截图复制到剪贴板。</value>
+  </data>
+  <data name="Function_game-bar_Name" xml:space="preserve">
+    <value>Xbox Game Bar</value>
+  </data>
+  <data name="Function_game-bar_Description" xml:space="preserve">
+    <value>打开 Game Bar 覆盖界面。</value>
+  </data>
+  <data name="Function_record-screen_Name" xml:space="preserve">
+    <value>录制屏幕</value>
+  </data>
+  <data name="Function_record-screen_Description" xml:space="preserve">
+    <value>通过 Game Bar 开始或停止录屏。</value>
+  </data>
+  <data name="Function_notifications_Name" xml:space="preserve">
+    <value>通知中心</value>
+  </data>
+  <data name="Function_notifications_Description" xml:space="preserve">
+    <value>打开通知中心和日历。</value>
+  </data>
+  <data name="Function_context-menu_Name" xml:space="preserve">
+    <value>菜单键（上下文菜单）</value>
+  </data>
+  <data name="Function_context-menu_Description" xml:space="preserve">
+    <value>像传统菜单键一样，为当前焦点所在的内容打开右键菜单。</value>
+  </data>
+  <data name="Function_quick-settings_Name" xml:space="preserve">
+    <value>快速设置</value>
+  </data>
+  <data name="Function_quick-settings_Description" xml:space="preserve">
+    <value>打开快速设置面板（Wi-Fi、音量等）。</value>
+  </data>
+  <data name="Function_clipboard-history_Name" xml:space="preserve">
+    <value>剪贴板历史记录</value>
+  </data>
+  <data name="Function_clipboard-history_Description" xml:space="preserve">
+    <value>打开剪贴板历史记录。</value>
+  </data>
+  <data name="Function_emoji-panel_Name" xml:space="preserve">
+    <value>表情符号和符号面板</value>
+  </data>
+  <data name="Function_emoji-panel_Description" xml:space="preserve">
+    <value>打开表情符号、颜文字和符号选择器。</value>
+  </data>
+  <data name="Function_voice-typing_Name" xml:space="preserve">
+    <value>语音键入</value>
+  </data>
+  <data name="Function_voice-typing_Description" xml:space="preserve">
+    <value>开始语音键入或听写。</value>
+  </data>
+  <data name="Function_widgets_Name" xml:space="preserve">
+    <value>小组件面板</value>
+  </data>
+  <data name="Function_widgets_Description" xml:space="preserve">
+    <value>打开小组件面板。</value>
+  </data>
+  <data name="Function_magnifier_Name" xml:space="preserve">
+    <value>放大镜</value>
+  </data>
+  <data name="Function_magnifier_Description" xml:space="preserve">
+    <value>开启放大镜或放大。</value>
+  </data>
+  <data name="Function_narrator_Name" xml:space="preserve">
+    <value>讲述人</value>
+  </data>
+  <data name="Function_narrator_Description" xml:space="preserve">
+    <value>开启或关闭讲述人屏幕阅读器。</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Name" xml:space="preserve">
+    <value>屏幕键盘</value>
+  </data>
+  <data name="Function_on-screen-keyboard_Description" xml:space="preserve">
+    <value>开启或关闭屏幕键盘。</value>
+  </data>
+  <data name="Function_color-filters_Name" xml:space="preserve">
+    <value>颜色筛选器</value>
+  </data>
+  <data name="Function_color-filters_Description" xml:space="preserve">
+    <value>开启或关闭颜色筛选器。</value>
+  </data>
+  <data name="Function_live-captions_Name" xml:space="preserve">
+    <value>实时字幕</value>
+  </data>
+  <data name="Function_live-captions_Description" xml:space="preserve">
+    <value>开启或关闭系统实时字幕。</value>
+  </data>
+  <data name="Function_search_Name" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Function_search_Description" xml:space="preserve">
+    <value>打开 Windows 搜索。</value>
+  </data>
+  <data name="Function_settings-home_Name" xml:space="preserve">
+    <value>所有设置</value>
+  </data>
+  <data name="Function_settings-home_Description" xml:space="preserve">
+    <value>打开设置应用。</value>
+  </data>
+  <data name="Function_settings-display_Name" xml:space="preserve">
+    <value>显示设置</value>
+  </data>
+  <data name="Function_settings-display_Description" xml:space="preserve">
+    <value>打开显示设置。</value>
+  </data>
+  <data name="Function_settings-sound_Name" xml:space="preserve">
+    <value>声音设置</value>
+  </data>
+  <data name="Function_settings-sound_Description" xml:space="preserve">
+    <value>打开声音设置。</value>
+  </data>
+  <data name="Function_settings-bluetooth_Name" xml:space="preserve">
+    <value>蓝牙和设备</value>
+  </data>
+  <data name="Function_settings-bluetooth_Description" xml:space="preserve">
+    <value>打开蓝牙和设备设置。</value>
+  </data>
+  <data name="Function_settings-apps_Name" xml:space="preserve">
+    <value>已安装的应用</value>
+  </data>
+  <data name="Function_settings-apps_Description" xml:space="preserve">
+    <value>打开已安装的应用设置。</value>
+  </data>
+  <data name="FunctionGroup_Windowmanagement" xml:space="preserve">
+    <value>窗口管理</value>
+  </data>
+  <data name="FunctionGroup_System" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="FunctionGroup_Capturerecording" xml:space="preserve">
+    <value>截图与录制</value>
+  </data>
+  <data name="FunctionGroup_Notificationsinput" xml:space="preserve">
+    <value>通知与输入</value>
+  </data>
+  <data name="FunctionGroup_Accessibility" xml:space="preserve">
+    <value>辅助功能</value>
+  </data>
+  <data name="FunctionGroup_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="FunctionGroup_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="PromoSubtitle" xml:space="preserve">
+    <value>Microsoft Store 上更多来自 Dynamic Solutions Canada 的应用。</value>
+  </data>
+  <data name="PromoVisitWebsite" xml:space="preserve">
+    <value>访问网站</value>
+  </data>
+  <data name="PromoViewInStore" xml:space="preserve">
+    <value>在商店中查看</value>
+  </data>
+  <data name="PromoPrintStream" xml:space="preserve">
+    <value>从任何设备管理你的 3D 打印机，无论是一台还是整个打印农场。</value>
+  </data>
+  <data name="PromoImmichDrive" xml:space="preserve">
+    <value>ImmichDrive 将你自托管的 Immich 照片和视频库作为原生云盘直接集成到 Windows 文件资源管理器中。整个时间线会显示为文件，你可以…</value>
+  </data>
+  <data name="PromoPersistent" xml:space="preserve">
+    <value>不会放弃的提醒。</value>
+  </data>
+  <data name="PromoTitle" xml:space="preserve">
+    <value>我们的其他应用</value>
+  </data>
+  <data name="PromoLittleLauncher" xml:space="preserve">
+    <value>在 Windows 和 Linux 上从系统托盘启动应用和网站。Windows 版可在应用商店获取；Linux 版使用 AppImage。</value>
+  </data>
+</root>

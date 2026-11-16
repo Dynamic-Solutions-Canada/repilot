@@ -56,6 +56,11 @@ jobs:
           echo "VERSION=$ver" >> $env:GITHUB_OUTPUT
           Write-Host "Detected version: $ver"
 
+      # Every language complete and consistent with the XAML, code and catalog.
+      - name: Check string resources
+        shell: pwsh
+        run: dotnet run --project tests/Repilot.LocalizationTests -c Release
+
       # ── Generate MSIX visual assets ────────────────────────────
       - name: Generate images
         shell: pwsh
