@@ -68,10 +68,11 @@ Repilot collects no telemetry or crash reports. Everything it writes stays on th
 
 | What | Where | Written by | After uninstall |
 | --- | --- | --- | --- |
-| Settings (the action, theme, language) | `%AppData%\Repilot\settings.json` | Settings app | Removed (see below) |
+| Settings (the action, theme, language, window position) | `%AppData%\Repilot\settings.json` | Settings app (the kit's versioned store); the key handler reads it | Removed (see below) |
+| Settings backups: before an upgrade (`settings.json.v<old>.bak`), an unreadable file (`settings.json.bad`), a reset (`settings.json.<UTC time>.reset`) | Beside `settings.json` | Settings app | Removed (see below) |
 | Key-repeat timestamp, for the one-press-one-run debounce | `%AppData%\Repilot\repeat-state` | Key handler | Removed (see below) |
 | Key handler error log | `%AppData%\Repilot\key-handler.log` | Key handler | Removed (see below) |
-| Settings app logs | `%AppData%\Repilot\logs.<start time>.txt` | Settings app (NLog) | Removed (see below) |
+| Settings app logs (the current file and three older ones) | `%AppData%\Repilot\logs.<start time>.txt` | Settings app (the kit's shared NLog config) | Removed (see below) |
 | App language override | The package's own app data (`ApplicationLanguages.PrimaryLanguageOverride`) | Settings app | Removed with the package |
 | Copilot key assignment | `HKCU\Software\Microsoft\Windows\Shell\BrandedKey` | Windows Settings, not Repilot (Repilot only reads it) | Owned by Windows |
 
@@ -80,6 +81,24 @@ In the packaged (MSIX) install, `%AppData%\Repilot` is redirected into the packa
 This list is unconfirmed: it is taken from the code and has not yet been checked against a real uninstall.
 
 To delete Repilot's data without uninstalling, close the settings app and delete `settings.json`; the next launch starts from defaults.
+
+## Upgrade checks
+
+Run these before a release that changes settings, packaging or identity. The automated harness (`tests/Repilot.Settings.Tests`) covers the file itself; these cover the installed app.
+
+On the Windows 11 test VM (dev identity), with the windows-build-tools app-test recipe:
+
+1. Install the previous release's dev package, give it settings (an action, a theme, a language, a moved window) and close it.
+2. Install the new dev package over it, without uninstalling.
+3. Open Repilot: the action, theme, language and window position are kept, `settings.json` has the new `SchemaVersion`, and the old file is beside it as `settings.json.v<old>.bak`.
+4. Open Repilot again while it is open: the first window comes forward and no second copy stays running. Close it: no `Repilot.exe` remains.
+5. Settings > Reset settings: the question is in the app's language and says the Copilot key stays assigned; Cancel changes nothing.
+6. Assign the key (or set `BrandedKey` as Settings would) and press it: the saved action runs.
+
+On a machine with the Store version installed (the maintainer's acceptance check):
+
+7. `npm run install:desktop -- --store-identity` over the Store install, then repeat steps 3, 5 and 6. The key stays assigned to Repilot without visiting Windows Settings again.
+8. Let the Store update back over it when the release ships.
 
 ## Continuous integration
 

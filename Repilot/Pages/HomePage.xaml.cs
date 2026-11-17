@@ -2,6 +2,7 @@ using Repilot.Classes.Settings;
 using Repilot.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinUIAppKit.Settings;
 
 namespace Repilot.Pages;
 
@@ -10,8 +11,21 @@ public sealed partial class HomePage : Page
     public HomePage()
     {
         InitializeComponent();
+        ShowResetNoticeIfNeeded();
         ActionText.Text = ActionSummary.Describe(SettingsManager.Current.Action);
         RefreshStatus();
+    }
+
+    /// <summary>
+    /// When this launch found settings.json unreadable, says so once at the top of the page the window
+    /// opens on (CONF-2, UI-15). The store has already written defaults, so it never comes back.
+    /// </summary>
+    private void ShowResetNoticeIfNeeded()
+    {
+        if (SettingsManager.TakeResetNotice() is { } notice)
+        {
+            PageContent.Children.Insert(0, SettingsResetNotice.Create(notice.BackupPath));
+        }
     }
 
     private void RefreshStatus()

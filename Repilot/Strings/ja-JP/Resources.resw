@@ -519,4 +519,7 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="ResetKeptNote" xml:space="preserve">
+    <value>Windows の設定では Copilot キーは引き続き Repilot に割り当てられています。リセット後、ここで動作を選び直してください。</value>
+  </data>
 </root>

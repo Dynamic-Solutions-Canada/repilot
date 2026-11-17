@@ -519,4 +519,7 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="ResetKeptNote" xml:space="preserve">
+    <value>La touche Copilot reste attribuée à Repilot dans les Paramètres Windows ; choisissez ensuite à nouveau son action ici.</value>
+  </data>
 </root>

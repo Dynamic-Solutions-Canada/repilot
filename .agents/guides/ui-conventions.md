@@ -22,6 +22,7 @@ This app's own interface conventions. The shared family rules are in the standar
 - New cards copy the Home and Settings cards: a `Border` on `CardBackgroundFillColorDefaultBrush` with a 1 px `CardStrokeColorDefaultBrush` stroke, `CornerRadius="8"`, `Padding="16,12"` for a setting row (`20` for a content card), spaced by the page's `StackPanel`.
 - A setting row is a two-column `Grid` (`ColumnSpacing="16"`): title (`FontWeight="SemiBold"`) and a wrapped description (`Opacity="0.7"`) on the left, the control on the right with `MinWidth="160"`.
 - The About page's cards are an older generation (`CornerRadius="4"`, `Padding="16"`, bottom margin instead of spacing). Do not copy them; they are replaced when About moves to the kit's shared page.
+- The kit's controls keep the kit's styles: the Reset settings card on the Settings page is the kit's `ResetSetting` in `CardBorderStyle`, and an unreadable-settings notice is the kit's `SettingsResetNotice`, inserted once at the top of the Home page. Don't restyle them.
 - Button content with an icon is a horizontal `StackPanel` (`Spacing="8"`) with a 14 px `FontIcon`, then the label. The primary action on a card uses `AccentButtonStyle`.
 
 ## Text

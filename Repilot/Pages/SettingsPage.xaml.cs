@@ -13,9 +13,27 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        ThemeCombo.SelectedIndex = SettingsManager.Current.AppTheme;
+        ThemeCombo.SelectedIndex = (int)SettingsManager.Current.AppTheme;
         LoadLanguageChoices();
+        SetUpReset();
         _loaded = true;
+    }
+
+    /// <summary>
+    /// "Reset settings" (CONF-4): the kit's row asks first, then the store resets every Repilot setting,
+    /// the Copilot key's action included. The page is rebuilt to show the defaults; a language change
+    /// still needs a reopen, which the restart notice then says.
+    /// </summary>
+    private void SetUpReset()
+    {
+        ResetRow.Window = SettingsWindow.GetCurrent();
+        ResetRow.ResetAsync = () =>
+        {
+            SettingsManager.Reset();
+            return Task.CompletedTask;
+        };
+        ResetRow.KeptNote = () => UiStrings.Get("ResetKeptNote");
+        ResetRow.ResetCompleted += () => Frame.Navigate(typeof(SettingsPage));
     }
 
     private void ThemeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -26,9 +44,9 @@ public sealed partial class SettingsPage : Page
         }
 
         // Every open window follows at once (AppTheme.Track); the choice is saved for the next launch.
-        SettingsManager.Current.AppTheme = ThemeCombo.SelectedIndex;
-        SettingsManager.SaveSettings();
-        AppTheme.Set((AppThemeChoice)ThemeCombo.SelectedIndex);
+        SettingsManager.Current.AppTheme = (AppThemeChoice)ThemeCombo.SelectedIndex;
+        SettingsManager.Save();
+        AppTheme.Set(SettingsManager.Current.AppTheme);
     }
 
     /// <summary>

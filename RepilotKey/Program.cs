@@ -1,8 +1,6 @@
 using Repilot.Services;
 using System.Globalization;
 using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using Repilot.Models;
 
@@ -95,7 +93,7 @@ internal static class Program
             return new KeySettings();
         }
 
-        return JsonSerializer.Deserialize(File.ReadAllText(path), KeyJsonContext.Default.KeySettings) ?? new KeySettings();
+        return KeySettings.Parse(File.ReadAllText(path));
     }
 
     private static void Log(string message)
@@ -114,13 +112,3 @@ internal static class Program
         catch { /* best-effort */ }
     }
 }
-
-/// <summary>The subset of settings.json the handler needs (other fields are ignored).</summary>
-internal sealed class KeySettings
-{
-    public CopilotActionData Action { get; set; } = new();
-}
-
-[JsonSourceGenerationOptions(PropertyNameCaseInsensitive = true)]
-[JsonSerializable(typeof(KeySettings))]
-internal partial class KeyJsonContext : JsonSerializerContext { }

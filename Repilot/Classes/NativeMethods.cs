@@ -3,51 +3,19 @@ using System.Runtime.InteropServices;
 namespace Repilot.Classes;
 
 /// <summary>
-/// P/Invoke for the settings window only (sizing/centering, window icon, and a
-/// single-instance bring-to-front). No tray / hook / SendInput — keypress handling
-/// lives in the separate Native-AOT RepilotKey.exe.
+/// P/Invoke for the settings app only: bringing the running copy forward, and the low-level keyboard
+/// hook used while recording a shortcut. Window chrome comes from the kit, and the Copilot key itself is
+/// handled by the separate RepilotKey.exe.
 /// </summary>
 public static class NativeMethods
 {
-    internal const int MONITOR_DEFAULTTONEAREST = 2;
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct POINT { public int X; public int Y; }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct RECT { public int Left; public int Top; public int Right; public int Bottom; }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    internal struct MONITORINFOEX
-    {
-        public int cbSize;
-        public RECT rcMonitor;
-        public RECT rcWork;
-        public int dwFlags;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        public string szDevice;
-    }
-
+    // Bringing the running copy's window forward (App.SurfaceRunningCopy).
     [DllImport("user32.dll", SetLastError = true)]
     internal static extern IntPtr FindWindow(string? lpClassName, string? lpWindowName);
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static extern bool SetForegroundWindow(IntPtr hWnd);
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static extern bool GetCursorPos(out POINT lpPoint);
-
-    [DllImport("user32.dll")]
-    internal static extern IntPtr MonitorFromPoint(POINT pt, int dwFlags);
-
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFOEX lpmi);
-
-    [DllImport("user32.dll")]
-    internal static extern uint GetDpiForWindow(IntPtr hWnd);
-
 
     // ── Low-level keyboard hook (used only while recording a shortcut) ──────────
     internal const int WH_KEYBOARD_LL = 13;

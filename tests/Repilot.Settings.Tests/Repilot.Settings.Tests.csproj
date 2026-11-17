@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Repilot.Settings.Tests</RootNamespace>
+  </PropertyGroup>
+  <!-- The real settings store from winui-app-kit, the app's real schema steps, settings class and
+       action model, and the key handler's own settings reader, all linked unchanged. The kit's theme
+       and window types are the stand-ins in Stubs.cs, so this runs on Linux. -->
+  <ItemGroup>
+    <Compile Include="../../external/winui-app-kit/WinUIAppKit/Settings/JsonSettingsStore.cs" Link="Linked/JsonSettingsStore.cs" />
+    <Compile Include="../../external/winui-app-kit/WinUIAppKit/Settings/AtomicFile.cs" Link="Linked/AtomicFile.cs" />
+    <Compile Include="../../Repilot/Classes/Settings/SettingsMigrations.cs" Link="Linked/SettingsMigrations.cs" />
+    <Compile Include="../../Repilot/ViewModels/UserSettings.cs" Link="Linked/UserSettings.cs" />
+    <Compile Include="../../Repilot/Models/*.cs" Link="Linked/Models/%(Filename)%(Extension)" />
+    <Compile Include="../../RepilotKey/KeySettings.cs" Link="Linked/KeySettings.cs" />
+  </ItemGroup>
+  <!-- Versions come from Directory.Packages.props (the kit's shared versions). -->
+  <ItemGroup>
+    <PackageReference Include="NLog" />
+  </ItemGroup>
+</Project>

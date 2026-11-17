@@ -17,11 +17,11 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 | Area | Files |
 |---|---|
 | Shared with the handler through linked source (`<Compile Include="..\Repilot\...">`) | `Models/KeyCombo.cs`, `Models/CopilotActionData.cs`, `Models/WindowsFunction.cs`, `Services/WindowsFunctionCatalog.cs`, `Services/ActionExecutor.cs` |
-| Handler: gesture, debounce, log | `RepilotKey/Program.cs` |
+| Handler: gesture, debounce, log; its settings reader | `RepilotKey/Program.cs`, `RepilotKey/KeySettings.cs` |
 | Settings window and pages | `SettingsWindow.xaml(.cs)`, `Pages/*` |
 | Key assignment status | `Services/CopilotKeyProvider.cs` (`HandlerAppId = "App"`) |
 | Action summary, installed apps, function text | `Services/ActionSummary.cs`, `Services/InstalledAppsService.cs`, `Services/WindowsFunctionText.cs` |
-| Settings | `ViewModels/UserSettings.cs`, `Classes/Settings/SettingsManager.cs` |
+| Settings (the kit's versioned store, with Reset) | `ViewModels/UserSettings.cs`, `Classes/Settings/SettingsManager.cs`, `Classes/Settings/SettingsMigrations.cs` |
 | Repository name, used by About and the update check | `Classes/AboutContent.cs` |
 | Update check | `Services/UpdateService.cs` |
 | Interface text (nine languages) | `Strings/<lang>/Resources.resw`, `Services/UiStrings.cs`, `Classes/AppLanguage.cs` |
@@ -39,12 +39,8 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 
 - **Linked shared files stay WinUI-free and AOT/trim-safe:** no NLog, no reflection-heavy code. Handler errors go to `ActionExecutor.ErrorSink` in the settings app, or to the handler's own `key-handler.log`.
 - **Both executables read `%AppData%\Repilot\settings.json`**, redirected to package data when packaged.
-- **Interface text uses `.resw`** (LOC-6), in `Repilot/Strings/<lang>/Resources.resw` for the seven distinct wordings; `build-msix.ps1` packages en-CA and fr-CA as copies of en-US and fr-FR. The shared locale rules are in [locales.md](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/locales.md). The manifest, the picker (`Classes/AppLanguage.cs`) and the test's language list must agree.
-- **XAML uses `x:Uid`** (`Name.Property` entries) and code uses `UiStrings.Get/Format`. Never give a plain code key the same name as an `x:Uid`: Windows turns the dot into a path, so `A` and `A.Content` collide.
-- **Stored data never changes language.** Settings keep function Ids and `WindowsFunctionText` translates at display time. The catalog stays English because the handler links it, and the handler shows no text, so nothing localization-related goes into `RepilotKey/` or the linked files.
-- **A language change needs the settings app reopened.** The choice is applied in the `App` constructor through `ApplicationLanguages.PrimaryLanguageOverride`, before any XAML loads; there is no live relabelling.
-- **Packaging strips makepri's language splitting,** because split PRIs are dropped from a flat MSIX and every translation would be lost silently. The build fails unless a probe string resolves in every declared language.
 - **`external/` is never edited** (KIT-8): change winui-app-kit or apps-promo in their own repos and bump the pin. The kit supplies the build props, logging, crash handling, theme, update check and the shared labels (`UiText`, configured in `App` for `kit.*` keys only).
+- **Interface text is `.resw`, in nine languages;** read the localization guide before changing any text, language or the language picker.
 - **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
 - **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 
@@ -77,6 +73,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | --- | --- | --- |
 | [docs/development.md](docs/development.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
 | [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
+| [.agents/guides/localization.md](.agents/guides/localization.md) | Changing interface text, a language or the picker | `Repilot/Strings/**`, `Classes/AppLanguage.cs`, `Services/UiStrings.cs` |
 | [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, the kit's `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
 | `release` skill | Cutting a release | `Directory.Build.props`, `release-notes/**`, tags |
@@ -91,7 +88,8 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
 | An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
 | A Windows function | The catalog, every `Resources.resw` |
-| A language | The manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
+| A setting's shape | A step in `SettingsMigrations.cs` and a scenario in `tests/Repilot.Settings.Tests/`; `Action` is read by the handler too |
+| A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md`, `store-assets/microsoft/listings.json` and the claims in `listings.md` |
 | Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |

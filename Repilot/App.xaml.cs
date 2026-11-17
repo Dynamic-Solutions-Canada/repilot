@@ -52,7 +52,7 @@ public partial class App : Application
 
         AppBootstrap.InstallCrashLogging(this);
 
-        SettingsManager.RestoreSettings();
+        SettingsManager.Restore();
         AppLanguage.ApplySaved();
 
         // Repilot's own text is .resw (LOC-6); UiText supplies only the kit's shared labels, in the same

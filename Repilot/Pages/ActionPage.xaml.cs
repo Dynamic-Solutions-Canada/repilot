@@ -64,7 +64,7 @@ public sealed partial class ActionPage : Page
         }
 
         Action.Type = newType;              // the mode bar is the ONLY writer of Type
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
         ShowPanelFor(newType);
     }
 
@@ -210,7 +210,7 @@ public sealed partial class ActionPage : Page
         Action.LaunchPath = app.LaunchPath;
         Action.LaunchDisplayName = app.Name;
         Action.LaunchArguments = "";
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
         _loading = true; LaunchPathBox.Text = ""; _loading = false; // the two inputs don't fight
     }
 
@@ -244,7 +244,7 @@ public sealed partial class ActionPage : Page
         r.Captured += combo =>
         {
             Action.Combo = combo; // Type is owned by the mode bar (Shortcut)
-            SettingsManager.SaveSettings();
+            SettingsManager.Save();
             EndRecordingUi(restore: false);
             ComboDisplay.Text = combo.ToString();
         };
@@ -272,7 +272,7 @@ public sealed partial class ActionPage : Page
     {
         Action.Combo = new KeyCombo();
         ComboDisplay.Text = UiStrings.Get("NotSet");
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
     }
 
     protected override void OnNavigatedFrom(NavigationEventArgs e) => _recorder?.Stop();
@@ -286,7 +286,7 @@ public sealed partial class ActionPage : Page
         }
 
         Action.Text = TextBox.Text;
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
     }
 
     // ── Custom file / link ───────────────────────────────────────────
@@ -305,7 +305,7 @@ public sealed partial class ActionPage : Page
 
         Action.LaunchPath = LaunchPathBox.Text;
         Action.LaunchDisplayName = FriendlyTarget(LaunchPathBox.Text);
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
         _loading = true; AppList.SelectedItem = null; _loading = false; // typing a path clears app selection
     }
 
@@ -317,7 +317,7 @@ public sealed partial class ActionPage : Page
         }
 
         Action.LaunchArguments = LaunchArgsBox.Text;
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
     }
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e) => _ = BrowseAsync();
@@ -403,7 +403,7 @@ public sealed partial class ActionPage : Page
         }
 
         Action.WindowsFunctionId = item.Function.Id; // Type is owned by the mode bar
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
     }
 
     private void SelectFunctionInList(string id)

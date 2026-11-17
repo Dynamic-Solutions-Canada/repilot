@@ -1,7 +1,8 @@
 <Page
     x:Class="Repilot.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kitc="using:WinUIAppKit.Controls">
     <ScrollViewer Padding="32,16,32,32">
         <StackPanel Spacing="8" MaxWidth="720" HorizontalAlignment="Left">
             <TextBlock x:Uid="SettingsTitle" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,8" />
@@ -49,6 +50,11 @@
             <InfoBar x:Name="LanguageRestartBar" IsOpen="False" IsClosable="False" Severity="Informational" />
 
             <InfoBar x:Uid="NoBackground" IsOpen="True" IsClosable="False" Severity="Informational" />
+
+            <!-- Reset settings (CONF-4): the kit's row, in its own card below the others. -->
+            <Border Style="{StaticResource CardBorderStyle}" Margin="0,8,0,0">
+                <kitc:ResetSetting x:Name="ResetRow" />
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>

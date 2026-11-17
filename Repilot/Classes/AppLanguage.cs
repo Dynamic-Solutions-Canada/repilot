@@ -71,7 +71,7 @@ internal static class AppLanguage
     {
         string normalized = Normalize(tag);
         SettingsManager.Current.LanguageOverride = normalized;
-        SettingsManager.SaveSettings();
+        SettingsManager.Save();
         return normalized != AppliedAtStartup;
     }
 

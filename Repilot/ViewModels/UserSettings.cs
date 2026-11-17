@@ -1,43 +1,29 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using Repilot.Models;
+using WinUIAppKit.Theming;
+using WinUIAppKit.Windowing;
 
 namespace Repilot.ViewModels;
 
 /// <summary>
-/// User settings for Repilot. All [ObservableProperty] fields generate
-/// INotifyPropertyChanged via CommunityToolkit.Mvvm source generators and
-/// auto-serialize to settings.json.
+/// User settings, saved as settings.json by <see cref="Classes.Settings.SettingsManager"/>. The kit's
+/// store owns the file's <c>SchemaVersion</c>; never declare one here. A change to the shape needs a step
+/// in <see cref="Classes.Settings.SettingsMigrations"/>. The key handler reads <see cref="Action"/> from
+/// the same file with its own reader, so <see cref="Action"/>'s name and shape are a contract with it.
 /// </summary>
-public partial class UserSettings : ObservableObject
+public sealed class UserSettings
 {
-    /// <summary>App theme. 0 = System default, 1 = Light, 2 = Dark.</summary>
-    [ObservableProperty]
-    public partial int AppTheme { get; set; }
+    /// <summary>The settings app's theme (stored as 0 = system, 1 = light, 2 = dark).</summary>
+    public AppThemeChoice AppTheme { get; set; }
 
     /// <summary>
-    /// Settings-app language tag (for example "fr-CA"), or "" to follow Windows.
-    /// Applied at startup by <see cref="Repilot.Classes.AppLanguage"/>.
+    /// Settings-app language identity (for example "fr-CA"), or "" to follow Windows. Applied at startup
+    /// by <see cref="Classes.AppLanguage"/>.
     /// </summary>
-    [ObservableProperty]
-    public partial string LanguageOverride { get; set; } = "";
+    public string LanguageOverride { get; set; } = "";
 
-    /// <summary>The action run when the Copilot key is pressed.</summary>
+    /// <summary>The action run when the Copilot key is pressed. Read by the key handler.</summary>
     public CopilotActionData Action { get; set; } = new();
 
-    /// <summary>Last known app version string.</summary>
-    [ObservableProperty]
-    public partial string LastKnownVersion { get; set; } = "";
-
-    // ── Settings window geometry ─────────────────────────────────────
-    [ObservableProperty] public partial int SettingsWindowX { get; set; }
-    [ObservableProperty] public partial int SettingsWindowY { get; set; }
-    [ObservableProperty] public partial int SettingsWindowWidth { get; set; }
-    [ObservableProperty] public partial int SettingsWindowHeight { get; set; }
-
-    /// <summary>Repairs any nulls from older/partial settings files.</summary>
-    public void CompleteInitialization()
-    {
-        Action ??= new CopilotActionData();
-        LanguageOverride ??= "";
-    }
+    /// <summary>Last normal position and size of the settings window, or null for the default.</summary>
+    public WindowPlacement? SettingsWindow { get; set; }
 }
