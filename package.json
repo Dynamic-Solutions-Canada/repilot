@@ -16,7 +16,7 @@
     "check:listing": "python3 external/winui-app-kit/scripts/check-listing.py",
     "check:notices": "python3 external/winui-app-kit/scripts/generate-notices.py --check",
     "generate:notices": "python3 external/winui-app-kit/scripts/generate-notices.py",
-    "shots:render": "python3 scripts/render-screenshots.py",
-    "check:screenshots": "python3 scripts/render-screenshots.py --check"
+    "shots:render": "python3 external/winui-app-kit/scripts/store/render-screenshots.py",
+    "check:screenshots": "python3 external/winui-app-kit/scripts/store/render-screenshots.py --check"
   }
 }
