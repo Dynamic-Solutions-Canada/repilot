@@ -240,8 +240,6 @@ ClientBin/
 *.cer
 *.publishsettings
 
-# MSIX build output
-/LittleLauncherMSIX/bin/
 orleans.codegen.cs
 
 # Including strong name files can present a security risk
