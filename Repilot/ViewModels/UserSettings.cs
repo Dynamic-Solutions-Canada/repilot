@@ -14,10 +14,6 @@ public partial class UserSettings : ObservableObject
     [ObservableProperty]
     public partial int AppTheme { get; set; }
 
-    /// <summary>Run in the background at sign-in (keeps the fast-path responsive).</summary>
-    [ObservableProperty]
-    public partial bool Startup { get; set; }
-
     /// <summary>
     /// Settings-app language tag (for example "fr-CA"), or "" to follow Windows.
     /// Applied at startup by <see cref="Repilot.Classes.AppLanguage"/>.

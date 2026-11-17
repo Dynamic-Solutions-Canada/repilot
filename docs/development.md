@@ -50,6 +50,8 @@ The Linux checks need no Windows machine. They run through winui-app-kit's `scri
 
 `tests-native/Repilot.InputTests` sends real keystrokes, so it never runs from these commands or CI; its README says how to run it deliberately on Windows.
 
+Signed dev packages use their own identity, `TechnicallyReal.Repilot` (DIST-3), so a dev install sits beside the Store install and has its own data folder; assign the Copilot key to whichever copy you want to test. To test an update over a Store install instead, add `-- --store-identity` to `install:desktop` or `package:desktop:dev`: that package takes the Store identity (`27766TechnicallyReal.CopilotKeyRemapper`). Unsigned Store packages always keep the Store identity. All three are set in `windows-build.json`.
+
 The packaging script publishes both executables (the self-contained WinUI app and the handler) into the package. It finds the Windows SDK packaging tools (makeappx, makepri, signtool) in an installed SDK or the Microsoft.Windows.SDK.BuildTools NuGet package, acquiring it if needed. A signed build needs a certificate passed to it, which the build tools do; it never makes its own. Bump `<Version>` in `Directory.Build.props` for releases only; the build tools allocate dev revisions in the temporary copy.
 
 Run build commands from the repository or its project directories so `global.json` selects the SDK. It requires stable .NET SDK 10.0.403 or a later 10.0 feature band or patch, and both packaging workflows install the version from that file. The SDK still chooses runtime packs for each architecture; `Directory.Build.targets` rejects resolved .NET 10 runtime packs older than 10.0.14, including explicit overrides.

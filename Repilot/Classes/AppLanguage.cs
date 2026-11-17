@@ -34,9 +34,9 @@ internal static class AppLanguage
         new("fr-FR", "Français (France)"),
         new("fr-CA", "Français (Canada)"),
         new("de-DE", "Deutsch (Deutschland)"),
-        new("zh-CN", "中文（简体）"),
+        new("zh-CN", "简体中文（中国）"),
         new("pt-BR", "Português (Brasil)"),
-        new("ja-JP", "日本語"),
+        new("ja-JP", "日本語（日本）"),
     ];
 
     /// <summary>The override applied when this process started ("" = follow Windows).</summary>

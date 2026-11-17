@@ -12,6 +12,7 @@
     "format": "scripts/format",
     "format:check": "scripts/format --check",
     "check:l10n": "external/winui-app-kit/scripts/dotnet run --project tests/Repilot.Localization.Tests -c Release",
-    "check:gitignore": "external/winui-app-kit/scripts/check-gitignore ."
+    "check:gitignore": "external/winui-app-kit/scripts/check-gitignore .",
+    "check:listing": "python3 external/winui-app-kit/scripts/check-listing.py"
   }
 }

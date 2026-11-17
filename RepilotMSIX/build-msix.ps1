@@ -14,6 +14,10 @@
     and no written password. The build tooling passes the shared dev certificate. Use -NoSign for
     Microsoft Store uploads (the Store re-signs during ingestion).
 
+    Identity (DIST-3): unsigned builds keep the manifest's Store identity. Signed builds take the
+    dev_identity from windows-build.json and the certificate's subject as publisher, so a dev install
+    sits beside the Store install. -StoreIdentity signs with the Store identity instead.
+
 .EXAMPLE
     .\build-msix.ps1 -NoSign
     .\build-msix.ps1 -Platform x64 -TrustedPfxPath C:\path\signing.pfx -TrustedPfxPassword <password>
@@ -27,7 +31,12 @@ param(
 
     [string]$TrustedPfxPath = "",
     [string]$TrustedPfxPassword = "",
-    [switch]$NoSign
+    [switch]$NoSign,
+
+    # Build a signed test package with the Store identity from windows-build.json instead of the dev
+    # identity, to test an update over a Store install (DIST-3). The signing certificate's subject must
+    # be the Store publisher.
+    [switch]$StoreIdentity
 )
 
 $ErrorActionPreference = "Stop"
@@ -131,6 +140,23 @@ if ($NoSign) {
     $signCert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($TrustedPfxPath, $TrustedPfxPassword)
 }
 
+# Package identities come from windows-build.json, shared with the build tooling.
+$buildConfig = Get-Content (Join-Path $repoRoot "windows-build.json") -Raw | ConvertFrom-Json
+if ($StoreIdentity) {
+    if ($NoSign) {
+        Write-Error "-StoreIdentity makes a signed test package; an unsigned build already keeps the Store identity."
+        exit 1
+    }
+    if (-not $buildConfig.store_identity -or -not $buildConfig.store_publisher) {
+        Write-Error "-StoreIdentity needs store_identity and store_publisher in windows-build.json."
+        exit 1
+    }
+    if ($signCert.Subject -ne $buildConfig.store_publisher) {
+        Write-Error "Store-identity packages must be signed by a certificate whose subject is the Store publisher ($($buildConfig.store_publisher)), not $($signCert.Subject)."
+        exit 1
+    }
+}
+
 # ── Step 1: Publish (self-contained) ────────────────────────────────────────────
 Write-Host "`n=== Publishing Repilot ($Platform $Configuration) ===" -ForegroundColor Cyan
 dotnet publish $mainProj -c $Configuration -r $rid -p:Platform=$Platform `
@@ -170,13 +196,28 @@ $manifestContent = (Get-Content $manifestSrc -Raw) `
     -replace 'ARCH_PLACEHOLDER', $msixArch `
     -replace 'VERSION_PLACEHOLDER', $msixVersion
 
-# For signed (non-Store) builds, swap Publisher to the signing certificate's subject.
-if ($signCert) {
-    if ($manifestContent -match '<Identity[^>]+Publisher="([^"]+)"') {
-        $manifestContent = $manifestContent.Replace("Publisher=`"$($Matches[1])`"", "Publisher=`"$($signCert.Subject)`"")
-        Write-Host "  Stamped Publisher=$($signCert.Subject)"
-    }
+# Identity (DIST-3). Only the <Identity> element is edited: other elements have Name= and
+# Publisher= attributes of their own (the Windows App Runtime dependency).
+$identityName = $null
+$identityPublisher = $null
+if ($StoreIdentity) {
+    $identityName = $buildConfig.store_identity
+    $identityPublisher = $buildConfig.store_publisher
+} elseif ($signCert) {
+    $identityName = $buildConfig.dev_identity
+    $identityPublisher = $signCert.Subject
 }
+if ($identityPublisher) {
+    $identityPattern = '<Identity\b[^>]*>'
+    $identityElement = [regex]::Match($manifestContent, $identityPattern)
+    if (-not $identityElement.Success) { Write-Error "Package.appxmanifest has no Identity element"; exit 1 }
+    $stamped = $identityElement.Value -replace 'Publisher="[^"]*"', "Publisher=`"$identityPublisher`""
+    if ($identityName) { $stamped = $stamped -replace '\bName="[^"]*"', "Name=`"$identityName`"" }
+    $manifestContent = $manifestContent.Substring(0, $identityElement.Index) + $stamped +
+        $manifestContent.Substring($identityElement.Index + $identityElement.Length)
+}
+$stampedIdentity = [regex]::Match($manifestContent, '<Identity\b[^>]*>').Value
+Write-Host "  Identity: $([regex]::Match($stampedIdentity, '\bName="([^"]*)"').Groups[1].Value) / $([regex]::Match($stampedIdentity, 'Publisher="([^"]*)"').Groups[1].Value)"
 
 Set-Content -Path (Join-Path $layoutDir "AppxManifest.xml") -Value $manifestContent -NoNewline
 

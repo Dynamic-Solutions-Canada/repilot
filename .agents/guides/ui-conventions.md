@@ -29,3 +29,8 @@ This app's own interface conventions. The shared family rules are in the standar
 - XAML text uses `x:Uid`; code-built text uses `UiStrings.Get/Format`. Never hardcode user-visible English, except the product name.
 - Language options are labelled in their own language and filled in code.
 - A language change needs the window reopened; the Settings page says so in its restart InfoBar. Do not try to relabel pages live.
+
+## Code-behind gotchas
+
+- `global::` does not parse inside interpolated strings; assign to a local first.
+- Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.

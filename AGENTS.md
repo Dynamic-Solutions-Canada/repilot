@@ -46,7 +46,6 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 - **Packaging strips makepri's language splitting,** because split PRIs are dropped from a flat MSIX and every translation would be lost silently. The build fails unless a probe string resolves in every declared language.
 - **`external/promo` is never edited.** `Pages/PromotedAppsPage.Localization.cs` translates exact known English copy from it; unknown remote copy stays English.
 - **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
-- `global::` does not parse inside interpolated strings. Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.
 - **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 
 ## Commands
@@ -81,6 +80,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, the kit's `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
 | `release` skill | Cutting a release | `Directory.Build.props`, `release-notes/**`, tags |
+| [store-assets/microsoft/listings.md](store-assets/microsoft/listings.md) | Changing Store listing text or a claim it makes | `store-assets/microsoft/**` (`npm run check:listing`) |
 
 ## Keeping docs current
 
@@ -93,6 +93,6 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | A Windows function | The catalog, every `Resources.resw` |
 | A language | The manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
-| A feature or requirement users can see | Behaviour above, `README.md` |
+| A feature or requirement users can see | Behaviour above, `README.md`, `store-assets/microsoft/listings.json` and the claims in `listings.md` |
 | Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |
