@@ -10,8 +10,8 @@ updates:
     directories:
       - "/Repilot"
       - "/RepilotKey"
-      - "/tests/Repilot.InputTests"
-      - "/tests/Repilot.LocalizationTests"
+      - "/tests-native/Repilot.InputTests"
+      - "/tests/Repilot.Localization.Tests"
     schedule:
       interval: weekly
     groups:

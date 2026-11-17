@@ -3,9 +3,15 @@
   "private": true,
   "license": "PolyForm-Noncommercial-1.0.0",
   "scripts": {
-    "build:desktop": "scripts/windows-build --dev",
-    "verify:desktop": "scripts/windows-build --build-only --configuration Debug",
-    "install:desktop": "scripts/windows-build --install",
-    "package:desktop": "scripts/windows-build --no-sign"
+    "package:desktop:dev": "external/winui-app-kit/scripts/windows-build --dev",
+    "verify:desktop": "external/winui-app-kit/scripts/windows-build --build-only --configuration Debug",
+    "install:desktop": "external/winui-app-kit/scripts/windows-build --install",
+    "package:desktop": "external/winui-app-kit/scripts/windows-build --no-sign",
+    "test": "external/winui-app-kit/scripts/run-tests",
+    "validate": "npm run format:check && npm run check:gitignore && npm run check:l10n && npm test",
+    "format": "scripts/format",
+    "format:check": "scripts/format --check",
+    "check:l10n": "external/winui-app-kit/scripts/dotnet run --project tests/Repilot.Localization.Tests -c Release",
+    "check:gitignore": "external/winui-app-kit/scripts/check-gitignore ."
   }
 }

@@ -8,9 +8,25 @@ using Repilot.Services;
 /// <summary>Native Windows regression checks using a disposable, focused text field.</summary>
 internal static class Program
 {
+    /// <summary>The variable that must be set to "1" before this suite will send any input (TEST-10).</summary>
+    private const string OptInVariable = "REPILOT_INPUT_TESTS";
+
+    /// <summary>
+    /// Runs the checks only when explicitly asked: they type into a window and switch this thread's
+    /// keyboard layout, which would disturb whoever is using the machine. Returns 2 when refused, so an
+    /// accidental run is never reported as a pass.
+    /// </summary>
     [STAThread]
     private static int Main()
     {
+        if (!OperatingSystem.IsWindows() || Environment.GetEnvironmentVariable(OptInVariable) != "1")
+        {
+            Console.Error.WriteLine(
+                $"REFUSED: this suite sends real keystrokes. On Windows, set {OptInVariable}=1 on a machine nobody is using " +
+                "(see README.md), keep its window focused, then run it again.");
+            return 2;
+        }
+
         try
         {
             CheckSettings();

@@ -27,16 +27,28 @@ The handler and the settings app share their model, catalog and executor code th
 
 ## Building
 
-After cloning, run `git submodule update --init` and, once per clone, `lefthook install` to enable the git hooks in `lefthook.yml` (they block signing material, credentials, settings files and files over 5 MB).
+After cloning, run `git submodule update --init` (winui-app-kit supplies the build, test and format scripts) and, once per clone, `lefthook install` to enable the git hooks in `lefthook.yml` (they block signing material, credentials, settings files and files over 5 MB).
 
 Source is authoritative in WSL. Builds run through the [shared Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools), which copy the working tree into a disposable Windows temporary folder, build there and clean up. Do not build a Windows-side checkout, or build the WSL source directly with Windows tools. Dev installs change the version only in the temporary copy; never uninstall to get past an update error.
 
 | Command | What it does |
 | --- | --- |
 | `npm run verify:desktop` | Compiles the settings app (Debug), XAML included |
-| `npm run build:desktop` | Builds a signed dev package (sideload) |
+| `npm run package:desktop:dev` | Builds a signed dev package (sideload) |
 | `npm run install:desktop` | Builds the dev package, updates the installed copy in place and launches it |
 | `npm run package:desktop` | Builds the unsigned Store package |
+
+The Linux checks need no Windows machine. They run through winui-app-kit's `scripts/dotnet`, which uses a host .NET SDK if there is one and otherwise the SDK container pinned by `global.json`, under a 3 GB memory cap (Docker required).
+
+| Command | What it does |
+| --- | --- |
+| `npm run validate` | The whole Linux gate: `format:check`, `check:gitignore`, `check:l10n`, then `npm test` |
+| `npm test` | Runs every harness under `tests/` (found by walking the folder) |
+| `npm run check:l10n` | The localization harness (`tests/Repilot.Localization.Tests`) |
+| `npm run check:gitignore` | Checks `.gitignore` ends with the kit's shared block unchanged |
+| `npm run format` / `format:check` | Formats C# outside `external/` to the kit's `.editorconfig`, or fails on a difference |
+
+`tests-native/Repilot.InputTests` sends real keystrokes, so it never runs from these commands or CI; its README says how to run it deliberately on Windows.
 
 The packaging script publishes both executables (the self-contained WinUI app and the handler) into the package. It finds the Windows SDK packaging tools (makeappx, makepri, signtool) in an installed SDK or the Microsoft.Windows.SDK.BuildTools NuGet package, acquiring it if needed. A signed build needs a certificate passed to it, which the build tools do; it never makes its own. Bump `<Version>` in `Directory.Build.props` for releases only; the build tools allocate dev revisions in the temporary copy.
 
@@ -46,7 +58,7 @@ This is the minimum build baseline for [CVE-2026-111497](https://github.com/dotn
 
 ## App language
 
-The settings app follows the Windows display language by default. **Settings > App language** saves an override; close and reopen the settings app to apply it. Strings are in `Repilot/Strings/<lang>/Resources.resw`; see the conventions in [AGENTS.md](../AGENTS.md) for the rules, and run `dotnet run --project tests/Repilot.LocalizationTests -c Release` after changing any text.
+The settings app follows the Windows display language by default. **Settings > App language** saves an override; close and reopen the settings app to apply it. Strings are in `Repilot/Strings/<lang>/Resources.resw`; see the conventions in [AGENTS.md](../AGENTS.md) for the rules, and run `npm run check:l10n` after changing any text.
 
 ## Where Repilot writes data
 

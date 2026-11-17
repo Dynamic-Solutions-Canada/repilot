@@ -62,7 +62,7 @@ jobs:
       - name: Check string resources
         if: matrix.platform == 'x64'
         shell: pwsh
-        run: dotnet run --project tests/Repilot.LocalizationTests -c Release
+        run: dotnet run --project tests/Repilot.Localization.Tests -c Release
 
       # ── Generate MSIX visual assets ────────────────────────────
       - name: Generate images

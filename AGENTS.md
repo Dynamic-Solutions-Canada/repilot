@@ -10,7 +10,7 @@ This repo follows the shared standards at https://github.com/Dynamic-Solutions-C
 
 Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress path must stay thin and non-resident.
 
-- **`RepilotKey.exe`** (`RepilotKey/`) is the key handler. Windows launches it on each key press; `Program.cs` detects the gesture, reads `settings.json`, calls `ActionExecutor.RunSync` and exits. No window, nothing resident. It is self-contained, ReadyToRun, trimmed and single-file.
+- **`RepilotKey.exe`** (`RepilotKey/`) is the key handler. Windows launches it on each key press; `Program.cs` detects the gesture, reads `settings.json`, calls `ActionExecutor.RunSync` and exits. No window, nothing resident. It is self-contained, trimmed and single-file.
 - **`Repilot.exe`** (`Repilot/`) is the WinUI 3 settings app, launched on demand. `SettingsWindow` is its only window. It is not resident and not in the keypress path.
 - The manifest has two `<Application>`s. `Id="App"` is the handler (provider and protocol extension; Start tile "Repilot Key"); it is named `App` so the user's key assignment (`PFN!App`) survives updates. `Id="Settings"` is the settings app (Start tile "Repilot").
 
@@ -33,7 +33,7 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 - **One press runs the action once.** Holding the key auto-repeats the launch, so the handler debounces with a `repeat-state` timestamp and the named mutex `Repilot.HandlerState`. A press-and-hold activation (`repilot-key://?state=Up`) is a no-op: Windows does not reliably deliver a distinct hold gesture, so hold was dropped.
 - **`ActionExecutor`** sends key combos with `SendInput` (reusing a physically held Win key when triggered by Win+C), starts apps, URIs and `ms-settings:` with `Process.Start(UseShellExecute)`, and starts packaged apps through `explorer.exe shell:AppsFolder\{AUMID}`.
 - **Unpackaged builds cannot be assigned to the key**, because the key is claimed through the `com.microsoft.windows.copilotkeyprovider` AppExtension. `Pages/HomePage.xaml.cs` hides the Assign button and says so.
-- **Check for Updates** opens the Store's Updates and downloads page (`ms-windows-store://downloadsandupdates`) for packaged copies; it does not claim a scan finished. Unpackaged builds check GitHub Releases and offer "View Release", never a download.
+- **Check for Updates** opens the Store's Updates and downloads page for packaged copies, without claiming a scan finished. Unpackaged builds check GitHub Releases and offer "View Release", never a download.
 
 ## Conventions and gotchas
 
@@ -46,26 +46,31 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 - **Packaging strips makepri's language splitting,** because split PRIs are dropped from a flat MSIX and every translation would be lost silently. The build fails unless a probe string resolves in every declared language.
 - **`external/promo` is never edited.** `Pages/PromotedAppsPage.Localization.cs` translates exact known English copy from it; unknown remote copy stays English.
 - **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
-- `global::` does not parse inside interpolated strings; assign to a local first. Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.
+- `global::` does not parse inside interpolated strings. Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.
 - **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 
 ## Commands
 
-Source is authoritative in WSL, with submodules initialised (`git submodule update --init`). Setup is in [docs/development.md](docs/development.md).
+Source is authoritative in WSL, with submodules initialised (`git submodule update --init`). The kit submodule supplies only scripts and `.editorconfig` so far. Setup is in [docs/development.md](docs/development.md).
 
 | Command | Proves | Does not prove |
 | --- | --- | --- |
 | `npm run verify:desktop` | The settings app compiles on Windows (Debug), XAML included | That the handler publishes, or that it packages or runs |
-| `npm run build:desktop` | A signed dev package builds, handler included | That it installs or runs |
+| `npm run package:desktop:dev` | A signed dev package builds, handler included | That it installs or runs |
 | `npm run install:desktop` | The dev package updates in place and launches | Key behaviour; check it in the running app |
 | `npm run package:desktop` | An unsigned Store package builds, with every language resolving | Signing; that it runs |
-| `dotnet run --project tests/Repilot.LocalizationTests -c Release` | Every language is complete and consistent with the XAML, code and catalog (runs on Linux) | That the text is translated well |
+| `npm run check:l10n` | Every language is complete and consistent with the XAML, code and catalog | That the text is translated well |
+| `npm test` | Every harness under `tests/` passes on Linux | What needs Windows, the installed package or a key press (see each README) |
+| `npm run validate` | The Linux gate: format, `.gitignore` shared block and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
+| `npm run format` | Rewrites C# outside `external/` to the kit's style | Behaviour |
 
-Use the `desktop` skill for builds and installs.
+`tests-native/Repilot.InputTests` sends real keystrokes: never part of `test`, `validate` or CI; Windows only, with `REPILOT_INPUT_TESTS=1` (see its README).
+
+Before finishing a change, run `npm run validate` and `npm run verify:desktop`; use the `desktop` skill for builds and installs.
 
 ## Release
 
-Repilot ships only through the Microsoft Store, and a GitHub Release carries notes and the tag, nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md)); the header of `build-msix.yml` says why. That workflow still builds and signs the MSIX on both platforms every run as CI's only packaging check, so keep the step. A `v*` tag makes `store-publish.yml` upload the Store package (price tier `Tier1012`, US $0.99; manual runs default to draft review). `build-msix.ps1 -NoSign` builds the same unsigned Store package locally; keep that path working. Bump `<Version>` in `Directory.Build.props` for releases only: MSIX refuses the same version with different content, and dev builds use a staging-only revision.
+Repilot ships only through the Microsoft Store; a GitHub Release carries notes and the tag, nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md), and the header of `build-msix.yml`). That workflow still builds and signs the MSIX on both platforms as CI's only packaging check; keep the step. A `v*` tag makes `store-publish.yml` upload the Store package (`Tier1012`, US $0.99; manual runs default to draft review). Keep `build-msix.ps1 -NoSign` working for local Store packages. Bump `<Version>` in `Directory.Build.props` for releases only; dev builds use a staging-only revision.
 
 ## Guidance map
 
@@ -73,7 +78,7 @@ Repilot ships only through the Microsoft Store, and a GitHub Release carries not
 | --- | --- | --- |
 | [docs/development.md](docs/development.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
 | [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
-| [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, `scripts/windows-build` |
+| [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, the kit's `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
 
 ## Keeping docs current
@@ -85,7 +90,8 @@ Repilot ships only through the Microsoft Store, and a GitHub Release carries not
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
 | An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
 | A Windows function | The catalog, every `Resources.resw` |
-| A language | The manifest, `Classes/AppLanguage.cs`, the localization test's list, `build-msix.ps1` |
+| A language | The manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
+| winui-app-kit pin bumped | The kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md` |
 | Release workflow or packaging | Release above, `docs/development.md` |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |
