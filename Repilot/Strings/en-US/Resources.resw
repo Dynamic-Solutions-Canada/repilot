@@ -519,28 +519,4 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="PromoSubtitle" xml:space="preserve">
-    <value>More from Dynamic Solutions Canada on the Microsoft Store.</value>
-  </data>
-  <data name="PromoVisitWebsite" xml:space="preserve">
-    <value>Visit website</value>
-  </data>
-  <data name="PromoViewInStore" xml:space="preserve">
-    <value>View in Store</value>
-  </data>
-  <data name="PromoPrintStream" xml:space="preserve">
-    <value>Manage your 3D printers, one or a whole farm, from any device.</value>
-  </data>
-  <data name="PromoImmichDrive" xml:space="preserve">
-    <value>ImmichDrive brings your self-hosted Immich photo and video library straight into Windows File Explorer as a native cloud drive. Your whole timeline appears as files you can...</value>
-  </data>
-  <data name="PromoPersistent" xml:space="preserve">
-    <value>Reminders that don't give up.</value>
-  </data>
-  <data name="PromoTitle" xml:space="preserve">
-    <value>Our other apps</value>
-  </data>
-  <data name="PromoLittleLauncher" xml:space="preserve">
-    <value>Launch apps and websites from your tray on Windows and Linux. Windows is available in the Store; Linux uses AppImage.</value>
-  </data>
 </root>

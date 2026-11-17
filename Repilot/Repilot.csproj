@@ -2,15 +2,12 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.22000.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
     <RootNamespace>Repilot</RootNamespace>
     <AssemblyName>Repilot</AssemblyName>
     <Platforms>x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-    <LangVersion>preview</LangVersion>
     <Configurations>Debug;Release</Configurations>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Repilot.ico</ApplicationIcon>
@@ -23,24 +20,26 @@
     <FrameworkReference Include="Microsoft.WindowsDesktop.App" />
 
     <!-- WinUI 3 (Windows App SDK) — Fluent Design, Mica, NavigationView -->
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
 
     <!-- MVVM source generators (ObservableProperty, RelayCommand) -->
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
 
-    <!-- Structured logging -->
-    <PackageReference Include="NLog" Version="6.1.1" />
+    <!-- Structured logging; the shared NLog.config is linked in by the kit's targets -->
+    <PackageReference Include="NLog" />
+  </ItemGroup>
+
+  <!-- The shared WinUI App Kit (KIT-2). The key handler never references it: it must stay free of
+       WinUI and NLog. -->
+  <ItemGroup>
+    <ProjectReference Include="..\external\winui-app-kit\WinUIAppKit\WinUIAppKit.csproj" />
   </ItemGroup>
 
   <!-- Content files to copy to output ────────────────────────────── -->
   <ItemGroup>
-    <None Remove="NLog.config" />
     <None Remove="Resources\Repilot.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Repilot.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

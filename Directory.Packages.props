@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!-- Microsoft.WindowsAppSDK, NLog and CommunityToolkit.Mvvm come from the kit (PLAT-5): the app
+       never moves ahead of the kit's versions. -->
+  <Import Project="$(MSBuildThisFileDirectory)external/winui-app-kit/build/WinUIAppKit.Packages.props" />
+</Project>

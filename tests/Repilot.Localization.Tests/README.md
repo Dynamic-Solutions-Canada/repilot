@@ -11,7 +11,7 @@ dotnet run --project tests/Repilot.Localization.Tests -c Release
 - **Every language is complete:** each `Repilot/Strings/<lang>/Resources.resw` has exactly the English keys, with no duplicates, no empty values, no em dashes and the same placeholders as English.
 - **Keys cannot collide:** no plain code key has the same name as an `x:Uid` prefix (Windows turns `A.B` into the path `A/B`).
 - **XAML matches the strings:** every `x:Uid` is used once, has resources, and sets only properties its element has; every resource is used.
-- **Code matches the strings:** every `UiStrings.Get/Format` key and every key the promo adapter uses exists, and no resource is unused.
+- **Code matches the strings:** every `UiStrings.Get/Format` key exists, and no resource is unused.
 - **The Windows function catalog matches:** each catalog entry has its `Function_<id>_Name` and `_Description` strings, the en-US text equals the catalog, and no catalog string is orphaned.
 - **Languages agree:** the language picker, the manifest and the string folders declare the same set (en-CA and fr-CA are packaged from en-US and fr-FR).
 - **English summaries:** the action summaries the settings app shows read as expected, including text that contains braces.

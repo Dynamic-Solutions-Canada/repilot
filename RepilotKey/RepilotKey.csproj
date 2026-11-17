@@ -2,14 +2,13 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.22000.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>RepilotKey</RootNamespace>
     <AssemblyName>RepilotKey</AssemblyName>
     <Platforms>x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-    <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- The handler logs to its own key-handler.log and must not carry NLog or its config. -->
+    <WinUIAppKitIncludeNLogConfig>false</WinUIAppKitIncludeNLogConfig>
     <ApplicationIcon>..\Repilot\Resources\Repilot.ico</ApplicationIcon>
 
     <!-- Tiny, fast, fire-and-exit handler with no resident footprint.

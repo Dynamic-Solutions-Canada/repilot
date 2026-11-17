@@ -1,3 +1,4 @@
+using WinUIAppKit.Theming;
 using Repilot.Classes;
 using Repilot.Classes.Settings;
 using Repilot.Services;
@@ -24,7 +25,10 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        ThemeManager.ApplyAndSaveTheme(ThemeCombo.SelectedIndex);
+        // Every open window follows at once (AppTheme.Track); the choice is saved for the next launch.
+        SettingsManager.Current.AppTheme = ThemeCombo.SelectedIndex;
+        SettingsManager.SaveSettings();
+        AppTheme.Set((AppThemeChoice)ThemeCombo.SelectedIndex);
     }
 
     /// <summary>
@@ -34,9 +38,9 @@ public sealed partial class SettingsPage : Page
     private void LoadLanguageChoices()
     {
         LanguageCombo.Items.Add(new ComboBoxItem { Content = UiStrings.Get("FollowWindows"), Tag = "" });
-        foreach (var option in AppLanguage.Supported)
+        foreach (string identity in AppLanguage.Supported.Identities)
         {
-            LanguageCombo.Items.Add(new ComboBoxItem { Content = option.NativeName, Tag = option.Tag });
+            LanguageCombo.Items.Add(new ComboBoxItem { Content = AppLanguage.Supported.NativeName(identity), Tag = identity });
         }
 
         string saved = AppLanguage.Normalize(SettingsManager.Current.LanguageOverride);

@@ -11,12 +11,6 @@ public static class NativeMethods
 {
     internal const int MONITOR_DEFAULTTONEAREST = 2;
 
-    internal const uint WM_SETICON = 0x0080;
-    internal static readonly IntPtr ICON_SMALL = 0;
-    internal static readonly IntPtr ICON_BIG = 1;
-    internal const uint IMAGE_ICON = 1;
-    internal const uint LR_LOADFROMFILE = 0x0010;
-
     [StructLayout(LayoutKind.Sequential)]
     internal struct POINT { public int X; public int Y; }
 
@@ -54,15 +48,6 @@ public static class NativeMethods
     [DllImport("user32.dll")]
     internal static extern uint GetDpiForWindow(IntPtr hWnd);
 
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static extern bool DestroyIcon(IntPtr hIcon);
-
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    internal static extern IntPtr LoadImage(IntPtr hInst, string lpszName, uint uType, int cxDesired, int cyDesired, uint fuLoad);
 
     // ── Low-level keyboard hook (used only while recording a shortcut) ──────────
     internal const int WH_KEYBOARD_LL = 13;

@@ -519,28 +519,4 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="PromoSubtitle" xml:space="preserve">
-    <value>Microsoft Store で Dynamic Solutions Canada の他のアプリをご覧ください。</value>
-  </data>
-  <data name="PromoVisitWebsite" xml:space="preserve">
-    <value>Web サイトを見る</value>
-  </data>
-  <data name="PromoViewInStore" xml:space="preserve">
-    <value>ストアで見る</value>
-  </data>
-  <data name="PromoPrintStream" xml:space="preserve">
-    <value>1 台からファーム全体まで、どのデバイスからでも 3D プリンターを管理できます。</value>
-  </data>
-  <data name="PromoImmichDrive" xml:space="preserve">
-    <value>ImmichDrive は、セルフホストの Immich の写真と動画ライブラリを、ネイティブのクラウドドライブとして Windows エクスプローラーに表示します。タイムライン全体をファイルとして扱い…</value>
-  </data>
-  <data name="PromoPersistent" xml:space="preserve">
-    <value>あきらめないリマインダー。</value>
-  </data>
-  <data name="PromoTitle" xml:space="preserve">
-    <value>その他のアプリ</value>
-  </data>
-  <data name="PromoLittleLauncher" xml:space="preserve">
-    <value>Windows と Linux で、システムトレイからアプリや Web サイトを起動できます。Windows 版は Microsoft Store で入手でき、Linux 版は AppImage を使用します。</value>
-  </data>
 </root>

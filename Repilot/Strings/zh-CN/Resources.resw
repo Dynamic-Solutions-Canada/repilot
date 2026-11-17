@@ -519,28 +519,4 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="PromoSubtitle" xml:space="preserve">
-    <value>Microsoft Store 上更多来自 Dynamic Solutions Canada 的应用。</value>
-  </data>
-  <data name="PromoVisitWebsite" xml:space="preserve">
-    <value>访问网站</value>
-  </data>
-  <data name="PromoViewInStore" xml:space="preserve">
-    <value>在商店中查看</value>
-  </data>
-  <data name="PromoPrintStream" xml:space="preserve">
-    <value>从任何设备管理你的 3D 打印机，无论是一台还是整个打印农场。</value>
-  </data>
-  <data name="PromoImmichDrive" xml:space="preserve">
-    <value>ImmichDrive 将你自托管的 Immich 照片和视频库作为原生云盘直接集成到 Windows 文件资源管理器中。整个时间线会显示为文件，你可以…</value>
-  </data>
-  <data name="PromoPersistent" xml:space="preserve">
-    <value>不会放弃的提醒。</value>
-  </data>
-  <data name="PromoTitle" xml:space="preserve">
-    <value>我们的其他应用</value>
-  </data>
-  <data name="PromoLittleLauncher" xml:space="preserve">
-    <value>在 Windows 和 Linux 上从系统托盘启动应用和网站。Windows 版可在应用商店获取；Linux 版使用 AppImage。</value>
-  </data>
 </root>

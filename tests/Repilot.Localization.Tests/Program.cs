@@ -169,7 +169,7 @@ internal static class Program
     }
 
     /// <summary>
-    /// Literal keys passed to UiStrings or listed in the promo adapter exist, and every plain
+    /// Literal keys passed to UiStrings exist, and every plain
     /// key is referenced somewhere (catalog keys are covered by the catalog check).
     /// </summary>
     private static void CheckCodeKeys(Dictionary<string, string> english)
@@ -183,14 +183,6 @@ internal static class Program
             if (!english.ContainsKey(call.Groups[1].Value))
             {
                 Fail($"code uses missing key {call.Groups[1].Value}");
-            }
-        }
-
-        foreach (Match entry in Regex.Matches(code, "\\] = \"(Promo[A-Za-z]+)\""))
-        {
-            if (!english.ContainsKey(entry.Groups[1].Value))
-            {
-                Fail($"promo adapter uses missing key {entry.Groups[1].Value}");
             }
         }
 
@@ -236,7 +228,7 @@ internal static class Program
     /// <summary>The picker, the manifest and the Strings folders describe the same nine languages.</summary>
     private static void CheckPackageLanguages()
     {
-        string[] picker = Regex.Matches(File.ReadAllText(Path.Combine(Root, "Repilot", "Classes", "AppLanguage.cs")), "new\\(\"([a-z]{2}-[A-Z]{2})\"")
+        string[] picker = Regex.Matches(File.ReadAllText(Path.Combine(Root, "Repilot", "Classes", "AppLanguage.cs")), "\\(\"([a-z]{2}-[A-Z]{2})\", \"[a-z]{2}-[A-Z]{2}\", \"")
             .Select(m => m.Groups[1].Value).ToArray();
         string[] manifest = XDocument.Load(Path.Combine(Root, "RepilotMSIX", "Package.appxmanifest")).Descendants()
             .Where(e => e.Name.LocalName == "Resource")

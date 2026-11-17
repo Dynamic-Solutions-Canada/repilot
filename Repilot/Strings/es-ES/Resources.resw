@@ -519,28 +519,4 @@
   <data name="FunctionGroup_Settings" xml:space="preserve">
     <value>Configuración</value>
   </data>
-  <data name="PromoSubtitle" xml:space="preserve">
-    <value>Más de Dynamic Solutions Canada en Microsoft Store.</value>
-  </data>
-  <data name="PromoVisitWebsite" xml:space="preserve">
-    <value>Visitar sitio web</value>
-  </data>
-  <data name="PromoViewInStore" xml:space="preserve">
-    <value>Ver en la tienda</value>
-  </data>
-  <data name="PromoPrintStream" xml:space="preserve">
-    <value>Gestiona tus impresoras 3D, una o toda una granja, desde cualquier dispositivo.</value>
-  </data>
-  <data name="PromoImmichDrive" xml:space="preserve">
-    <value>ImmichDrive lleva tu biblioteca de fotos y vídeos de Immich autoalojada al Explorador de archivos de Windows como una unidad en la nube nativa. Toda tu cronología aparece como archivos que puedes...</value>
-  </data>
-  <data name="PromoPersistent" xml:space="preserve">
-    <value>Recordatorios que no se rinden.</value>
-  </data>
-  <data name="PromoTitle" xml:space="preserve">
-    <value>Nuestras otras aplicaciones</value>
-  </data>
-  <data name="PromoLittleLauncher" xml:space="preserve">
-    <value>Abre aplicaciones y sitios web desde la bandeja del sistema en Windows y Linux. La versión para Windows está en Microsoft Store; la de Linux usa AppImage.</value>
-  </data>
 </root>

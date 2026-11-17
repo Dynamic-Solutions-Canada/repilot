@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using System.IO;
 using System.Linq;
 using WinRT.Interop;
+using WinUIAppKit.Theming;
+using WinUIAppKit.Windowing;
 using static Repilot.Classes.NativeMethods;
 
 namespace Repilot;
@@ -16,7 +18,6 @@ namespace Repilot;
 public sealed partial class SettingsWindow : Window
 {
     private static SettingsWindow? _instance;
-    private IntPtr _hIconSmall, _hIconBig;
 
     public SettingsWindow()
     {
@@ -31,15 +32,6 @@ public sealed partial class SettingsWindow : Window
         _instance = this;
         Closed += (s, e) => _instance = null;
 
-        // The shared promo page lives in a submodule with English copy; translate it here.
-        ContentFrame.Navigated += (_, _) =>
-        {
-            if (ContentFrame.Content is TechnicallyReal.Promo.PromotedAppsPage promo)
-            {
-                promo.EnableLocalization();
-            }
-        };
-
         SystemBackdrop = new MicaBackdrop();
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
@@ -48,11 +40,11 @@ public sealed partial class SettingsWindow : Window
         var wndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
         var appWindow = AppWindow.GetFromWindowId(wndId);
 
+        // Sharp taskbar and title bar icons at the window's scaling (the kit's WindowIcon).
         string iconPath = App.IconPath;
+        WindowIcon.Apply(this, iconPath);
         if (File.Exists(iconPath))
         {
-            ApplyWindowIcon(hwnd, iconPath);
-            SetAppWindowIcon(appWindow, iconPath);
             LoadTitleBarIcon(iconPath);
         }
 
@@ -82,17 +74,10 @@ public sealed partial class SettingsWindow : Window
 
         RootNavigation.SelectedItem = RootNavigation.MenuItems[0];
         ContentFrame.Navigate(typeof(HomePage));
-        Classes.ThemeManager.ApplySavedTheme(this);
 
-        Activated += (s, e) =>
-        {
-            if (_hIconBig != IntPtr.Zero)
-            {
-                var h = WindowNative.GetWindowHandle(this);
-                SendMessage(h, WM_SETICON, ICON_SMALL, _hIconSmall);
-                SendMessage(h, WM_SETICON, ICON_BIG, _hIconBig);
-            }
-        };
+        // The saved theme, applied now and again whenever the Settings page changes it.
+        AppTheme.Set((AppThemeChoice)settings.AppTheme);
+        AppTheme.Track(this);
 
         Closed += SettingsWindow_Closed;
     }
@@ -140,35 +125,6 @@ public sealed partial class SettingsWindow : Window
         "AboutPage" => typeof(AboutPage),
         _ => null
     };
-
-    private static void SetAppWindowIcon(AppWindow appWindow, string icoPath)
-    {
-        var hIcon = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
-        if (hIcon == IntPtr.Zero)
-        {
-            return;
-        }
-
-        try { appWindow.SetIcon(Microsoft.UI.Win32Interop.GetIconIdFromIcon(hIcon)); }
-        finally { DestroyIcon(hIcon); }
-    }
-
-    private void ApplyWindowIcon(IntPtr hwnd, string icoPath)
-    {
-        if (_hIconSmall != IntPtr.Zero) { DestroyIcon(_hIconSmall); _hIconSmall = IntPtr.Zero; }
-        if (_hIconBig != IntPtr.Zero) { DestroyIcon(_hIconBig); _hIconBig = IntPtr.Zero; }
-        _hIconSmall = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
-        _hIconBig = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-        if (_hIconSmall != IntPtr.Zero)
-        {
-            SendMessage(hwnd, WM_SETICON, ICON_SMALL, _hIconSmall);
-        }
-
-        if (_hIconBig != IntPtr.Zero)
-        {
-            SendMessage(hwnd, WM_SETICON, ICON_BIG, _hIconBig);
-        }
-    }
 
     private void LoadTitleBarIcon(string icoPath)
     {

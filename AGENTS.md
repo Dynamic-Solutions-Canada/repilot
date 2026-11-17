@@ -25,7 +25,7 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 | Repository name, used by About and the update check | `Classes/AboutContent.cs` |
 | Update check | `Services/UpdateService.cs` |
 | Interface text (nine languages) | `Strings/<lang>/Resources.resw`, `Services/UiStrings.cs`, `Classes/AppLanguage.cs` |
-| "Our other apps" page | `external/promo` submodule; English-copy adapter in `Pages/PromotedAppsPage.Localization.cs` |
+| "Our other apps" page | `external/promo` submodule; it follows the app's language through `PromoLocalization.LocaleProvider` (set in `App`) |
 
 ## Behaviour
 
@@ -44,7 +44,7 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 - **Stored data never changes language.** Settings keep function Ids and `WindowsFunctionText` translates at display time. The catalog stays English because the handler links it, and the handler shows no text, so nothing localization-related goes into `RepilotKey/` or the linked files.
 - **A language change needs the settings app reopened.** The choice is applied in the `App` constructor through `ApplicationLanguages.PrimaryLanguageOverride`, before any XAML loads; there is no live relabelling.
 - **Packaging strips makepri's language splitting,** because split PRIs are dropped from a flat MSIX and every translation would be lost silently. The build fails unless a probe string resolves in every declared language.
-- **`external/promo` is never edited.** `Pages/PromotedAppsPage.Localization.cs` translates exact known English copy from it; unknown remote copy stays English.
+- **`external/` is never edited** (KIT-8): change winui-app-kit or apps-promo in their own repos and bump the pin. The kit supplies the build props, logging, crash handling, theme, update check and the shared labels (`UiText`, configured in `App` for `kit.*` keys only).
 - **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
 - **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 

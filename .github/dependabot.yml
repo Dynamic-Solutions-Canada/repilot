@@ -1,13 +1,14 @@
 version: 2
 
-# Weekly, grouped updates (HYG-8). Package versions are written in each project file; only
-# Repilot/Repilot.csproj has package references today, but every project directory is listed so a
-# new reference is covered. When the app adopts winui-app-kit, the versions the kit owns move with a
-# kit tag and are ignored here.
+# Weekly, grouped updates (HYG-8). Versions live in the root Directory.Packages.props (central package
+# management), and every project directory is listed so a new reference is covered. The shared versions
+# it imports from winui-app-kit (Windows App SDK, NLog, CommunityToolkit.Mvvm) move with a kit tag, not
+# here, so they are ignored below.
 
 updates:
   - package-ecosystem: nuget
     directories:
+      - "/"
       - "/Repilot"
       - "/RepilotKey"
       - "/tests-native/Repilot.InputTests"
@@ -17,6 +18,11 @@ updates:
     groups:
       nuget:
         patterns: ["*"]
+    ignore:
+      # Owned by winui-app-kit's WinUIAppKit.Packages.props (PLAT-5); the app never moves ahead of the kit.
+      - dependency-name: Microsoft.WindowsAppSDK
+      - dependency-name: NLog
+      - dependency-name: CommunityToolkit.Mvvm
 
   - package-ecosystem: github-actions
     directory: "/"

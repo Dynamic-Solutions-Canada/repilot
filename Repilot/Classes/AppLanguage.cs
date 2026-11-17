@@ -1,5 +1,6 @@
 using Repilot.Classes.Settings;
 using Microsoft.Windows.Globalization;
+using WinUIAppKit.Localization;
 
 namespace Repilot.Classes;
 
@@ -18,26 +19,24 @@ internal static class AppLanguage
 {
     private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-    /// <summary>One selectable language, labelled in its own language so anyone can find theirs.</summary>
-    internal sealed record Option(string Tag, string NativeName);
-
     /// <summary>
-    /// The nine package languages, in the shared Persistent order. Canadian English and
-    /// French reuse the US English and France French text; Windows resource matching maps
-    /// them to those files, while keeping their own identities for selection.
+    /// The nine-locale set (LOC-1), in picker order, as the kit's <see cref="SupportedLanguages"/> so the
+    /// kit's shared labels follow the same choice. Canadian English and French reuse the US English and
+    /// France French text; Windows resource matching maps them to those files, while keeping their own
+    /// identities for selection. Keep this list, the manifest's languages and the Strings folders in step.
     /// </summary>
-    internal static IReadOnlyList<Option> Supported { get; } =
+    internal static SupportedLanguages Supported { get; } = new("en-US",
     [
-        new("en-US", "English (United States)"),
-        new("en-CA", "English (Canada)"),
-        new("es-ES", "Español (España)"),
-        new("fr-FR", "Français (France)"),
-        new("fr-CA", "Français (Canada)"),
-        new("de-DE", "Deutsch (Deutschland)"),
-        new("zh-CN", "简体中文（中国）"),
-        new("pt-BR", "Português (Brasil)"),
-        new("ja-JP", "日本語（日本）"),
-    ];
+        ("en-US", "en-US", "English (United States)"),
+        ("en-CA", "en-US", "English (Canada)"),
+        ("es-ES", "es-ES", "Español (España)"),
+        ("fr-FR", "fr-FR", "Français (France)"),
+        ("fr-CA", "fr-FR", "Français (Canada)"),
+        ("de-DE", "de-DE", "Deutsch (Deutschland)"),
+        ("zh-CN", "zh-CN", "简体中文（中国）"),
+        ("pt-BR", "pt-BR", "Português (Brasil)"),
+        ("ja-JP", "ja-JP", "日本語（日本）"),
+    ]);
 
     /// <summary>The override applied when this process started ("" = follow Windows).</summary>
     internal static string AppliedAtStartup { get; private set; } = "";
@@ -84,8 +83,8 @@ internal static class AppLanguage
             return "";
         }
 
-        Option? match = Supported.FirstOrDefault(option =>
-            option.Tag.Equals(tag.Trim(), StringComparison.OrdinalIgnoreCase));
-        return match?.Tag ?? "";
+        string? match = Supported.Identities.FirstOrDefault(identity =>
+            identity.Equals(tag.Trim(), StringComparison.OrdinalIgnoreCase));
+        return match ?? "";
     }
 }
