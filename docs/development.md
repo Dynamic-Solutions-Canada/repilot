@@ -27,6 +27,8 @@ The handler and the settings app share their model, catalog and executor code th
 
 ## Building
 
+After cloning, run `git submodule update --init` and, once per clone, `lefthook install` to enable the git hooks in `lefthook.yml` (they block signing material, credentials, settings files and files over 5 MB).
+
 Source is authoritative in WSL. Builds run through the [shared Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools), which copy the working tree into a disposable Windows temporary folder, build there and clean up. Do not build a Windows-side checkout, or build the WSL source directly with Windows tools. Dev installs change the version only in the temporary copy; never uninstall to get past an update error.
 
 | Command | What it does |

@@ -1,0 +1,27 @@
+version: 2
+
+# Weekly, grouped updates (HYG-8). Package versions are written in each project file; only
+# Repilot/Repilot.csproj has package references today, but every project directory is listed so a
+# new reference is covered. When the app adopts winui-app-kit, the versions the kit owns move with a
+# kit tag and are ignored here.
+
+updates:
+  - package-ecosystem: nuget
+    directories:
+      - "/Repilot"
+      - "/RepilotKey"
+      - "/tests/Repilot.InputTests"
+      - "/tests/Repilot.LocalizationTests"
+    schedule:
+      interval: weekly
+    groups:
+      nuget:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
