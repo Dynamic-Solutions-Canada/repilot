@@ -24,11 +24,9 @@ Release notes are not in this file. Each version's "What's new" text is `release
 - The action runs from a small handler that Windows starts on each key press and that exits afterwards; there is no service, tray app or startup task. The settings app runs only while open.
 - The five actions: keyboard shortcut (including system ones such as Alt+Tab, Win+Tab and Ctrl+Shift+Esc), text (typed regardless of keyboard layout), app, file or link (installed apps searchable, with icons; paths, websites and `ms-settings:` links), Windows function (searchable by name), and nothing.
 - Works with the dedicated Copilot key and Windows logo key + C. Assigning the key needs the Store (packaged) install.
-- The settings app follows the Windows display language or a choice in Settings among the nine; a change needs the app reopened, and regional formats are not changed. Canadian English and French share wording with US English and French for France. (Shipped after 1.0.22; see below.)
+- The settings app follows the Windows display language or a choice in Settings among the nine; a change needs the app reopened, and regional formats are not changed. Canadian English and French share wording with US English and French for France. (Shipped in 1.1.0.)
 - No account or sign-in; settings are stored locally. No telemetry or crash reports.
 - Requires Windows 11 (the manifest's minimum, build 22000).
-
-Known gap: the live listing (and its "What's new") already describes the nine app languages, but the live package is 1.0.22, which does not have them. The next release ships them.
 
 ## Console-only fields
 
