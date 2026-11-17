@@ -61,6 +61,8 @@ public sealed partial class AboutPage : Page
     private void ViewRelease_Click(object sender, RoutedEventArgs e)
     {
         if (_update?.ReleaseUrl is { Length: > 0 } url)
+        {
             UpdateService.OpenUrl(url);
+        }
     }
 }

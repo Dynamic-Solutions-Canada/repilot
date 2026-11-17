@@ -80,7 +80,10 @@ internal static class Program
             finally
             {
                 ActivateKeyboardLayout(original, 0);
-                if (!existing.Contains(layout)) UnloadKeyboardLayout(layout);
+                if (!existing.Contains(layout))
+                {
+                    UnloadKeyboardLayout(layout);
+                }
             }
         }
     }
@@ -140,14 +143,21 @@ internal static class Program
             timer.Start();
         };
         Application.Run(form);
-        if (failure != null) throw failure;
+        if (failure != null)
+        {
+            throw failure;
+        }
+
         Require(step == 4, "Input test completed");
     }
 
     /// <summary>Fail immediately when a regression contract is not met.</summary>
     private static void Require(bool condition, string message)
     {
-        if (!condition) throw new InvalidOperationException(message);
+        if (!condition)
+        {
+            throw new InvalidOperationException(message);
+        }
     }
 
     [DllImport("user32.dll")]

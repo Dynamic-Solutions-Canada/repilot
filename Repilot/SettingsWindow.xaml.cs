@@ -15,27 +15,29 @@ namespace Repilot;
 /// <summary>The settings window — the app's only window. Plain on-demand UI.</summary>
 public sealed partial class SettingsWindow : Window
 {
-    private static SettingsWindow? instance;
+    private static SettingsWindow? _instance;
     private IntPtr _hIconSmall, _hIconBig;
 
     public SettingsWindow()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            SetForegroundWindow(WindowNative.GetWindowHandle(instance));
+            SetForegroundWindow(WindowNative.GetWindowHandle(_instance));
             Close();
             return;
         }
 
         InitializeComponent();
-        instance = this;
-        Closed += (s, e) => instance = null;
+        _instance = this;
+        Closed += (s, e) => _instance = null;
 
         // The shared promo page lives in a submodule with English copy; translate it here.
         ContentFrame.Navigated += (_, _) =>
         {
             if (ContentFrame.Content is TechnicallyReal.Promo.PromotedAppsPage promo)
+            {
                 promo.EnableLocalization();
+            }
         };
 
         SystemBackdrop = new MicaBackdrop();
@@ -95,7 +97,7 @@ public sealed partial class SettingsWindow : Window
         Closed += SettingsWindow_Closed;
     }
 
-    public static SettingsWindow? GetCurrent() => instance;
+    public static SettingsWindow? GetCurrent() => _instance;
 
     public void NavigateTo(Type pageType)
     {
@@ -106,9 +108,14 @@ public sealed partial class SettingsWindow : Window
             return;
         }
         foreach (var item in RootNavigation.MenuItems.OfType<NavigationViewItem>())
+        {
             if (item.Tag is string tag && GetPageTypeFromTag(tag) == pageType) { RootNavigation.SelectedItem = item; return; }
+        }
+
         foreach (var item in RootNavigation.FooterMenuItems.OfType<NavigationViewItem>())
+        {
             if (item.Tag is string tag && GetPageTypeFromTag(tag) == pageType) { RootNavigation.SelectedItem = item; return; }
+        }
     }
 
     private void RootNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -116,7 +123,11 @@ public sealed partial class SettingsWindow : Window
         Type? pageType = args.IsSettingsSelected
             ? typeof(SettingsPage)
             : (args.SelectedItem as NavigationViewItem)?.Tag is string tag ? GetPageTypeFromTag(tag) : null;
-        if (pageType == null || ContentFrame.Content?.GetType() == pageType) return;
+        if (pageType == null || ContentFrame.Content?.GetType() == pageType)
+        {
+            return;
+        }
+
         ContentFrame.Navigate(pageType);
     }
 
@@ -133,7 +144,11 @@ public sealed partial class SettingsWindow : Window
     private static void SetAppWindowIcon(AppWindow appWindow, string icoPath)
     {
         var hIcon = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
-        if (hIcon == IntPtr.Zero) return;
+        if (hIcon == IntPtr.Zero)
+        {
+            return;
+        }
+
         try { appWindow.SetIcon(Microsoft.UI.Win32Interop.GetIconIdFromIcon(hIcon)); }
         finally { DestroyIcon(hIcon); }
     }
@@ -144,8 +159,15 @@ public sealed partial class SettingsWindow : Window
         if (_hIconBig != IntPtr.Zero) { DestroyIcon(_hIconBig); _hIconBig = IntPtr.Zero; }
         _hIconSmall = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
         _hIconBig = LoadImage(IntPtr.Zero, icoPath, IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-        if (_hIconSmall != IntPtr.Zero) SendMessage(hwnd, WM_SETICON, ICON_SMALL, _hIconSmall);
-        if (_hIconBig != IntPtr.Zero) SendMessage(hwnd, WM_SETICON, ICON_BIG, _hIconBig);
+        if (_hIconSmall != IntPtr.Zero)
+        {
+            SendMessage(hwnd, WM_SETICON, ICON_SMALL, _hIconSmall);
+        }
+
+        if (_hIconBig != IntPtr.Zero)
+        {
+            SendMessage(hwnd, WM_SETICON, ICON_BIG, _hIconBig);
+        }
     }
 
     private void LoadTitleBarIcon(string icoPath)

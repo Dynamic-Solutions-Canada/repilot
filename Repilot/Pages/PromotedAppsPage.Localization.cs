@@ -35,7 +35,11 @@ public sealed partial class PromotedAppsPage
     /// </summary>
     internal void EnableLocalization()
     {
-        if (_promoAttached) return;
+        if (_promoAttached)
+        {
+            return;
+        }
+
         _promoAttached = true;
 
         TranslateHeadings();
@@ -50,7 +54,10 @@ public sealed partial class PromotedAppsPage
     /// <summary>Translates the two headings in the page's own content panel.</summary>
     private void TranslateHeadings()
     {
-        if (Content is not ScrollViewer { Content: Panel panel }) return;
+        if (Content is not ScrollViewer { Content: Panel panel })
+        {
+            return;
+        }
 
         foreach (var heading in panel.Children.OfType<TextBlock>())
         {
@@ -62,8 +69,15 @@ public sealed partial class PromotedAppsPage
     private void TranslateCards()
     {
         // Our own assignment below re-enters through the ItemsSource callback.
-        if (_promoApplying) return;
-        if (AppList.ItemsSource is not IEnumerable<PromotedApp> apps) return;
+        if (_promoApplying)
+        {
+            return;
+        }
+
+        if (AppList.ItemsSource is not IEnumerable<PromotedApp> apps)
+        {
+            return;
+        }
 
         _promoApplying = true;
         try

@@ -46,18 +46,33 @@ public static class InstalledAppsService
         try
         {
             var shellType = Type.GetTypeFromProgID("Shell.Application");
-            if (shellType == null) return list;
+            if (shellType == null)
+            {
+                return list;
+            }
+
             dynamic shell = Activator.CreateInstance(shellType)!;
             dynamic folder = shell.NameSpace("shell:AppsFolder");
-            if (folder == null) return list;
+            if (folder == null)
+            {
+                return list;
+            }
 
             var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (dynamic item in folder.Items())
             {
                 string name = item.Name ?? "";
                 string aumid = item.Path ?? "";
-                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(aumid)) continue;
-                if (!seen.Add(aumid)) continue;
+                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(aumid))
+                {
+                    continue;
+                }
+
+                if (!seen.Add(aumid))
+                {
+                    continue;
+                }
+
                 list.Add(new InstalledApp(name, aumid));
             }
         }
@@ -75,11 +90,19 @@ public static class InstalledAppsService
         {
             foreach (var app in apps)
             {
-                if (app.Icon != null) continue;
+                if (app.Icon != null)
+                {
+                    continue;
+                }
+
                 ShellIcons.IconPixels? px;
                 try { px = ShellIcons.Extract(app.LaunchPath, 32); }
                 catch { px = null; }
-                if (px == null) continue;
+                if (px == null)
+                {
+                    continue;
+                }
+
                 dispatcher.TryEnqueue(() =>
                 {
                     try

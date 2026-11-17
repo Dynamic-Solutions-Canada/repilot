@@ -72,7 +72,9 @@ public static class SettingsManager
         {
             string? directory = Path.GetDirectoryName(filePath);
             if (directory != null && !Directory.Exists(directory))
+            {
                 Directory.CreateDirectory(directory);
+            }
 
             string json = JsonSerializer.Serialize(_current, JsonOptions);
             File.WriteAllText(filePath, json);

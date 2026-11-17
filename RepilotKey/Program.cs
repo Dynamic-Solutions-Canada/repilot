@@ -26,7 +26,10 @@ internal static class Program
         try
         {
             // Hold-release protocol activation (if a device ever sends it) is a no-op.
-            if (string.Join(' ', args).ToLowerInvariant().Contains("state=up")) return 0;
+            if (string.Join(' ', args).ToLowerInvariant().Contains("state=up"))
+            {
+                return 0;
+            }
 
             var settings = LoadSettings();
 
@@ -64,7 +67,11 @@ internal static class Program
         try
         {
             string path = Path.Combine(SettingsDir, "repeat-state");
-            if (!File.Exists(path)) return DateTime.MinValue;
+            if (!File.Exists(path))
+            {
+                return DateTime.MinValue;
+            }
+
             return new DateTime(long.Parse(File.ReadAllText(path).Trim(), CultureInfo.InvariantCulture), DateTimeKind.Utc);
         }
         catch { return DateTime.MinValue; }
@@ -83,7 +90,11 @@ internal static class Program
     private static KeySettings LoadSettings()
     {
         string path = Path.Combine(SettingsDir, "settings.json");
-        if (!File.Exists(path)) return new KeySettings();
+        if (!File.Exists(path))
+        {
+            return new KeySettings();
+        }
+
         return JsonSerializer.Deserialize(File.ReadAllText(path), KeyJsonContext.Default.KeySettings) ?? new KeySettings();
     }
 
@@ -93,7 +104,11 @@ internal static class Program
         {
             Directory.CreateDirectory(SettingsDir);
             string path = Path.Combine(SettingsDir, "key-handler.log");
-            if (File.Exists(path) && new FileInfo(path).Length > 64 * 1024) File.Delete(path);
+            if (File.Exists(path) && new FileInfo(path).Length > 64 * 1024)
+            {
+                File.Delete(path);
+            }
+
             File.AppendAllText(path, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} | {message}{Environment.NewLine}");
         }
         catch { /* best-effort */ }

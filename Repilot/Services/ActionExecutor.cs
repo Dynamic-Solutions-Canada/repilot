@@ -37,13 +37,25 @@ public static class ActionExecutor
             case CopilotActionType.None:
                 break;
             case CopilotActionType.Text:
-                if (!string.IsNullOrEmpty(action.Text)) SendText(action.Text);
+                if (!string.IsNullOrEmpty(action.Text))
+                {
+                    SendText(action.Text);
+                }
+
                 break;
             case CopilotActionType.KeyCombo:
-                if (action.Combo is { IsEmpty: false } combo) SendCombo(combo);
+                if (action.Combo is { IsEmpty: false } combo)
+                {
+                    SendCombo(combo);
+                }
+
                 break;
             case CopilotActionType.LaunchApp:
-                if (!string.IsNullOrWhiteSpace(action.LaunchPath)) Launch(action.LaunchPath, action.LaunchArguments);
+                if (!string.IsNullOrWhiteSpace(action.LaunchPath))
+                {
+                    Launch(action.LaunchPath, action.LaunchArguments);
+                }
+
                 break;
             case CopilotActionType.WindowsFunction:
                 RunWindowsFunction(action.WindowsFunctionId);
@@ -54,9 +66,19 @@ public static class ActionExecutor
     private static void RunWindowsFunction(string id)
     {
         var fn = WindowsFunctionCatalog.TryGet(id);
-        if (fn == null) return;
-        if (fn.Combo is { IsEmpty: false } combo) SendCombo(combo);
-        else if (!string.IsNullOrWhiteSpace(fn.ShellTarget)) Launch(fn.ShellTarget!, fn.ShellArguments ?? "");
+        if (fn == null)
+        {
+            return;
+        }
+
+        if (fn.Combo is { IsEmpty: false } combo)
+        {
+            SendCombo(combo);
+        }
+        else if (!string.IsNullOrWhiteSpace(fn.ShellTarget))
+        {
+            Launch(fn.ShellTarget!, fn.ShellArguments ?? "");
+        }
     }
 
     private static void Launch(string target, string arguments)
@@ -129,10 +151,25 @@ public static class ActionExecutor
         bool winHeld = IsDown(0x5B) || IsDown(0x5C);
         bool injectWin = m.HasFlag(KeyMods.Win) && !winHeld;
 
-        if (injectWin) AddKey(inputs, VK_LWIN, up: false);
-        if (m.HasFlag(KeyMods.Control)) AddKey(inputs, VK_CONTROL, up: false);
-        if (m.HasFlag(KeyMods.Alt)) AddKey(inputs, VK_MENU, up: false);
-        if (m.HasFlag(KeyMods.Shift)) AddKey(inputs, VK_SHIFT, up: false);
+        if (injectWin)
+        {
+            AddKey(inputs, VK_LWIN, up: false);
+        }
+
+        if (m.HasFlag(KeyMods.Control))
+        {
+            AddKey(inputs, VK_CONTROL, up: false);
+        }
+
+        if (m.HasFlag(KeyMods.Alt))
+        {
+            AddKey(inputs, VK_MENU, up: false);
+        }
+
+        if (m.HasFlag(KeyMods.Shift))
+        {
+            AddKey(inputs, VK_SHIFT, up: false);
+        }
 
         if (combo.VirtualKey != 0)
         {
@@ -140,10 +177,25 @@ public static class ActionExecutor
             AddKey(inputs, (ushort)combo.VirtualKey, up: true);
         }
 
-        if (m.HasFlag(KeyMods.Shift)) AddKey(inputs, VK_SHIFT, up: true);
-        if (m.HasFlag(KeyMods.Alt)) AddKey(inputs, VK_MENU, up: true);
-        if (m.HasFlag(KeyMods.Control)) AddKey(inputs, VK_CONTROL, up: true);
-        if (injectWin) AddKey(inputs, VK_LWIN, up: true);
+        if (m.HasFlag(KeyMods.Shift))
+        {
+            AddKey(inputs, VK_SHIFT, up: true);
+        }
+
+        if (m.HasFlag(KeyMods.Alt))
+        {
+            AddKey(inputs, VK_MENU, up: true);
+        }
+
+        if (m.HasFlag(KeyMods.Control))
+        {
+            AddKey(inputs, VK_CONTROL, up: true);
+        }
+
+        if (injectWin)
+        {
+            AddKey(inputs, VK_LWIN, up: true);
+        }
 
         SendInputs(inputs);
     }
@@ -168,7 +220,11 @@ public static class ActionExecutor
     private static void AddKey(List<INPUT> inputs, ushort vk, bool up)
     {
         uint flags = up ? KEYEVENTF_KEYUP : 0;
-        if (IsExtendedKey(vk)) flags |= KEYEVENTF_EXTENDEDKEY;
+        if (IsExtendedKey(vk))
+        {
+            flags |= KEYEVENTF_EXTENDEDKEY;
+        }
+
         inputs.Add(new INPUT
         {
             type = INPUT_KEYBOARD,

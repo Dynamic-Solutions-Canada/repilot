@@ -45,7 +45,11 @@ public sealed partial class ActionPage : Page
 
     private void ModeBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        if (_loading) return;
+        if (_loading)
+        {
+            return;
+        }
+
         var newType = (ModeBar.SelectedItem?.Tag as string) switch
         {
             "KeyCombo" => CopilotActionType.KeyCombo,
@@ -54,7 +58,11 @@ public sealed partial class ActionPage : Page
             "Text" => CopilotActionType.Text,
             _ => CopilotActionType.None,
         };
-        if (newType == Action.Type) return; // ignore spurious/programmatic re-selection
+        if (newType == Action.Type)
+        {
+            return; // ignore spurious/programmatic re-selection
+        }
+
         Action.Type = newType;              // the mode bar is the ONLY writer of Type
         SettingsManager.SaveSettings();
         ShowPanelFor(newType);
@@ -84,18 +92,26 @@ public sealed partial class ActionPage : Page
 
         FunctionSearch.Text = "";
         BuildFunctionList(null);
-        if (a.Type == CopilotActionType.WindowsFunction) SelectFunctionInList(a.WindowsFunctionId);
+        if (a.Type == CopilotActionType.WindowsFunction)
+        {
+            SelectFunctionInList(a.WindowsFunctionId);
+        }
 
         ShowPanelFor(a.Type);
         _loading = false;
 
-        if (a.Type == CopilotActionType.LaunchApp) _ = EnsureAppsLoadedAsync();
+        if (a.Type == CopilotActionType.LaunchApp)
+        {
+            _ = EnsureAppsLoadedAsync();
+        }
     }
 
     private static void SelectBarItem(SelectorBar bar, string tag)
     {
         foreach (var item in bar.Items)
+        {
             if (item.Tag as string == tag) { bar.SelectedItem = item; return; }
+        }
     }
 
     private void ShowPanelFor(CopilotActionType type)
@@ -108,14 +124,21 @@ public sealed partial class ActionPage : Page
         NonePanel.Visibility = type == CopilotActionType.None ? V : C;
         TextPanel.Visibility = type == CopilotActionType.Text ? V : C;
 
-        if (type == CopilotActionType.LaunchApp) _ = EnsureAppsLoadedAsync();
+        if (type == CopilotActionType.LaunchApp)
+        {
+            _ = EnsureAppsLoadedAsync();
+        }
     }
 
     // ── App chooser ──────────────────────────────────────────────────
 
     private async Task EnsureAppsLoadedAsync()
     {
-        if (_appsLoaded) return;
+        if (_appsLoaded)
+        {
+            return;
+        }
+
         _appsLoaded = true;
         _allApps = await InstalledAppsService.GetAppsAsync();
         FilterApps(AppSearch.Text);
@@ -127,33 +150,62 @@ public sealed partial class ActionPage : Page
     {
         IEnumerable<InstalledApp> items = _allApps;
         if (!string.IsNullOrWhiteSpace(query))
+        {
             items = items.Where(a => a.Name.Contains(query.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
         AppList.ItemsSource = items.ToList();
     }
 
     private void PreselectCurrentApp()
     {
-        if (Action.Type != CopilotActionType.LaunchApp) return;
+        if (Action.Type != CopilotActionType.LaunchApp)
+        {
+            return;
+        }
+
         var match = _allApps.FirstOrDefault(a =>
             string.Equals(a.LaunchPath, Action.LaunchPath, StringComparison.OrdinalIgnoreCase));
-        if (match == null) return;
+        if (match == null)
+        {
+            return;
+        }
+
         _loading = true;
         if (AppList.ItemsSource is IEnumerable<InstalledApp> shown && shown.Contains(match))
+        {
             AppList.SelectedItem = match;
+        }
+
         _loading = false;
     }
 
     private void AppSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
-        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            return;
+        }
+
         FilterApps(sender.Text);
     }
 
     private void AppList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_loading) return;
-        if (AppList.SelectedItem is not InstalledApp app) return;
-        if (string.Equals(app.LaunchPath, Action.LaunchPath, StringComparison.OrdinalIgnoreCase)) return;
+        if (_loading)
+        {
+            return;
+        }
+
+        if (AppList.SelectedItem is not InstalledApp app)
+        {
+            return;
+        }
+
+        if (string.Equals(app.LaunchPath, Action.LaunchPath, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
         // Type is owned by the mode bar; this only sets the target.
         Action.LaunchPath = app.LaunchPath;
         Action.LaunchDisplayName = app.Name;
@@ -182,7 +234,11 @@ public sealed partial class ActionPage : Page
         var r = new ShortcutRecorder(DispatcherQueue);
         r.ModifiersChanged += mods =>
         {
-            if (_recorder?.IsRecording != true) return;
+            if (_recorder?.IsRecording != true)
+            {
+                return;
+            }
+
             ComboDisplay.Text = mods == KeyMods.None ? UiStrings.Get("RecordPrompt") : $"{new KeyCombo(mods, 0)} + …";
         };
         r.Captured += combo =>
@@ -201,7 +257,10 @@ public sealed partial class ActionPage : Page
         RecordButton.Content = UiStrings.Get("RecordShortcut");
         ComboBorder.BorderBrush = (Brush)Application.Current.Resources["ControlStrokeColorDefaultBrush"];
         ComboBorder.BorderThickness = new Thickness(1);
-        if (restore) ComboDisplay.Text = _comboBeforeRecording;
+        if (restore)
+        {
+            ComboDisplay.Text = _comboBeforeRecording;
+        }
     }
 
     private void RecordButton_LostFocus(object sender, RoutedEventArgs e)
@@ -221,7 +280,11 @@ public sealed partial class ActionPage : Page
     /// <summary>Save text verbatim, including spaces, without changing the selected action type.</summary>
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (_loading) return;
+        if (_loading)
+        {
+            return;
+        }
+
         Action.Text = TextBox.Text;
         SettingsManager.SaveSettings();
     }
@@ -230,8 +293,16 @@ public sealed partial class ActionPage : Page
 
     private void LaunchPathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (_loading) return;
-        if (string.IsNullOrEmpty(LaunchPathBox.Text)) return; // don't clobber an app selection
+        if (_loading)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(LaunchPathBox.Text))
+        {
+            return; // don't clobber an app selection
+        }
+
         Action.LaunchPath = LaunchPathBox.Text;
         Action.LaunchDisplayName = FriendlyTarget(LaunchPathBox.Text);
         SettingsManager.SaveSettings();
@@ -240,7 +311,11 @@ public sealed partial class ActionPage : Page
 
     private void LaunchArgsBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (_loading) return;
+        if (_loading)
+        {
+            return;
+        }
+
         Action.LaunchArguments = LaunchArgsBox.Text;
         SettingsManager.SaveSettings();
     }
@@ -252,17 +327,33 @@ public sealed partial class ActionPage : Page
         var picker = new FileOpenPicker();
         picker.FileTypeFilter.Add("*");
         var window = SettingsWindow.GetCurrent();
-        if (window == null) return;
+        if (window == null)
+        {
+            return;
+        }
+
         InitializeWithWindow.Initialize(picker, WindowNative.GetWindowHandle(window));
         var file = await picker.PickSingleFileAsync();
-        if (file == null) return;
+        if (file == null)
+        {
+            return;
+        }
+
         LaunchPathBox.Text = file.Path; // triggers TextChanged → saves
     }
 
     private static string FriendlyTarget(string path)
     {
-        if (string.IsNullOrWhiteSpace(path)) return "";
-        if (path.Contains("://") || (path.Contains(':') && path.StartsWith("ms-"))) return path;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return "";
+        }
+
+        if (path.Contains("://") || (path.Contains(':') && path.StartsWith("ms-")))
+        {
+            return path;
+        }
+
         try { return Path.GetFileNameWithoutExtension(path); }
         catch { return path; }
     }
@@ -286,26 +377,54 @@ public sealed partial class ActionPage : Page
 
     private void FunctionSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
-        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            return;
+        }
+
         BuildFunctionList(sender.Text);
     }
 
     private void FunctionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_loading) return;
-        if (FunctionList.SelectedItem is not WindowsFunctionItem item) return;
-        if (item.Function.Id == Action.WindowsFunctionId) return;
+        if (_loading)
+        {
+            return;
+        }
+
+        if (FunctionList.SelectedItem is not WindowsFunctionItem item)
+        {
+            return;
+        }
+
+        if (item.Function.Id == Action.WindowsFunctionId)
+        {
+            return;
+        }
+
         Action.WindowsFunctionId = item.Function.Id; // Type is owned by the mode bar
         SettingsManager.SaveSettings();
     }
 
     private void SelectFunctionInList(string id)
     {
-        if (WindowsFunctionCatalog.TryGet(id) == null) return;
+        if (WindowsFunctionCatalog.TryGet(id) == null)
+        {
+            return;
+        }
+
         if (FunctionList.ItemsSource is Microsoft.UI.Xaml.Data.ICollectionView view)
+        {
             foreach (var group in view)
+            {
                 if (group is IEnumerable<WindowsFunctionItem> g)
+                {
                     foreach (var item in g)
+                    {
                         if (item.Function.Id == id) { FunctionList.SelectedItem = item; return; }
+                    }
+                }
+            }
+        }
     }
 }

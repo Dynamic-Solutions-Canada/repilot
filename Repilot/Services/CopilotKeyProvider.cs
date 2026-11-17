@@ -28,7 +28,11 @@ public static class CopilotKeyProvider
     /// <summary>The key handler's AUMID (PackageFamilyName!KeyHandler), or null when unpackaged.</summary>
     public static string? HandlerAumid()
     {
-        if (!IsPackaged) return null;
+        if (!IsPackaged)
+        {
+            return null;
+        }
+
         try
         {
             string family = global::Windows.ApplicationModel.Package.Current.Id.FamilyName;
@@ -48,15 +52,24 @@ public static class CopilotKeyProvider
             var aumid = key?.GetValue("AppAumid") as string;
 
             if (string.Equals(choice, "Search", StringComparison.OrdinalIgnoreCase))
+            {
                 return ProviderStatus.SetToSearch;
+            }
 
             bool isApp = string.Equals(choice, "App", StringComparison.OrdinalIgnoreCase);
             bool byPolicy = string.Equals(choice, "AppEnforcedByPolicy", StringComparison.OrdinalIgnoreCase);
-            if (!isApp && !byPolicy) return ProviderStatus.NotAssigned;
+            if (!isApp && !byPolicy)
+            {
+                return ProviderStatus.NotAssigned;
+            }
 
             bool mine = !string.IsNullOrEmpty(aumid) &&
                         string.Equals(aumid, HandlerAumid(), StringComparison.OrdinalIgnoreCase);
-            if (!mine) return ProviderStatus.AssignedToOtherApp;
+            if (!mine)
+            {
+                return ProviderStatus.AssignedToOtherApp;
+            }
+
             return byPolicy ? ProviderStatus.AssignedByPolicy : ProviderStatus.Assigned;
         }
         catch (Exception ex)

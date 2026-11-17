@@ -14,17 +14,24 @@ internal static class ShellIcons
     {
         var iid = new Guid("bcc18b79-ba16-442f-80c4-8a59c30c463b"); // IID_IShellItemImageFactory
         if (SHCreateItemFromParsingName(parsingName, IntPtr.Zero, ref iid, out var factory) != 0 || factory == null)
+        {
             return null;
+        }
 
         IntPtr hBitmap = IntPtr.Zero;
         try
         {
             if (factory.GetImage(new SIZE { cx = size, cy = size }, 0, out hBitmap) != 0 || hBitmap == IntPtr.Zero)
+            {
                 return null;
+            }
 
             GetObject(hBitmap, Marshal.SizeOf<BITMAP>(), out var bm);
             int w = bm.bmWidth, h = bm.bmHeight;
-            if (w <= 0 || h <= 0) return null;
+            if (w <= 0 || h <= 0)
+            {
+                return null;
+            }
 
             // BitBlt the source HBITMAP into a top-down 32bpp DIB we control, to
             // normalize orientation/format, then copy out the BGRA bytes.
@@ -46,7 +53,10 @@ internal static class ShellIcons
             IntPtr hDib = CreateDIBSection(hdcDst, ref bmi, 0, out IntPtr dibBits, IntPtr.Zero, 0);
             try
             {
-                if (hDib == IntPtr.Zero || dibBits == IntPtr.Zero) return null;
+                if (hDib == IntPtr.Zero || dibBits == IntPtr.Zero)
+                {
+                    return null;
+                }
 
                 IntPtr oldSrc = SelectObject(hdcSrc, hBitmap);
                 IntPtr oldDst = SelectObject(hdcDst, hDib);
@@ -60,14 +70,22 @@ internal static class ShellIcons
             }
             finally
             {
-                if (hDib != IntPtr.Zero) DeleteObject(hDib);
+                if (hDib != IntPtr.Zero)
+                {
+                    DeleteObject(hDib);
+                }
+
                 DeleteDC(hdcSrc);
                 DeleteDC(hdcDst);
             }
         }
         finally
         {
-            if (hBitmap != IntPtr.Zero) DeleteObject(hBitmap);
+            if (hBitmap != IntPtr.Zero)
+            {
+                DeleteObject(hBitmap);
+            }
+
             Marshal.ReleaseComObject(factory);
         }
     }

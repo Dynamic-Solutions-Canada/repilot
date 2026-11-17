@@ -42,7 +42,11 @@ public partial class App : Application
         if (!Singleton.WaitOne(TimeSpan.Zero, true))
         {
             IntPtr existing = FindWindow(null, "Repilot");
-            if (existing != IntPtr.Zero) SetForegroundWindow(existing);
+            if (existing != IntPtr.Zero)
+            {
+                SetForegroundWindow(existing);
+            }
+
             Environment.Exit(0);
         }
 

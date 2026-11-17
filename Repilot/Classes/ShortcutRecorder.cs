@@ -43,7 +43,11 @@ internal sealed class ShortcutRecorder
 
     public void Start()
     {
-        if (_hook != IntPtr.Zero) return;
+        if (_hook != IntPtr.Zero)
+        {
+            return;
+        }
+
         _mods = KeyMods.None;
         _proc = HookProc;
         _hook = SetWindowsHookEx(WH_KEYBOARD_LL, _proc, GetModuleHandle(null), 0);
@@ -60,7 +64,11 @@ internal sealed class ShortcutRecorder
     public void Stop()
     {
         _timeout.Stop();
-        if (_hook == IntPtr.Zero) return;
+        if (_hook == IntPtr.Zero)
+        {
+            return;
+        }
+
         UnhookWindowsHookEx(_hook);
         _hook = IntPtr.Zero;
         _proc = null;
@@ -68,7 +76,11 @@ internal sealed class ShortcutRecorder
 
     private void Cancel()
     {
-        if (!IsRecording) return;
+        if (!IsRecording)
+        {
+            return;
+        }
+
         Stop();
         _dispatcher.TryEnqueue(() => Cancelled?.Invoke());
     }

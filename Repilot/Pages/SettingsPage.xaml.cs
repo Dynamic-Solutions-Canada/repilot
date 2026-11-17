@@ -19,7 +19,11 @@ public sealed partial class SettingsPage : Page
 
     private void ThemeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!_loaded) return;
+        if (!_loaded)
+        {
+            return;
+        }
+
         ThemeManager.ApplyAndSaveTheme(ThemeCombo.SelectedIndex);
     }
 
@@ -46,8 +50,15 @@ public sealed partial class SettingsPage : Page
     /// <summary>Saves the choice for the next launch; WinUI cannot relabel an open window.</summary>
     private void LanguageCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!_loaded) return;
-        if (LanguageCombo.SelectedItem is not ComboBoxItem { Tag: string tag }) return;
+        if (!_loaded)
+        {
+            return;
+        }
+
+        if (LanguageCombo.SelectedItem is not ComboBoxItem { Tag: string tag })
+        {
+            return;
+        }
 
         bool needsRestart = AppLanguage.SaveChoice(tag);
         ShowRestartNotice(needsRestart);

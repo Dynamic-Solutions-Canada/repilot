@@ -48,7 +48,9 @@ internal static class Program
             {
                 string name = (string)data.Attribute("name")!;
                 if (!values.TryAdd(name, (string?)data.Element("value") ?? ""))
+                {
                     Fail($"{language}: duplicate resource {name}");
+                }
             }
 
             result[language] = values;
@@ -64,25 +66,40 @@ internal static class Program
         foreach (var (language, values) in catalogs)
         {
             foreach (string missing in english.Keys.Except(values.Keys))
+            {
                 Fail($"{language}: missing {missing}");
+            }
+
             foreach (string extra in values.Keys.Except(english.Keys))
+            {
                 Fail($"{language}: unexpected {extra}");
+            }
 
             foreach (var (name, value) in values)
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     Fail($"{language}: empty {name}");
+                }
+
                 if (value.Contains('—'))
+                {
                     Fail($"{language}: em dash in {name}");
+                }
+
                 if (english.TryGetValue(name, out string? source) && Placeholders(source) != Placeholders(value))
+                {
                     Fail($"{language}: placeholders differ in {name}");
+                }
             }
         }
 
         // Windows turns "A.B" into the path A/B, so a plain key named A would collide with it.
         var uidPrefixes = english.Keys.Where(k => k.Contains('.')).Select(k => k.Split('.')[0]).ToHashSet();
         foreach (string clash in english.Keys.Where(k => !k.Contains('.') && uidPrefixes.Contains(k)))
+        {
             Fail($"{clash} is both a code key and an x:Uid prefix");
+        }
     }
 
     /// <summary>
@@ -116,7 +133,9 @@ internal static class Program
             .ToList();
 
         foreach (var group in uses.GroupBy(use => use.Uid).Where(g => g.Count() > 1))
+        {
             Fail($"x:Uid {group.Key} is used on {group.Count()} elements; give each its own");
+        }
 
         foreach (var (element, uid) in uses)
         {
@@ -125,18 +144,28 @@ internal static class Program
                 .Select(k => k[(uid.Length + 1)..])
                 .ToArray();
             if (properties.Length == 0)
+            {
                 Fail($"x:Uid {uid} has no resources");
+            }
 
             if (!UidProperties.TryGetValue(element, out string[]? allowed))
+            {
                 Fail($"x:Uid {uid} is on {element}; add its properties to the test's list");
+            }
             else
+            {
                 foreach (string property in properties.Except(allowed))
+                {
                     Fail($"x:Uid {uid} sets {property}, which {element} does not have");
+                }
+            }
         }
 
         var uids = uses.Select(use => use.Uid).ToHashSet();
         foreach (string name in english.Keys.Where(k => k.Contains('.') && !uids.Contains(k.Split('.')[0])))
+        {
             Fail($"resource {name} is not used by any x:Uid");
+        }
     }
 
     /// <summary>
@@ -152,19 +181,25 @@ internal static class Program
         foreach (Match call in Regex.Matches(code, "UiStrings\\.(?:Get|Format)\\(\"([^\"]+)\""))
         {
             if (!english.ContainsKey(call.Groups[1].Value))
+            {
                 Fail($"code uses missing key {call.Groups[1].Value}");
+            }
         }
 
         foreach (Match entry in Regex.Matches(code, "\\] = \"(Promo[A-Za-z]+)\""))
         {
             if (!english.ContainsKey(entry.Groups[1].Value))
+            {
                 Fail($"promo adapter uses missing key {entry.Groups[1].Value}");
+            }
         }
 
         foreach (string name in english.Keys.Where(k => !k.Contains('.') && !k.StartsWith("Function", StringComparison.Ordinal)))
         {
             if (!code.Contains($"\"{name}\"", StringComparison.Ordinal))
+            {
                 Fail($"resource {name} is never used");
+            }
         }
     }
 
@@ -180,16 +215,22 @@ internal static class Program
         }
 
         foreach (string orphan in english.Keys.Where(k => k.StartsWith("Function", StringComparison.Ordinal) && !expected.Contains(k)))
+        {
             Fail($"catalog resource {orphan} has no catalog entry");
+        }
     }
 
     private static void Expect(Dictionary<string, string> english, string key, string value, HashSet<string> seen)
     {
         seen.Add(key);
         if (!english.TryGetValue(key, out string? actual))
+        {
             Fail($"catalog resource {key} is missing");
+        }
         else if (actual != value)
+        {
             Fail($"{key} is \"{actual}\" but the catalog says \"{value}\"");
+        }
     }
 
     /// <summary>The picker, the manifest and the Strings folders describe the same nine languages.</summary>
@@ -203,9 +244,14 @@ internal static class Program
         string[] expected = ["en-US", "en-CA", "es-ES", "fr-FR", "fr-CA", "de-DE", "zh-CN", "pt-BR", "ja-JP"];
 
         if (!picker.SequenceEqual(expected))
+        {
             Fail($"picker languages are {string.Join(',', picker)}");
+        }
+
         if (!manifest.SequenceEqual(expected))
+        {
             Fail($"manifest languages are {string.Join(',', manifest)}");
+        }
 
         // Canadian English and French are packaged from the US English and France French files.
         var aliases = new Dictionary<string, string> { ["en-CA"] = "en-US", ["fr-CA"] = "fr-FR" };
@@ -213,7 +259,9 @@ internal static class Program
         {
             string folder = aliases.GetValueOrDefault(language, language);
             if (!File.Exists(Path.Combine(Root, "Repilot", "Strings", folder, "Resources.resw")))
+            {
                 Fail($"no strings for {language} (expected Strings/{folder})");
+            }
         }
     }
 
@@ -235,7 +283,10 @@ internal static class Program
 
     private static void Require(bool condition, string name)
     {
-        if (!condition) Fail(name);
+        if (!condition)
+        {
+            Fail(name);
+        }
     }
 
     private static void Fail(string message) => Failures.Add(message);
@@ -245,7 +296,9 @@ internal static class Program
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)
         {
             if (File.Exists(Path.Combine(dir.FullName, "Repilot.slnx")))
+            {
                 return dir.FullName;
+            }
         }
 
         throw new InvalidOperationException("Run from inside the repository (Repilot.slnx not found).");
