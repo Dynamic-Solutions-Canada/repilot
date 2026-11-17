@@ -8,14 +8,15 @@
     3. Assembles the MSIX layout (app files + compiled XAML + stamped manifest + Images + Public)
     4. Generates resources.pri via makepri
     5. Packages with makeappx.exe
-    6. Signs with signtool.exe (dev self-signed cert, or a CA-trusted PFX)
+    6. Signs with signtool.exe using the PFX passed in -TrustedPfxPath
 
-    Use -NoSign for Microsoft Store uploads (the Store re-signs during ingestion).
+    Signing material is only ever a parameter (SEC-11, DIST-2): there is no generated certificate
+    and no written password. The build tooling passes the shared dev certificate. Use -NoSign for
+    Microsoft Store uploads (the Store re-signs during ingestion).
 
 .EXAMPLE
-    .\build-msix.ps1
-    .\build-msix.ps1 -Platform x64
     .\build-msix.ps1 -NoSign
+    .\build-msix.ps1 -Platform x64 -TrustedPfxPath C:\path\signing.pfx -TrustedPfxPassword <password>
 #>
 param(
     [ValidateSet("x64", "ARM64")]
@@ -40,7 +41,6 @@ $keyProj     = Join-Path $repoRoot "RepilotKey\RepilotKey.csproj"
 $manifestSrc = Join-Path $msixDir  "Package.appxmanifest"
 $imagesDir   = Join-Path $msixDir  "Images"
 $publicDir   = Join-Path $msixDir  "Public"
-$pfxFile     = Join-Path $msixDir  "Repilot.pfx"
 
 $rid        = if ($Platform -eq "ARM64") { "win-arm64" } else { "win-x64" }
 $publishDir = Join-Path $repoRoot "Repilot\bin\$Platform\$Configuration\net10.0-windows10.0.22000.0\$rid\publish"
@@ -118,21 +118,17 @@ Write-Host "Version: $msixVersion" -ForegroundColor Cyan
 # the human picking the file cannot get it wrong.
 $msixFile = Join-Path $outputDir "Repilot-$version-$Platform.msix"
 
-# ── Signing certificate (auto-generate dev cert if missing) ─────────────────────
+# -- Signing certificate (checked before publishing) ---------------------------------
+# Signing material is only ever a parameter (FIX-060): no fallback certificate is generated.
+$signCert = $null
 if ($NoSign) {
     Write-Host "Skipping signing (Store upload mode)" -ForegroundColor Yellow
-} elseif (-not (Test-Path $pfxFile)) {
-    Write-Host "Signing cert not found - generating self-signed dev cert..." -ForegroundColor Yellow
-    $cert = New-SelfSignedCertificate -Type Custom -Subject "CN=Repilot-Dev" `
-        -KeyUsage DigitalSignature -FriendlyName "Repilot Dev" `
-        -CertStoreLocation "Cert:\CurrentUser\My" `
-        -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.3")
-    $pwd = ConvertTo-SecureString -String "Repilot" -Force -AsPlainText
-    Export-PfxCertificate -Cert $cert -FilePath $pfxFile -Password $pwd | Out-Null
-    Export-Certificate -Cert $cert -FilePath (Join-Path $msixDir "Repilot.cer") | Out-Null
-    Write-Host "  Created $pfxFile"
-    Write-Host "  Trust it (admin) before installing the MSIX:" -ForegroundColor Cyan
-    Write-Host "    Import-Certificate -FilePath '$($msixDir)\Repilot.cer' -CertStoreLocation Cert:\LocalMachine\TrustedPeople" -ForegroundColor DarkCyan
+} else {
+    if ([string]::IsNullOrEmpty($TrustedPfxPath) -or -not (Test-Path $TrustedPfxPath)) {
+        Write-Error "No signing certificate. Pass -TrustedPfxPath and -TrustedPfxPassword (the build tooling does), or use -NoSign for an unsigned Store upload."
+        exit 1
+    }
+    $signCert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($TrustedPfxPath, $TrustedPfxPassword)
 }
 
 # ── Step 1: Publish (self-contained) ────────────────────────────────────────────
@@ -174,11 +170,8 @@ $manifestContent = (Get-Content $manifestSrc -Raw) `
     -replace 'ARCH_PLACEHOLDER', $msixArch `
     -replace 'VERSION_PLACEHOLDER', $msixVersion
 
-# For dev (non-Store) signing, swap Publisher to the dev cert subject.
-if (-not $NoSign) {
-    $signingPfx = if ([string]::IsNullOrEmpty($TrustedPfxPath)) { $pfxFile } else { $TrustedPfxPath }
-    $signingPwd = if ([string]::IsNullOrEmpty($TrustedPfxPath)) { "Repilot" } else { $TrustedPfxPassword }
-    $signCert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($signingPfx, $signingPwd)
+# For signed (non-Store) builds, swap Publisher to the signing certificate's subject.
+if ($signCert) {
     if ($manifestContent -match '<Identity[^>]+Publisher="([^"]+)"') {
         $manifestContent = $manifestContent.Replace("Publisher=`"$($Matches[1])`"", "Publisher=`"$($signCert.Subject)`"")
         Write-Host "  Stamped Publisher=$($signCert.Subject)"
@@ -261,11 +254,7 @@ if ($NoSign) {
     Write-Host "`n=== Skipping MSIX signing (Store upload) ===" -ForegroundColor Yellow
 } else {
     Write-Host "`n=== Signing MSIX ===" -ForegroundColor Cyan
-    if (-not [string]::IsNullOrEmpty($TrustedPfxPath)) {
-        & $signtool sign /fd SHA256 /f $TrustedPfxPath /p $TrustedPfxPassword /tr http://timestamp.digicert.com /td SHA256 $msixFile
-    } else {
-        & $signtool sign /fd SHA256 /a /f $pfxFile /p "Repilot" $msixFile
-    }
+    & $signtool sign /fd SHA256 /f $TrustedPfxPath /p $TrustedPfxPassword /tr http://timestamp.digicert.com /td SHA256 $msixFile
     if ($LASTEXITCODE -ne 0) { Write-Error "signtool sign failed"; exit 1 }
 }
 

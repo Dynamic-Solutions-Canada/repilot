@@ -73,27 +73,22 @@ jobs:
       # them would first surface during a Store submission, which is the
       # slowest and worst place to discover one.
       #
-      # Sign with a CA-trusted certificate when these repository secrets exist:
-      #   CODESIGN_PFX_BASE64   — base64-encoded PFX certificate file
-      #   CODESIGN_PFX_PASSWORD — password for the PFX certificate
-      # Otherwise a self-signed dev certificate is used (install requires trusting it).
-      # For Microsoft Store uploads, run build-msix.ps1 with -NoSign instead.
+      # It signs with a throwaway self-signed certificate made for this run, with a random
+      # password that is never stored (DIST-2, FIX-060). For Microsoft Store uploads, run
+      # build-msix.ps1 with -NoSign instead.
       - name: Build MSIX
         shell: pwsh
-        env:
-          CODESIGN_PFX_BASE64: ${{ secrets.CODESIGN_PFX_BASE64 }}
-          CODESIGN_PFX_PASSWORD: ${{ secrets.CODESIGN_PFX_PASSWORD }}
         run: |
-          $script = "RepilotMSIX/build-msix.ps1"
-          if (-not [string]::IsNullOrEmpty($env:CODESIGN_PFX_BASE64)) {
-            $pfx = Join-Path $env:RUNNER_TEMP "codesign.pfx"
-            [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:CODESIGN_PFX_BASE64))
-            & $script -Platform $env:PLATFORM -TrustedPfxPath $pfx -TrustedPfxPassword $env:CODESIGN_PFX_PASSWORD
-            Remove-Item $pfx -Force
-          } else {
-            Write-Host "No CODESIGN_PFX_BASE64 secret — using a self-signed dev certificate." -ForegroundColor Yellow
-            & $script -Platform $env:PLATFORM
-          }
+          $password = [Convert]::ToBase64String([Security.Cryptography.RandomNumberGenerator]::GetBytes(32))
+          Write-Host "::add-mask::$password"
+          $cert = New-SelfSignedCertificate -Type Custom -Subject "CN=Repilot-CI" `
+            -KeyUsage DigitalSignature -CertStoreLocation "Cert:\CurrentUser\My" `
+            -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.3")
+          $pfx = Join-Path $env:RUNNER_TEMP "ci-signing.pfx"
+          Export-PfxCertificate -Cert $cert -FilePath $pfx `
+            -Password (ConvertTo-SecureString -String $password -Force -AsPlainText) | Out-Null
+          Remove-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" -DeleteKey
+          & "RepilotMSIX/build-msix.ps1" -Platform $env:PLATFORM -TrustedPfxPath $pfx -TrustedPfxPassword $password
           if ($LASTEXITCODE -ne 0) { Write-Error "build-msix failed"; exit 1 }
 
   release:

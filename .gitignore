@@ -382,3 +382,6 @@ build_out.txt
 RepilotMSIX/bin/
 
 /.artifacts/
+
+# Windows build bridge staging and signing material (SEC-11)
+/.windows-build/
