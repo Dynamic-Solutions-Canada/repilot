@@ -18,5 +18,8 @@
     ],
     "catalog_dir": "Repilot/Strings",
     "catalog_layout": "folders"
+  },
+  "notices": {
+    "about_source": "Repilot/Classes/AboutContent.cs"
   }
 }

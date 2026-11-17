@@ -12,26 +12,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavHome.Content" xml:space="preserve">
+  <data name="NavHome" xml:space="preserve">
     <value>主页</value>
   </data>
-  <data name="NavAction.Content" xml:space="preserve">
+  <data name="NavAction" xml:space="preserve">
     <value>Copilot 键操作</value>
   </data>
   <data name="ActionTitle.Text" xml:space="preserve">
     <value>Copilot 键操作</value>
-  </data>
-  <data name="NavOtherApps.Content" xml:space="preserve">
-    <value>我们的其他应用</value>
-  </data>
-  <data name="NavAbout.Content" xml:space="preserve">
-    <value>关于</value>
-  </data>
-  <data name="AboutTitle.Text" xml:space="preserve">
-    <value>关于</value>
-  </data>
-  <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>设置</value>
   </data>
   <data name="HomeDescription.Text" xml:space="preserve">
     <value>选择键盘上的 Copilot 键执行的操作。</value>
@@ -48,50 +36,14 @@
   <data name="TestAction.Text" xml:space="preserve">
     <value>立即测试</value>
   </data>
-  <data name="AboutDescription.Text" xml:space="preserve">
+  <data name="AboutDescription" xml:space="preserve">
     <value>选择键盘上的 Copilot 键执行的操作：发送自定义快捷键、打开应用或执行 Windows 功能。</value>
   </data>
-  <data name="HowItWorks.Text" xml:space="preserve">
+  <data name="HowItWorks" xml:space="preserve">
     <value>工作原理</value>
   </data>
-  <data name="HowItWorksDescription.Text" xml:space="preserve">
+  <data name="HowItWorksDescription" xml:space="preserve">
     <value>注册为 Microsoft 官方 Copilot 硬件键提供程序。按键会启动一个小程序，执行操作后立即退出。没有后台服务、托盘图标或常驻进程。</value>
-  </data>
-  <data name="BuiltWith.Text" xml:space="preserve">
-    <value>所用技术</value>
-  </data>
-  <data name="SourceCode.Text" xml:space="preserve">
-    <value>源代码</value>
-  </data>
-  <data name="SourceDescription.Text" xml:space="preserve">
-    <value>在 GitHub 上查看项目</value>
-  </data>
-  <data name="GitHubRepository.Content" xml:space="preserve">
-    <value>GitHub 仓库</value>
-  </data>
-  <data name="Updates.Text" xml:space="preserve">
-    <value>更新</value>
-  </data>
-  <data name="CheckUpdatesHint.Text" xml:space="preserve">
-    <value>点击检查更新</value>
-  </data>
-  <data name="CheckUpdates" xml:space="preserve">
-    <value>检查更新</value>
-  </data>
-  <data name="AppTheme.Text" xml:space="preserve">
-    <value>应用主题</value>
-  </data>
-  <data name="AppThemeDescription.Text" xml:space="preserve">
-    <value>此设置窗口的外观。</value>
-  </data>
-  <data name="SystemTheme.Content" xml:space="preserve">
-    <value>系统默认</value>
-  </data>
-  <data name="LightTheme.Content" xml:space="preserve">
-    <value>浅色</value>
-  </data>
-  <data name="DarkTheme.Content" xml:space="preserve">
-    <value>深色</value>
   </data>
   <data name="NoBackground.Title" xml:space="preserve">
     <value>无后台进程</value>
@@ -195,33 +147,6 @@
   <data name="Recording" xml:space="preserve">
     <value>正在录制… (Esc)</value>
   </data>
-  <data name="StoreOpened" xml:space="preserve">
-    <value>Microsoft Store 已打开“更新和下载”。请在那里检查可用更新。</value>
-  </data>
-  <data name="StoreOpenFailed" xml:space="preserve">
-    <value>无法打开 Microsoft Store。</value>
-  </data>
-  <data name="Checking" xml:space="preserve">
-    <value>正在检查…</value>
-  </data>
-  <data name="CheckingUpdates" xml:space="preserve">
-    <value>正在检查更新…</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>无法检查更新。请检查网络连接。</value>
-  </data>
-  <data name="ViewRelease" xml:space="preserve">
-    <value>查看版本</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>版本 {0}</value>
-  </data>
-  <data name="UpdateAvailable" xml:space="preserve">
-    <value>版本 {0} 已可用（当前为 {1}）。</value>
-  </data>
-  <data name="UpToDate" xml:space="preserve">
-    <value>已是最新版本（{0}）。</value>
-  </data>
   <data name="SummaryNone" xml:space="preserve">
     <value>不执行操作</value>
   </data>
@@ -252,7 +177,7 @@
   <data name="SummaryFunction" xml:space="preserve">
     <value>Windows 功能：{0}</value>
   </data>
-  <data name="LanguageTitle.Text" xml:space="preserve">
+  <data name="LanguageCombo.Header" xml:space="preserve">
     <value>应用语言</value>
   </data>
   <data name="LanguageDescription.Text" xml:space="preserve">
@@ -521,5 +446,17 @@
   </data>
   <data name="ResetKeptNote" xml:space="preserve">
     <value>在 Windows 设置中，Copilot 键仍分配给 Repilot；之后请在此处重新选择它的操作。</value>
+  </data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="SettingsResetHeader.Text" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="ChangeButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>更改操作</value>
+  </data>
+  <data name="TestButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>立即测试</value>
   </data>
 </root>

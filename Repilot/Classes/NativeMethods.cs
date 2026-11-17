@@ -3,20 +3,12 @@ using System.Runtime.InteropServices;
 namespace Repilot.Classes;
 
 /// <summary>
-/// P/Invoke for the settings app only: bringing the running copy forward, and the low-level keyboard
-/// hook used while recording a shortcut. Window chrome comes from the kit, and the Copilot key itself is
-/// handled by the separate RepilotKey.exe.
+/// P/Invoke for the settings app only: the low-level keyboard hook used while recording a shortcut.
+/// Window chrome and the single instance come from the kit, and the Copilot key itself is handled by the
+/// separate RepilotKey.exe.
 /// </summary>
 public static class NativeMethods
 {
-    // Bringing the running copy's window forward (App.SurfaceRunningCopy).
-    [DllImport("user32.dll", SetLastError = true)]
-    internal static extern IntPtr FindWindow(string? lpClassName, string? lpWindowName);
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static extern bool SetForegroundWindow(IntPtr hWnd);
-
     // ── Low-level keyboard hook (used only while recording a shortcut) ──────────
     internal const int WH_KEYBOARD_LL = 13;
     internal const int HC_ACTION = 0;

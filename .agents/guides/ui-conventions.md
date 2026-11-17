@@ -1,37 +1,34 @@
 > **Read when:** adding or changing any window, page, card, setting row or InfoBar in the settings app.
-> **Governs:** `Repilot/**/*.xaml`, `Repilot/**/*.xaml.cs`, `Repilot/Pages/**`, `Repilot/SettingsWindow.xaml(.cs)`
+> **Governs:** `Repilot/**/*.xaml`, `Repilot/**/*.xaml.cs`, `Repilot/Pages/**`, `Repilot/SettingsWindow.xaml(.cs)`, `Repilot/Classes/AboutContent.cs`
 
 # UI conventions
 
-This app's own interface conventions. The shared family rules are in the standards' [ui.md](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/ui.md); this file records only what is specific to Repilot as it stands today. Repilot does not use winui-app-kit's shared styles or settings shell yet; when it adopts them, this guide changes to point at them.
+This app's own interface conventions. The shared family rules are in the standards' [ui.md](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/ui.md), and the kit's styles, shell, rows and About page are documented in the [WinUI App Kit README](../../external/winui-app-kit/README.md); this file records only what is specific to Repilot.
 
 ## Settings window
 
-- `SettingsWindow` is the only window: a 48 px custom title bar (icon and "Repilot" in `CaptionTextBlockStyle`) above a left `NavigationView`.
-- Menu items are Home, then Action. The footer holds "Our other apps", then About, then the built-in Settings item. Every item is labelled with `x:Uid` and navigated by its `Tag` (the page type name).
-- Only the settings app has UI. The key handler (`RepilotKey/`) shows nothing, so no UI or text goes there or into the files it links.
+- `SettingsWindow` hosts the kit's `SettingsShell` and is the only window. Repilot adds two menu items in code, Home then Action; the footer ("Our other apps", About, Settings) is the shell's. Never add footer items or restyle the shell.
+- Tags map to pages in `SettingsWindow.PageFor`. About is the kit's `AboutPage`, opened with `AboutContent.Create()`; product cards go in its `ExtraCards` ("How it works" today), never in a page of Repilot's own.
+- `WindowChrome.SetUpSettingsWindow` gives Mica, the title bar, icons, the minimum size, the saved placement and the theme. Only the key handler (`RepilotKey/`) has no UI.
 
 ## Pages
 
-- A page is a `ScrollViewer` with `Padding="32,16,32,32"` holding a left-aligned `StackPanel` (`MaxWidth` 720 to 760), whose first child is the page title in `TitleTextBlockStyle`. The Action page is the exception: it is a `Grid` so the mode-specific panel can fill the remaining height.
-- The Action page picks the action type with a `SelectorBar` (one `SelectorBarItem` per type, each with a `FontIcon`) and shows one panel per type below it.
-- Status and notices are `InfoBar`s, not text blocks or dialogs: the key assignment status (with the Assign button as its `ActionButton`) on Home, and the language restart and "no background process" notes on Settings. They are not closable when they state a fact the user cannot dismiss.
+- A page is `ScrollViewer`, then `StackPanel Style="{StaticResource PageContentStyle}"`, a `PageTitleStyle` title, then sections: a `FirstSectionHeaderStyle` or `SectionHeaderStyle` heading above a `CardBorderStyle` card. Use the kit's keys from `Styles.xaml`; never write padding, radius or header sizes inline.
+- The Action page is the exception: a `Grid` with the same padding and title style, so the app and function lists can fill the window. It picks the action type with a `SelectorBar`.
+- Secondary text uses `TextFillColorSecondaryBrush` (with `CaptionTextBlockStyle` for notes under a control), never `Opacity`.
+- Status and notices are `InfoBar`s: the key assignment status (with Assign as its action button) on Home, the language restart and "no background process" notes on Settings, and the kit's `SettingsResetNotice` inserted once at the top of Home after an unreadable settings file.
+- The Settings page uses the kit's `ThemeSetting` and `ResetSetting`. Language stays Repilot's own combo box (restart-based, `.resw`), styled like the kit's rows: a header, then a caption.
 
-## Cards and rows
+## Buttons
 
-- New cards copy the Home and Settings cards: a `Border` on `CardBackgroundFillColorDefaultBrush` with a 1 px `CardStrokeColorDefaultBrush` stroke, `CornerRadius="8"`, `Padding="16,12"` for a setting row (`20` for a content card), spaced by the page's `StackPanel`.
-- A setting row is a two-column `Grid` (`ColumnSpacing="16"`): title (`FontWeight="SemiBold"`) and a wrapped description (`Opacity="0.7"`) on the left, the control on the right with `MinWidth="160"`.
-- The About page's cards are an older generation (`CornerRadius="4"`, `Padding="16"`, bottom margin instead of spacing). Do not copy them; they are replaced when About moves to the kit's shared page.
-- The kit's controls keep the kit's styles: the Reset settings card on the Settings page is the kit's `ResetSetting` in `CardBorderStyle`, and an unreadable-settings notice is the kit's `SettingsResetNotice`, inserted once at the top of the Home page. Don't restyle them.
-- Button content with an icon is a horizontal `StackPanel` (`Spacing="8"`) with a 14 px `FontIcon`, then the label. The primary action on a card uses `AccentButtonStyle`.
+- Button content with an icon is a `StackPanel Style="{StaticResource IconLabelStyle}"` with a `FontIcon Style="{StaticResource ButtonGlyphStyle}"`, then the label. The primary action on a card uses `AccentButtonStyle`.
+- Such a button has no accessible name of its own: give it an `x:Uid` with a `[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name` entry equal to the label, in every `Resources.resw` (the localization check allows that property on `Button`).
 
 ## Text
 
-- XAML text uses `x:Uid`; code-built text uses `UiStrings.Get/Format`. Never hardcode user-visible English, except the product name.
-- Language options are labelled in their own language and filled in code.
-- A language change needs the window reopened; the Settings page says so in its restart InfoBar. Do not try to relabel pages live.
+- XAML text uses `x:Uid`; code-built text uses `UiStrings.Get/Format`. Never hardcode user-visible English, except the product name. The kit's own labels (`kit.*`) come through `l10n:Localize` and `UiText`; see the localization guide.
 
 ## Code-behind gotchas
 
 - `global::` does not parse inside interpolated strings; assign to a local first.
-- Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.
+- Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind, and the kit's About page as `WinUIAppKit.Pages.AboutPage`.

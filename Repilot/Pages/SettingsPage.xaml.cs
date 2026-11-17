@@ -13,7 +13,12 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        ThemeCombo.SelectedIndex = (int)SettingsManager.Current.AppTheme;
+        // The kit's theme row shows AppTheme.Current and applies a change to every window; Repilot saves it.
+        ThemeRow.ChoiceChanged += choice =>
+        {
+            SettingsManager.Current.AppTheme = choice;
+            SettingsManager.Save();
+        };
         LoadLanguageChoices();
         SetUpReset();
         _loaded = true;
@@ -34,19 +39,6 @@ public sealed partial class SettingsPage : Page
         };
         ResetRow.KeptNote = () => UiStrings.Get("ResetKeptNote");
         ResetRow.ResetCompleted += () => Frame.Navigate(typeof(SettingsPage));
-    }
-
-    private void ThemeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (!_loaded)
-        {
-            return;
-        }
-
-        // Every open window follows at once (AppTheme.Track); the choice is saved for the next launch.
-        SettingsManager.Current.AppTheme = (AppThemeChoice)ThemeCombo.SelectedIndex;
-        SettingsManager.Save();
-        AppTheme.Set(SettingsManager.Current.AppTheme);
     }
 
     /// <summary>

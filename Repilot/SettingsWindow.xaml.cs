@@ -1,16 +1,11 @@
+using Repilot.Classes;
 using Repilot.Classes.Settings;
 using Repilot.Pages;
-using Microsoft.UI.Windowing;
+using Repilot.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
-using System.IO;
-using System.Linq;
-using WinRT.Interop;
-using WinUIAppKit.Theming;
+using WinUIAppKit.Pages;
 using WinUIAppKit.Windowing;
-using static Repilot.Classes.NativeMethods;
 
 namespace Repilot;
 
@@ -19,11 +14,17 @@ public sealed partial class SettingsWindow : Window
 {
     private static SettingsWindow? _instance;
 
+    /// <summary>The tag of the Home page, Repilot's first menu item.</summary>
+    private const string HomeTag = "home";
+
+    /// <summary>The tag of the Action page, where the Copilot key's action is chosen.</summary>
+    private const string ActionTag = "action";
+
     public SettingsWindow()
     {
         if (_instance != null)
         {
-            SetForegroundWindow(WindowNative.GetWindowHandle(_instance));
+            WindowChrome.BringToFront(_instance);
             Close();
             return;
         }
@@ -32,71 +33,51 @@ public sealed partial class SettingsWindow : Window
         _instance = this;
         Closed += (s, e) => _instance = null;
 
+        Shell.Caption = "Repilot";
+        Shell.IconPngPath = App.IconPngPath;
+        Shell.MenuItems.Add(new NavigationViewItem
+        {
+            Content = UiStrings.Get("NavHome"),
+            Tag = HomeTag,
+            Icon = new SymbolIcon(Symbol.Home),
+        });
+        Shell.MenuItems.Add(new NavigationViewItem
+        {
+            Content = UiStrings.Get("NavAction"),
+            Tag = ActionTag,
+            Icon = new FontIcon { Glyph = "\uE765" },
+        });
+
         // Mica, the custom title bar, sharp icons, a minimum size, the saved placement (or the default
         // size, centred) and the theme, from the kit's shared settings-window setup.
-        string iconPath = App.IconPath;
-        WindowChrome.SetUpSettingsWindow(this, AppTitleBar, iconPath, SettingsManager.Current.SettingsWindow,
+        WindowChrome.SetUpSettingsWindow(this, Shell.TitleBar, App.IconPath, SettingsManager.Current.SettingsWindow,
             defaultWidthDip: 820, defaultHeightDip: 680);
-        if (File.Exists(iconPath))
-        {
-            LoadTitleBarIcon(iconPath);
-        }
 
-        RootNavigation.SelectedItem = RootNavigation.MenuItems[0];
-        ContentFrame.Navigate(typeof(HomePage));
+        Shell.PageSelected += tag =>
+        {
+            // The kit's About page takes Repilot's AboutInfo; every other page needs no parameter.
+            object? parameter = tag == SettingsShell.AboutTag ? AboutContent.Create() : null;
+            Shell.ContentFrame.Navigate(PageFor(tag), parameter);
+        };
+        Shell.Select(HomeTag);
 
         Closed += SettingsWindow_Closed;
     }
 
     public static SettingsWindow? GetCurrent() => _instance;
 
-    public void NavigateTo(Type pageType)
+    /// <summary>Opens the Action page and selects its menu item, for the Home page's "Change" button.</summary>
+    public void ShowActionPage() => Shell.Select(ActionTag);
+
+    /// <summary>The page for a menu tag: Repilot's own pages, then the shell's Settings, About and "Our other apps".</summary>
+    private static Type PageFor(string tag) => tag switch
     {
-        ContentFrame.Navigate(pageType);
-        if (pageType == typeof(SettingsPage))
-        {
-            RootNavigation.SelectedItem = RootNavigation.SettingsItem;
-            return;
-        }
-        foreach (var item in RootNavigation.MenuItems.OfType<NavigationViewItem>())
-        {
-            if (item.Tag is string tag && GetPageTypeFromTag(tag) == pageType) { RootNavigation.SelectedItem = item; return; }
-        }
-
-        foreach (var item in RootNavigation.FooterMenuItems.OfType<NavigationViewItem>())
-        {
-            if (item.Tag is string tag && GetPageTypeFromTag(tag) == pageType) { RootNavigation.SelectedItem = item; return; }
-        }
-    }
-
-    private void RootNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-    {
-        Type? pageType = args.IsSettingsSelected
-            ? typeof(SettingsPage)
-            : (args.SelectedItem as NavigationViewItem)?.Tag is string tag ? GetPageTypeFromTag(tag) : null;
-        if (pageType == null || ContentFrame.Content?.GetType() == pageType)
-        {
-            return;
-        }
-
-        ContentFrame.Navigate(pageType);
-    }
-
-    private static Type? GetPageTypeFromTag(string tag) => tag switch
-    {
-        "HomePage" => typeof(HomePage),
-        "ActionPage" => typeof(ActionPage),
-        "SettingsPage" => typeof(SettingsPage),
-        "PromotedAppsPage" => typeof(TechnicallyReal.Promo.PromotedAppsPage),
-        "AboutPage" => typeof(AboutPage),
-        _ => null
+        ActionTag => typeof(ActionPage),
+        SettingsShell.SettingsTag => typeof(SettingsPage),
+        SettingsShell.AboutTag => typeof(WinUIAppKit.Pages.AboutPage),
+        SettingsShell.OtherAppsTag => typeof(TechnicallyReal.Promo.PromotedAppsPage),
+        _ => typeof(HomePage),
     };
-
-    private void LoadTitleBarIcon(string icoPath)
-    {
-        try { TitleBarIcon.Source = new BitmapImage(new Uri(icoPath)); }
-        catch { /* leave empty */ }
-    }
 
     /// <summary>Saves the window's normal position and size (not when minimized or maximized).</summary>
     private void SettingsWindow_Closed(object sender, WindowEventArgs e)

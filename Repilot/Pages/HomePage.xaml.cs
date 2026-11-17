@@ -70,7 +70,7 @@ public sealed partial class HomePage : Page
         => CopilotKeyProvider.OpenAssignmentSettings();
 
     private void ChangeButton_Click(object sender, RoutedEventArgs e)
-        => SettingsWindow.GetCurrent()?.NavigateTo(typeof(ActionPage));
+        => SettingsWindow.GetCurrent()?.ShowActionPage();
 
     private void TestButton_Click(object sender, RoutedEventArgs e)
         => ActionExecutor.Run(SettingsManager.Current.Action);

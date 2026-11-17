@@ -12,26 +12,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavHome.Content" xml:space="preserve">
+  <data name="NavHome" xml:space="preserve">
     <value>Início</value>
   </data>
-  <data name="NavAction.Content" xml:space="preserve">
+  <data name="NavAction" xml:space="preserve">
     <value>Ação da tecla Copilot</value>
   </data>
   <data name="ActionTitle.Text" xml:space="preserve">
     <value>Ação da tecla Copilot</value>
-  </data>
-  <data name="NavOtherApps.Content" xml:space="preserve">
-    <value>Nossos outros aplicativos</value>
-  </data>
-  <data name="NavAbout.Content" xml:space="preserve">
-    <value>Sobre</value>
-  </data>
-  <data name="AboutTitle.Text" xml:space="preserve">
-    <value>Sobre</value>
-  </data>
-  <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>Configurações</value>
   </data>
   <data name="HomeDescription.Text" xml:space="preserve">
     <value>Escolha o que a tecla Copilot do seu teclado faz.</value>
@@ -48,50 +36,14 @@
   <data name="TestAction.Text" xml:space="preserve">
     <value>Testar agora</value>
   </data>
-  <data name="AboutDescription.Text" xml:space="preserve">
+  <data name="AboutDescription" xml:space="preserve">
     <value>Escolha o que a tecla Copilot do seu teclado faz: enviar um atalho personalizado, abrir um aplicativo ou executar uma função do Windows.</value>
   </data>
-  <data name="HowItWorks.Text" xml:space="preserve">
+  <data name="HowItWorks" xml:space="preserve">
     <value>Como funciona</value>
   </data>
-  <data name="HowItWorksDescription.Text" xml:space="preserve">
+  <data name="HowItWorksDescription" xml:space="preserve">
     <value>Registra-se como um provedor oficial da tecla de hardware Copilot da Microsoft. Pressionar a tecla inicia um pequeno programa que executa sua ação e é encerrado. Sem serviço em segundo plano, ícone na bandeja ou processo residente.</value>
-  </data>
-  <data name="BuiltWith.Text" xml:space="preserve">
-    <value>Tecnologias utilizadas</value>
-  </data>
-  <data name="SourceCode.Text" xml:space="preserve">
-    <value>Código-fonte</value>
-  </data>
-  <data name="SourceDescription.Text" xml:space="preserve">
-    <value>Ver o projeto no GitHub</value>
-  </data>
-  <data name="GitHubRepository.Content" xml:space="preserve">
-    <value>Repositório no GitHub</value>
-  </data>
-  <data name="Updates.Text" xml:space="preserve">
-    <value>Atualizações</value>
-  </data>
-  <data name="CheckUpdatesHint.Text" xml:space="preserve">
-    <value>Clique para verificar atualizações</value>
-  </data>
-  <data name="CheckUpdates" xml:space="preserve">
-    <value>Verificar atualizações</value>
-  </data>
-  <data name="AppTheme.Text" xml:space="preserve">
-    <value>Tema do aplicativo</value>
-  </data>
-  <data name="AppThemeDescription.Text" xml:space="preserve">
-    <value>Aparência desta janela de configurações.</value>
-  </data>
-  <data name="SystemTheme.Content" xml:space="preserve">
-    <value>Padrão do sistema</value>
-  </data>
-  <data name="LightTheme.Content" xml:space="preserve">
-    <value>Claro</value>
-  </data>
-  <data name="DarkTheme.Content" xml:space="preserve">
-    <value>Escuro</value>
   </data>
   <data name="NoBackground.Title" xml:space="preserve">
     <value>Sem processo em segundo plano</value>
@@ -195,33 +147,6 @@
   <data name="Recording" xml:space="preserve">
     <value>Gravando… (Esc)</value>
   </data>
-  <data name="StoreOpened" xml:space="preserve">
-    <value>A Microsoft Store está aberta em Atualizações e downloads. Verifique lá as atualizações disponíveis.</value>
-  </data>
-  <data name="StoreOpenFailed" xml:space="preserve">
-    <value>Não foi possível abrir a Microsoft Store.</value>
-  </data>
-  <data name="Checking" xml:space="preserve">
-    <value>Verificando…</value>
-  </data>
-  <data name="CheckingUpdates" xml:space="preserve">
-    <value>Verificando atualizações…</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>Não foi possível verificar atualizações. Verifique sua conexão com a internet.</value>
-  </data>
-  <data name="ViewRelease" xml:space="preserve">
-    <value>Ver versão</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>Versão {0}</value>
-  </data>
-  <data name="UpdateAvailable" xml:space="preserve">
-    <value>A versão {0} está disponível (você tem a {1}).</value>
-  </data>
-  <data name="UpToDate" xml:space="preserve">
-    <value>Você está em dia ({0}).</value>
-  </data>
   <data name="SummaryNone" xml:space="preserve">
     <value>Não fazer nada</value>
   </data>
@@ -252,7 +177,7 @@
   <data name="SummaryFunction" xml:space="preserve">
     <value>Função do Windows: {0}</value>
   </data>
-  <data name="LanguageTitle.Text" xml:space="preserve">
+  <data name="LanguageCombo.Header" xml:space="preserve">
     <value>Idioma do aplicativo</value>
   </data>
   <data name="LanguageDescription.Text" xml:space="preserve">
@@ -521,5 +446,17 @@
   </data>
   <data name="ResetKeptNote" xml:space="preserve">
     <value>A tecla Copilot continua atribuída ao Repilot nas Configurações do Windows; depois, escolha novamente a ação dela aqui.</value>
+  </data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve">
+    <value>Aparência</value>
+  </data>
+  <data name="SettingsResetHeader.Text" xml:space="preserve">
+    <value>Redefinir</value>
+  </data>
+  <data name="ChangeButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Alterar ação</value>
+  </data>
+  <data name="TestButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Testar agora</value>
   </data>
 </root>

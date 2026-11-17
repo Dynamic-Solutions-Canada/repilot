@@ -106,10 +106,14 @@ internal static class Program
     /// Properties each element type accepts from resources. WinUI applies every Uid.Property
     /// resource to the element and fails to load the page if the property does not exist.
     /// </summary>
+    /// <summary>The attached property an icon-plus-label button sets for its accessible name.</summary>
+    private const string AutomationName = "[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name";
+
     private static readonly Dictionary<string, string[]> UidProperties = new()
     {
         ["TextBlock"] = ["Text"],
-        ["Button"] = ["Content"],
+        ["Button"] = ["Content", AutomationName],
+        ["ComboBox"] = ["Header"],
         ["HyperlinkButton"] = ["Content"],
         ["ComboBoxItem"] = ["Content"],
         ["NavigationViewItem"] = ["Content"],

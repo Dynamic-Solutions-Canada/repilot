@@ -7,7 +7,7 @@ using WinUIAppKit;
 using WinUIAppKit.Hosting;
 using WinUIAppKit.Localization;
 using WinUIAppKit.Logging;
-using static Repilot.Classes.NativeMethods;
+using WinUIAppKit.Windowing;
 
 namespace Repilot;
 
@@ -26,13 +26,13 @@ public partial class App : Application
     /// <summary>The single-instance mutex. Permanent: older versions claim the same name.</summary>
     private const string InstanceMutexName = "Repilot.Settings";
 
-    /// <summary>The settings window's title, which a second launch finds to bring it forward.</summary>
-    internal const string SettingsWindowTitle = "Repilot";
-
     public static DispatcherQueue MainDispatcherQueue { get; private set; } = null!;
 
     /// <summary>Path to the app icon (used for window/title-bar/about images).</summary>
     public static string IconPath => Path.Combine(AppContext.BaseDirectory, "Resources", "Repilot.ico");
+
+    /// <summary>Path to the 256 px app icon PNG, for the settings shell and the About page.</summary>
+    public static string IconPngPath => Path.Combine(AppContext.BaseDirectory, "Resources", "Repilot.png");
 
     /// <summary>
     /// Startup in the order the kit's gotchas require: logging first, then the single instance (before
@@ -46,7 +46,8 @@ public partial class App : Application
 
         if (!SingleInstance.TryClaim(InstanceMutexName))
         {
-            SurfaceRunningCopy();
+            // Restore and bring forward the running copy's window, using this launch's foreground right.
+            SingleInstance.BringRunningInstanceForward(InstanceMutexName);
             Environment.Exit(0);
         }
 
@@ -72,20 +73,9 @@ public partial class App : Application
 
         m_window = new SettingsWindow();
         m_window.Activate();
-    }
 
-    /// <summary>
-    /// Brings the running copy's settings window forward. Repilot has no hidden host window (it is not
-    /// resident), so the kit's <see cref="SingleInstance.SignalRunningInstance"/> does not apply; the
-    /// launching process may set the foreground window because the user just started it.
-    /// </summary>
-    private static void SurfaceRunningCopy()
-    {
-        IntPtr existing = FindWindow(null, SettingsWindowTitle);
-        if (existing != IntPtr.Zero)
-        {
-            SetForegroundWindow(existing);
-        }
+        // Record the window so a second launch can bring it forward (the kit's non-resident single instance).
+        SingleInstance.RegisterWindow(WindowChrome.Hwnd(m_window));
     }
 
     internal Window? m_window;

@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Repilot.ViewModels">
 
-    <Grid Padding="32,16,32,0" RowSpacing="14">
+    <!-- A grid rather than PageContentStyle, so the app and function lists can fill the window; the
+         padding and title match the kit's page style. -->
+    <Grid Padding="36,12,36,0" RowSpacing="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -12,7 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" x:Uid="ActionTitle" Style="{StaticResource TitleTextBlockStyle}" />
+        <TextBlock Grid.Row="0" x:Uid="ActionTitle" Style="{StaticResource PageTitleStyle}" />
 
         <!-- Mode -->
         <SelectorBar Grid.Row="1" x:Name="ModeBar" SelectionChanged="ModeBar_SelectionChanged">
@@ -38,14 +40,14 @@
 
             <!-- Text -->
             <StackPanel x:Name="TextPanel" Spacing="12" Visibility="Collapsed" VerticalAlignment="Top">
-                <TextBlock x:Uid="TextInstructions" TextWrapping="Wrap" Opacity="0.8" />
+                <TextBlock x:Uid="TextInstructions" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                 <TextBox x:Name="TextBox" x:Uid="TextToType"
                          TextChanged="TextBox_TextChanged" MaxWidth="520" HorizontalAlignment="Stretch" />
             </StackPanel>
 
             <!-- KeyCombo -->
             <StackPanel x:Name="ComboPanel" Spacing="12" Visibility="Collapsed" VerticalAlignment="Top">
-                <TextBlock x:Uid="ShortcutInstructions" TextWrapping="Wrap" Opacity="0.8" />
+                <TextBlock x:Uid="ShortcutInstructions" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <Border x:Name="ComboBorder" MinWidth="240" Height="40" VerticalAlignment="Center"
                             Background="{ThemeResource ControlFillColorDefaultBrush}"
@@ -102,7 +104,7 @@
             </Grid>
 
             <!-- None -->
-            <TextBlock x:Name="NonePanel" Visibility="Collapsed" VerticalAlignment="Top" Opacity="0.8"
+            <TextBlock x:Name="NonePanel" Visibility="Collapsed" VerticalAlignment="Top" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        TextWrapping="Wrap" x:Uid="NothingHappens" />
 
             <!-- WindowsFunction -->
@@ -121,7 +123,7 @@
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Key}" FontWeight="SemiBold" Opacity="0.7" Margin="0,8,0,2" />
+                                    <TextBlock Text="{Binding Key}" Style="{StaticResource BodyStrongTextBlockStyle}" Margin="0,8,0,2" />
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
@@ -130,7 +132,7 @@
                         <DataTemplate x:DataType="vm:WindowsFunctionItem">
                             <StackPanel Spacing="1" Padding="0,4">
                                 <TextBlock Text="{x:Bind Name}" />
-                                <TextBlock Text="{x:Bind Description}" FontSize="12" Opacity="0.6" TextWrapping="Wrap" />
+                                <TextBlock Text="{x:Bind Description}" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

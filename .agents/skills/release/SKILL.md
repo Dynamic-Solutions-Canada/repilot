@@ -24,4 +24,8 @@ Steps:
 7. Watch the "Publish to Microsoft Store" run for the same tag (`gh run list --workflow store-publish.yml`). It runs the gate, uploads both architectures at `Tier1012` with the notes as "What's new", and stops at a draft (REL-7); take the draft ID from its summary.
 8. Do not submit the draft: that is the maintainer's step. Tell them the draft ID and that submitting is a manual run of "Publish to Microsoft Store" on the tag with `submit_draft` set to it and `no_commit` unchecked. Post-release steps outside this repo (the promo catalog entry, the website page) go to the maintainer as well.
 
+Release-specific checklist items:
+
+- The first release with the kit's restyled pages (package 12) needs new Store screenshots: capture them from the installed app on the Windows test VM, update `store-assets/web/screenshots/` and the Partner Center images, and remove this item afterwards.
+
 Report: the version, the commit and tag, who approved the notes, each CI run's result with its link, the Release link, and what is left for the maintainer (submitting the Store draft, post-release steps).

@@ -1,4 +1,4 @@
-# Generates the MSIX visual assets AND the app .ico from one source: a dark keycap
+# Generates the MSIX visual assets, the app .ico and its 256 px PNG from one source: a dark keycap
 # bearing a white "R", on a light rounded tile.
 # Run with Windows PowerShell: powershell.exe -NoProfile -File generate-msix-images.ps1
 # ASCII only (Windows PowerShell 5.1 reads BOM-less .ps1 as ANSI).
@@ -7,6 +7,8 @@ Add-Type -AssemblyName System.Drawing
 $repoRoot  = Split-Path $PSScriptRoot -Parent
 $imagesDir = Join-Path $PSScriptRoot "Images"
 $icoPath   = Join-Path $repoRoot "Repilot\Resources\Repilot.ico"
+# The 256 px PNG the settings shell and the About page show (they take a PNG, not an .ico).
+$pngPath   = Join-Path $repoRoot "Repilot\Resources\Repilot.png"
 New-Item -ItemType Directory -Force $imagesDir | Out-Null
 
 $tile  = [System.Drawing.Color]::FromArgb(255, 233, 240, 250)  # E9F0FA  light tile
@@ -154,5 +156,9 @@ Save-Splash 1240 600 "SplashScreen.scale-200.png"
 
 Write-Output "Generating app icon:"
 Save-Ico @(16, 20, 24, 32, 40, 48, 64, 128, 256) $icoPath
+$appPng = New-Crisp 256
+$appPng.Save($pngPath, [System.Drawing.Imaging.ImageFormat]::Png)
+$appPng.Dispose()
+Write-Output "  Repilot.png (256 x 256)"
 
 Write-Output "Done."

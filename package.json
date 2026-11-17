@@ -8,11 +8,13 @@
     "install:desktop": "external/winui-app-kit/scripts/windows-build --install",
     "package:desktop": "external/winui-app-kit/scripts/windows-build --no-sign",
     "test": "external/winui-app-kit/scripts/run-tests",
-    "validate": "npm run format:check && npm run check:gitignore && npm run check:l10n && npm test",
+    "validate": "npm run format:check && npm run check:gitignore && npm run check:notices && npm run check:l10n && npm test",
     "format": "external/winui-app-kit/scripts/format",
     "format:check": "external/winui-app-kit/scripts/format --check",
     "check:l10n": "external/winui-app-kit/scripts/dotnet run --project tests/Repilot.Localization.Tests -c Release",
     "check:gitignore": "external/winui-app-kit/scripts/check-gitignore .",
-    "check:listing": "python3 external/winui-app-kit/scripts/check-listing.py"
+    "check:listing": "python3 external/winui-app-kit/scripts/check-listing.py",
+    "check:notices": "python3 external/winui-app-kit/scripts/generate-notices.py --check",
+    "generate:notices": "python3 external/winui-app-kit/scripts/generate-notices.py"
   }
 }

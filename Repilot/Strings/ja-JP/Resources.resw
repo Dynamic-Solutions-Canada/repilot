@@ -12,26 +12,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavHome.Content" xml:space="preserve">
+  <data name="NavHome" xml:space="preserve">
     <value>ホーム</value>
   </data>
-  <data name="NavAction.Content" xml:space="preserve">
+  <data name="NavAction" xml:space="preserve">
     <value>Copilot キーの操作</value>
   </data>
   <data name="ActionTitle.Text" xml:space="preserve">
     <value>Copilot キーの操作</value>
-  </data>
-  <data name="NavOtherApps.Content" xml:space="preserve">
-    <value>その他のアプリ</value>
-  </data>
-  <data name="NavAbout.Content" xml:space="preserve">
-    <value>バージョン情報</value>
-  </data>
-  <data name="AboutTitle.Text" xml:space="preserve">
-    <value>バージョン情報</value>
-  </data>
-  <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>設定</value>
   </data>
   <data name="HomeDescription.Text" xml:space="preserve">
     <value>キーボードの Copilot キーの動作を選択します。</value>
@@ -48,50 +36,14 @@
   <data name="TestAction.Text" xml:space="preserve">
     <value>今すぐテスト</value>
   </data>
-  <data name="AboutDescription.Text" xml:space="preserve">
+  <data name="AboutDescription" xml:space="preserve">
     <value>Copilot キーでカスタムショートカットの送信、アプリの起動、Windows 機能の実行ができます。</value>
   </data>
-  <data name="HowItWorks.Text" xml:space="preserve">
+  <data name="HowItWorks" xml:space="preserve">
     <value>仕組み</value>
   </data>
-  <data name="HowItWorksDescription.Text" xml:space="preserve">
+  <data name="HowItWorksDescription" xml:space="preserve">
     <value>Microsoft の公式 Copilot ハードウェアキーのプロバイダーとして登録します。キーを押すと小さなプログラムが起動し、操作を実行して終了します。バックグラウンドサービス、トレイアイコン、常駐プロセスはありません。</value>
-  </data>
-  <data name="BuiltWith.Text" xml:space="preserve">
-    <value>使用技術</value>
-  </data>
-  <data name="SourceCode.Text" xml:space="preserve">
-    <value>ソースコード</value>
-  </data>
-  <data name="SourceDescription.Text" xml:space="preserve">
-    <value>GitHub でプロジェクトを見る</value>
-  </data>
-  <data name="GitHubRepository.Content" xml:space="preserve">
-    <value>GitHub リポジトリ</value>
-  </data>
-  <data name="Updates.Text" xml:space="preserve">
-    <value>更新</value>
-  </data>
-  <data name="CheckUpdatesHint.Text" xml:space="preserve">
-    <value>クリックして更新を確認</value>
-  </data>
-  <data name="CheckUpdates" xml:space="preserve">
-    <value>更新を確認</value>
-  </data>
-  <data name="AppTheme.Text" xml:space="preserve">
-    <value>アプリのテーマ</value>
-  </data>
-  <data name="AppThemeDescription.Text" xml:space="preserve">
-    <value>この設定ウィンドウの外観です。</value>
-  </data>
-  <data name="SystemTheme.Content" xml:space="preserve">
-    <value>システムの既定</value>
-  </data>
-  <data name="LightTheme.Content" xml:space="preserve">
-    <value>ライト</value>
-  </data>
-  <data name="DarkTheme.Content" xml:space="preserve">
-    <value>ダーク</value>
   </data>
   <data name="NoBackground.Title" xml:space="preserve">
     <value>バックグラウンドプロセスなし</value>
@@ -195,33 +147,6 @@
   <data name="Recording" xml:space="preserve">
     <value>記録中… (Esc)</value>
   </data>
-  <data name="StoreOpened" xml:space="preserve">
-    <value>Microsoft Store の「更新とダウンロード」を開きました。利用可能な更新をそこで確認してください。</value>
-  </data>
-  <data name="StoreOpenFailed" xml:space="preserve">
-    <value>Microsoft Store を開けませんでした。</value>
-  </data>
-  <data name="Checking" xml:space="preserve">
-    <value>確認中…</value>
-  </data>
-  <data name="CheckingUpdates" xml:space="preserve">
-    <value>更新を確認中…</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>更新を確認できませんでした。インターネット接続を確認してください。</value>
-  </data>
-  <data name="ViewRelease" xml:space="preserve">
-    <value>リリースを見る</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>バージョン {0}</value>
-  </data>
-  <data name="UpdateAvailable" xml:space="preserve">
-    <value>バージョン {0} が利用可能です（現在は {1}）。</value>
-  </data>
-  <data name="UpToDate" xml:space="preserve">
-    <value>最新の状態です（{0}）。</value>
-  </data>
   <data name="SummaryNone" xml:space="preserve">
     <value>何もしない</value>
   </data>
@@ -252,7 +177,7 @@
   <data name="SummaryFunction" xml:space="preserve">
     <value>Windows の機能：{0}</value>
   </data>
-  <data name="LanguageTitle.Text" xml:space="preserve">
+  <data name="LanguageCombo.Header" xml:space="preserve">
     <value>アプリの言語</value>
   </data>
   <data name="LanguageDescription.Text" xml:space="preserve">
@@ -521,5 +446,17 @@
   </data>
   <data name="ResetKeptNote" xml:space="preserve">
     <value>Windows の設定では Copilot キーは引き続き Repilot に割り当てられています。リセット後、ここで動作を選び直してください。</value>
+  </data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="SettingsResetHeader.Text" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="ChangeButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>操作を変更</value>
+  </data>
+  <data name="TestButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>今すぐテスト</value>
   </data>
 </root>

@@ -18,12 +18,11 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 |---|---|
 | Shared with the handler through linked source (`<Compile Include="..\Repilot\...">`) | `Models/KeyCombo.cs`, `Models/CopilotActionData.cs`, `Models/WindowsFunction.cs`, `Services/WindowsFunctionCatalog.cs`, `Services/ActionExecutor.cs` |
 | Handler: gesture, debounce, log; its settings reader | `RepilotKey/Program.cs`, `RepilotKey/KeySettings.cs` |
-| Settings window and pages | `SettingsWindow.xaml(.cs)`, `Pages/*` |
+| Settings window (the kit's `SettingsShell`) and pages | `SettingsWindow.xaml(.cs)`, `Pages/*`; About is the kit's page, filled by `Classes/AboutContent.cs` |
 | Key assignment status | `Services/CopilotKeyProvider.cs` (`HandlerAppId = "App"`) |
 | Action summary, installed apps, function text | `Services/ActionSummary.cs`, `Services/InstalledAppsService.cs`, `Services/WindowsFunctionText.cs` |
 | Settings (the kit's versioned store, with Reset) | `ViewModels/UserSettings.cs`, `Classes/Settings/SettingsManager.cs`, `Classes/Settings/SettingsMigrations.cs` |
-| Repository name, used by About and the update check | `Classes/AboutContent.cs` |
-| Update check | `Services/UpdateService.cs` |
+| About content, repository, privacy URL, notices path, update check | `Classes/AboutContent.cs`; notices generated into `Repilot/THIRD-PARTY-NOTICES.txt` |
 | Interface text (nine languages) | `Strings/<lang>/Resources.resw`, `Services/UiStrings.cs`, `Classes/AppLanguage.cs` |
 | "Our other apps" page | `external/promo` submodule; it follows the app's language through `PromoLocalization.LocaleProvider` (set in `App`) |
 
@@ -93,4 +92,5 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md`, `store-assets/microsoft/listings.json` and the claims in `listings.md` |
 | Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |
+| A NuGet package added, removed or updated | `npm run generate:notices`, and commit the notices file |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |

@@ -270,15 +270,15 @@ $priDump = Join-Path $msixDir "bin\resources-$Platform.pri.xml"
 if ($LASTEXITCODE -ne 0) { Write-Error "makepri dump failed"; exit 1 }
 [xml]$dump = Get-Content $priDump -Raw
 # Dump shape: NamedResource(uri) > Candidate > QualifierSet > Qualifier(name="Language", value).
-$probeXPath = "//NamedResource[contains(@uri, '/Resources/NavHome/Content')]/Candidate/QualifierSet/Qualifier[@name='Language']/@value"
+$probeXPath = "//NamedResource[contains(@uri, '/Resources/NavHome')]/Candidate/QualifierSet/Qualifier[@name='Language']/@value"
 $probeLanguages = @($dump.SelectNodes($probeXPath) | ForEach-Object { $_.Value })
 if ($probeLanguages.Count -eq 0) {
-    Write-Error "resources.pri has no settings-app strings (NavHome.Content missing)"; exit 1
+    Write-Error "resources.pri has no settings-app strings (NavHome missing)"; exit 1
 }
 [xml]$stampedManifest = Get-Content (Join-Path $layoutDir "AppxManifest.xml") -Raw
 foreach ($resource in $stampedManifest.Package.Resources.Resource) {
     if (-not ($probeLanguages | Where-Object { $_ -eq $resource.Language })) {
-        Write-Error "resources.pri has no $($resource.Language) strings (looked for NavHome.Content)"; exit 1
+        Write-Error "resources.pri has no $($resource.Language) strings (looked for NavHome)"; exit 1
     }
 }
 Write-Host "  Strings indexed for: $(($stampedManifest.Package.Resources.Resource | ForEach-Object { $_.Language }) -join ', ')"
