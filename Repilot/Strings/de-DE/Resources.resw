@@ -37,7 +37,7 @@
     <value>Jetzt testen</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Wählen Sie, was die Copilot-Taste Ihrer Tastatur tut: einen eigenen Tastenkurzbefehl senden, eine App öffnen oder eine Windows-Funktion ausführen.</value>
+    <value>Wählen Sie, was die Copilot-Taste Ihrer Tastatur tut: einen eigenen Tastenkurzbefehl senden, Text eingeben, eine App oder einen Link öffnen oder eine Windows-Funktion ausführen.</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>Funktionsweise</value>

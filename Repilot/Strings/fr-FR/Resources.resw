@@ -37,7 +37,7 @@
     <value>Tester maintenant</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Choisissez ce que fait la touche Copilot de votre clavier : envoyer un raccourci personnalisé, ouvrir une application ou exécuter une fonction Windows.</value>
+    <value>Choisissez ce que fait la touche Copilot de votre clavier : envoyer un raccourci personnalisé, saisir du texte, ouvrir une application ou un lien, ou exécuter une fonction Windows.</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>Fonctionnement</value>

@@ -37,7 +37,7 @@
     <value>Probar ahora</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Elige qué hace la tecla Copilot de tu teclado: enviar un atajo personalizado, abrir una aplicación o ejecutar una función de Windows.</value>
+    <value>Elige qué hace la tecla Copilot de tu teclado: enviar un atajo personalizado, escribir texto, abrir una aplicación o enlace, o ejecutar una función de Windows.</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>Cómo funciona</value>

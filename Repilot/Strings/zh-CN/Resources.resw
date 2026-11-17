@@ -37,7 +37,7 @@
     <value>立即测试</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>选择键盘上的 Copilot 键执行的操作：发送自定义快捷键、打开应用或执行 Windows 功能。</value>
+    <value>选择键盘上的 Copilot 键执行的操作：发送自定义快捷键、输入文本、打开应用或链接，或执行 Windows 功能。</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>工作原理</value>

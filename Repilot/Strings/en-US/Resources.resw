@@ -37,7 +37,7 @@
     <value>Test it now</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Choose what your keyboard's Copilot key does: send a custom shortcut, open an app, or run a Windows function.</value>
+    <value>Choose what your keyboard's Copilot key does: send a custom shortcut, type text, open an app or link, or run a Windows function.</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>How it works</value>

@@ -37,7 +37,7 @@
     <value>今すぐテスト</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Copilot キーでカスタムショートカットの送信、アプリの起動、Windows 機能の実行ができます。</value>
+    <value>Copilot キーで、カスタムショートカットの送信、テキストの入力、アプリまたはリンクを開く、Windows の機能の実行ができます。</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>仕組み</value>
