@@ -19,7 +19,7 @@ name: Build and Package
 # https://apps.microsoft.com/detail/9pb5fj08pnvj
 # Anyone who wants to run it from source can build it themselves (docs/development.md).
 # The Store package is produced by store-publish.yml, or locally with
-# `.\RepilotMSIX\build-msix.ps1 -NoSign`.
+# `npm run package:desktop` (winui-app-kit's build/build-msix.ps1 -NoSign, driven by windows-build.json).
 
 on:
   workflow_dispatch:
@@ -99,7 +99,7 @@ jobs:
           Export-PfxCertificate -Cert $cert -FilePath $pfx `
             -Password (ConvertTo-SecureString -String $password -Force -AsPlainText) | Out-Null
           Remove-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" -DeleteKey
-          & "RepilotMSIX/build-msix.ps1" -Platform $env:PLATFORM -TrustedPfxPath $pfx -TrustedPfxPassword $password
+          & "external/winui-app-kit/build/build-msix.ps1" -Platform $env:PLATFORM -TrustedPfxPath $pfx -TrustedPfxPassword $password
           $buildExit = $LASTEXITCODE
           Remove-Item $pfx -Force
           if ($buildExit -ne 0) { Write-Error "build-msix failed"; exit 1 }

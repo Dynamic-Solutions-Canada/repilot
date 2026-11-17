@@ -64,7 +64,7 @@ Before finishing a change, run `npm run validate` and `npm run verify:desktop`; 
 
 ## Release
 
-Use the `release` skill; a `v*` tag fails without the committed `release-notes/` files. Repilot ships only through the Microsoft Store; a GitHub Release carries notes and nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md); the header of `build-msix.yml` says why). It still builds and signs both packages as CI's only packaging check; keep that step. `store-publish.yml` calls the kit's Store workflow (`Tier1012`, US $0.99): a tag stops at a draft, and submitting it is the maintainer's manual run. Keep `build-msix.ps1 -NoSign` working, since that workflow runs it.
+Use the `release` skill; a `v*` tag fails without the committed `release-notes/` files. Repilot ships only through the Microsoft Store; a GitHub Release carries notes and nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md); the header of `build-msix.yml` says why). It still builds and signs both packages as CI's only packaging check; keep that step. `store-publish.yml` calls the kit's Store workflow (`Tier1012`, US $0.99): a tag stops at a draft, and submitting it is the maintainer's manual run. Packaging is winui-app-kit's `build/build-msix.ps1`, driven by `windows-build.json` (`companions` for the key handler, `resw_dir`, `pri_probe_keys`, `extra_folders` for `Public`).
 
 ## Guidance map
 
@@ -88,7 +88,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
 | A Windows function | The catalog, every `Resources.resw` |
 | A setting's shape | A step in `SettingsMigrations.cs` and a scenario in `tests/Repilot.Settings.Tests/`; `Action` is read by the handler too |
-| A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
+| A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list |
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md`, `store-assets/microsoft/listings.json` and the claims in `listings.md` |
 | Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |

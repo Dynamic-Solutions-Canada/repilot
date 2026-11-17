@@ -363,7 +363,7 @@ FodyWeavers.xsd
 # Jetbrains IDE
 .idea/
 
-# Windows tail: packaging output from RepilotMSIX/build-msix.ps1.
+# Windows tail: packaging output from winui-app-kit's build-msix.ps1 under RepilotMSIX/.
 /RepilotMSIX/bin/
 
 # Part 2: project rules, each with a one-line reason.

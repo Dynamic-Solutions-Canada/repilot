@@ -29,7 +29,7 @@
   </Dependencies>
 
   <!-- Settings-app languages (see Repilot/Strings). en-CA and fr-CA reuse the en-US and
-       fr-FR text; build-msix.ps1 indexes those copies so every declared language resolves.
+       fr-FR text; the kit's build-msix.ps1 indexes them (resw_dir) so every declared language resolves.
        Display names stay literal brand names, so no ms-resource lookups are needed here. -->
   <Resources>
     <Resource Language="en-US" />

@@ -52,7 +52,7 @@ The Linux checks need no Windows machine. They run through winui-app-kit's `scri
 
 Signed dev packages use their own identity, `TechnicallyReal.Repilot` (DIST-3), so a dev install sits beside the Store install and has its own data folder; assign the Copilot key to whichever copy you want to test. To test an update over a Store install instead, add `-- --store-identity` to `install:desktop` or `package:desktop:dev`: that package takes the Store identity (`27766TechnicallyReal.CopilotKeyRemapper`). Unsigned Store packages always keep the Store identity. All three are set in `windows-build.json`.
 
-The packaging script publishes both executables (the self-contained WinUI app and the handler) into the package. It finds the Windows SDK packaging tools (makeappx, makepri, signtool) in an installed SDK or the Microsoft.Windows.SDK.BuildTools NuGet package, acquiring it if needed. A signed build needs a certificate passed to it, which the build tools do; it never makes its own. Bump `<Version>` in `Directory.Build.props` for releases only; the build tools allocate dev revisions in the temporary copy.
+The packaging script is winui-app-kit's `build/build-msix.ps1`, driven by `windows-build.json`: it publishes the self-contained WinUI app, then the key handler as a companion (`RepilotKey.exe` only), indexes the `.resw` strings for all nine languages, copies the `Public` folder the provider extension declares, and stamps the identity. It finds the Windows SDK packaging tools (makeappx, makepri, signtool) in an installed SDK or the Microsoft.Windows.SDK.BuildTools NuGet package, acquiring it if needed. A signed build needs a certificate passed to it, which the build tools do; it never makes its own. Bump `<Version>` in `Directory.Build.props` for releases only; the build tools allocate dev revisions in the temporary copy.
 
 Run build commands from the repository or its project directories so `global.json` selects the SDK. It requires stable .NET SDK 10.0.403 or a later 10.0 feature band or patch, and both packaging workflows install the version from that file. The SDK still chooses runtime packs for each architecture; `Directory.Build.targets` rejects resolved .NET 10 runtime packs older than 10.0.14, including explicit overrides.
 
@@ -113,16 +113,16 @@ Use the `release` skill ([.agents/skills/release/SKILL.md](../.agents/skills/rel
 
 ## Publishing to the Microsoft Store
 
-`store-publish.yml` publishes product `9PB5FJ08PNVJ` through winui-app-kit's reusable Store workflow. A `v*` tag runs the gate, builds unsigned x64 and ARM64 packages with `RepilotMSIX/build-msix.ps1` (named in `windows-build.json`), bundles them into a versioned `.msixupload`, uploads it with the notes as "What's new", and stops at a draft. Submitting is a second, manual run of the workflow on the same tag with `submit_draft` set to the draft ID from the tag run's summary and `no_commit` unchecked. Manual runs can also do a `dry_run` (everything except Store calls, no secrets needed), repair a draft, or replace a canceled or failed submission. Packages are never uploaded as workflow artifacts.
+`store-publish.yml` publishes product `9PB5FJ08PNVJ` through winui-app-kit's reusable Store workflow. A `v*` tag runs the gate, builds unsigned x64 and ARM64 packages with winui-app-kit's `build/build-msix.ps1` (named in `windows-build.json`), bundles them into a versioned `.msixupload`, uploads it with the notes as "What's new", and stops at a draft. Submitting is a second, manual run of the workflow on the same tag with `submit_draft` set to the draft ID from the tag run's summary and `no_commit` unchecked. Manual runs can also do a `dry_run` (everything except Store calls, no secrets needed), repair a draft, or replace a canceled or failed submission. Packages are never uploaded as workflow artifacts.
 
 The published base price is US $0.99. The API may report it as `PriceId: "Base"`, which the Store CLI cannot round-trip, so the workflow explicitly supplies `Tier1012`, the US $0.99 tier identified by a [Microsoft maintainer](https://github.com/microsoft/msstore-cli/pull/175#issuecomment-5791491206). Tier pricing can change converted prices in other markets; review the draft in Partner Center before submitting. Each listing locale gets the notes for its language (en-CA and fr-CA use the en-US and fr-FR files).
 
-For a manual fallback, generate images and build both packages on Windows, then upload the versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center:
+For a manual fallback, generate images and build both packages on Windows with PowerShell 7 from the repository root, then upload the versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center:
 
 ```powershell
 .\RepilotMSIX\generate-msix-images.ps1
-.\RepilotMSIX\build-msix.ps1 -Platform x64 -NoSign
-.\RepilotMSIX\build-msix.ps1 -Platform ARM64 -NoSign
+pwsh -File external/winui-app-kit/build/build-msix.ps1 -Platform x64 -NoSign
+pwsh -File external/winui-app-kit/build/build-msix.ps1 -Platform ARM64 -NoSign
 ```
 
 History: Submission 7 (`1152921505701962545`) was the first tier-based submission with a bundle covering x64 and ARM64 (1.0.19.0, committed by this [Store run](https://github.com/RyanEwen/Repilot/actions/runs/35898180528)); an earlier ZIP of loose packages ingested as x64 only, which is why uploads are bundles.

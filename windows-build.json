@@ -1,6 +1,7 @@
 {
   "project": "Repilot/Repilot.csproj",
-  "package_script": "RepilotMSIX/build-msix.ps1",
+  "package_script": "external/winui-app-kit/build/build-msix.ps1",
+  "msix_dir": "RepilotMSIX",
   "package_output": "RepilotMSIX/bin/msix-output",
   "certificate": ".windows-build/signing.pfx",
   "version_file": "Directory.Build.props",
@@ -21,5 +22,23 @@
   },
   "notices": {
     "about_source": "Repilot/Classes/AboutContent.cs"
-  }
+  },
+  "companions": [
+    {
+      "project": "RepilotKey/RepilotKey.csproj",
+      "files": [
+        "RepilotKey.exe"
+      ]
+    }
+  ],
+  "resw_dir": "Repilot/Strings",
+  "pri_probe_keys": [
+    "Resources/NavHome"
+  ],
+  "extra_folders": [
+    {
+      "source": "RepilotMSIX/Public",
+      "destination": "Public"
+    }
+  ]
 }
