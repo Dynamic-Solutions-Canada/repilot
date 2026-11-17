@@ -78,8 +78,8 @@
                     <TextBlock x:Uid="SourceCode" FontSize="14" FontWeight="Medium"/>
                     <TextBlock x:Uid="SourceDescription" FontSize="12" Opacity="0.5"/>
                 </StackPanel>
-                <HyperlinkButton Grid.Column="2" x:Uid="GitHubRepository"
-                                 NavigateUri="https://github.com/RyanEwen/Repilot" VerticalAlignment="Center"/>
+                <HyperlinkButton x:Name="RepositoryLink" Grid.Column="2" x:Uid="GitHubRepository"
+                                 VerticalAlignment="Center"/>
             </Grid>
         </Border>
 

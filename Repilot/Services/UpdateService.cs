@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Repilot.Classes;
 
 namespace Repilot.Services;
 
@@ -16,10 +17,8 @@ public static class UpdateService
     private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
     private const string StoreUpdatesUri = "ms-windows-store://downloadsandupdates";
 
-    private const string Owner = "RyanEwen";
-    private const string Repo = "Repilot";
-
-    private static readonly Uri LatestReleaseUri = new($"https://api.github.com/repos/{Owner}/{Repo}/releases/latest");
+    private static readonly Uri LatestReleaseUri =
+        new($"https://api.github.com/repos/{AboutContent.RepoOwner}/{AboutContent.RepoName}/releases/latest");
 
     private static readonly HttpClient Http = CreateHttpClient();
 

@@ -74,7 +74,7 @@ after changing any text.
 
 ## Requirements
 
-- Windows 11 (build 22621+)
+- Windows 11 (build 22000+)
 - Stable .NET 10 SDK 10.0.403 or newer, selected by `global.json`
 - Windows SDK packaging tools to build the MSIX
 - Full Native AOT for the handler additionally needs the VC++ build tools (optional)

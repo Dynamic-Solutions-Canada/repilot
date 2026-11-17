@@ -1,3 +1,4 @@
+using Repilot.Classes;
 using Repilot.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -15,6 +16,7 @@ public sealed partial class AboutPage : Page
         var v = typeof(AboutPage).Assembly.GetName().Version!;
         VersionText.Text = UiStrings.Format("Version", $"{v.Major}.{v.Minor}.{v.Build}");
         CheckUpdateButton.Content = UiStrings.Get("CheckUpdates");
+        RepositoryLink.NavigateUri = AboutContent.Repository;
     }
 
     /// <summary>Checks GitHub releases for an unpackaged development build.</summary>

@@ -52,7 +52,7 @@ The settings app follows your Windows display language, or you can choose one in
 
 ## Requirements
 
-- Windows 11 (build 22621 or newer), with a Copilot key — or use **Windows logo key + C**.
+- Windows 11 (build 22000 or newer), with a Copilot key — or use **Windows logo key + C**.
 
 ## Building from source
 
