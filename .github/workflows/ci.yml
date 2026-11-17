@@ -99,13 +99,16 @@ jobs:
 
       # Called directly: the WSL build bridge that local builds use is not available on a runner.
       # Debug, the same compile `npm run verify:desktop` runs, plus the key handler, which that
-      # command does not compile.
+      # command does not compile. The handler is self-contained, so it needs the runtime identifier
+      # for the platform, as the packaging script passes; without one the SDK assumes the runner's
+      # own (win-x64), which an ARM64 build rejects (NETSDK1032).
       - name: Compile the settings app and the key handler
         shell: pwsh
         env:
           PLATFORM: ${{ matrix.platform }}
         run: |
-          foreach ($project in @('Repilot/Repilot.csproj', 'RepilotKey/RepilotKey.csproj')) {
-            dotnet build $project -c Debug "-p:Platform=$env:PLATFORM"
-            if ($LASTEXITCODE -ne 0) { throw "Compile failed: $project ($env:PLATFORM)" }
-          }
+          dotnet build Repilot/Repilot.csproj -c Debug "-p:Platform=$env:PLATFORM"
+          if ($LASTEXITCODE -ne 0) { throw "Compile failed: settings app ($env:PLATFORM)" }
+          $rid = if ($env:PLATFORM -eq 'ARM64') { 'win-arm64' } else { 'win-x64' }
+          dotnet build RepilotKey/RepilotKey.csproj -c Debug "-p:Platform=$env:PLATFORM" -r $rid
+          if ($LASTEXITCODE -ne 0) { throw "Compile failed: key handler ($env:PLATFORM)" }
