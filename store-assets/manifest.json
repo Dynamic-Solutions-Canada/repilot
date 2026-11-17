@@ -1,0 +1,39 @@
+{
+  "microsoft": [
+    {
+      "file": "screenshots/00-home-light.png",
+      "source": "raw/microsoft/00-home-light.png",
+      "theme": "light",
+      "caption": "Choose what your Copilot key does, and see that Windows has it assigned to Repilot.",
+      "alt": "Repilot's Home page in the light theme: the Copilot key shows as assigned to Repilot, and the key is set to the Windows function Task View, with Change action and Test it now buttons."
+    },
+    {
+      "file": "screenshots/01-shortcut-dark.png",
+      "source": "raw/microsoft/01-shortcut-dark.png",
+      "theme": "dark",
+      "caption": "Record any keyboard shortcut, including system ones like Alt+Tab.",
+      "alt": "The Copilot key action page in the dark theme with Shortcut selected and the recorded shortcut Alt + Tab."
+    },
+    {
+      "file": "screenshots/02-text-light.png",
+      "source": "raw/microsoft/02-text-light.png",
+      "theme": "light",
+      "caption": "Type a character or a phrase with one press, whatever your keyboard layout.",
+      "alt": "The Copilot key action page in the light theme with Text selected and the phrase \"Thanks, talk soon!\" entered."
+    },
+    {
+      "file": "screenshots/03-app-or-link-dark.png",
+      "source": "raw/microsoft/03-app-or-link-dark.png",
+      "theme": "dark",
+      "caption": "Open an installed app, a file, a website or a Windows Settings page.",
+      "alt": "The Copilot key action page in the dark theme with App or link selected and the installed-apps list searched for \"Note\", showing Notepad and Sticky Notes."
+    },
+    {
+      "file": "screenshots/04-windows-function-light.png",
+      "source": "raw/microsoft/04-windows-function-light.png",
+      "theme": "light",
+      "caption": "Find Task View, Snap layouts, Lock PC, Magnifier and more by name.",
+      "alt": "The Copilot key action page in the light theme with Windows function selected and Task View chosen from the grouped, searchable list."
+    }
+  ]
+}

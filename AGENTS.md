@@ -91,6 +91,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list |
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md`, `store-assets/microsoft/listings.json` and the claims in `listings.md` |
+| A UI change that shows in a Store screenshot | Recapture it (`store-assets/README.md`) |
 | Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |
 | A NuGet package added, removed or updated | `npm run generate:notices`, and commit the notices file |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |

@@ -95,10 +95,12 @@ On the Windows 11 test VM (dev identity), with the windows-build-tools app-test 
 5. Settings > Reset settings: the question is in the app's language and says the Copilot key stays assigned; Cancel changes nothing.
 6. Assign the key (or set `BrandedKey` as Settings would) and press it: the saved action runs.
 
-On a machine with the Store version installed (the maintainer's acceptance check):
+Under the Store identity, on the same VM (no Store account needed; this is what a Store user's upgrade does to the package family and its data):
 
-7. `npm run install:desktop -- --store-identity` over the Store install, then repeat steps 3, 5 and 6. The key stays assigned to Repilot without visiting Windows Settings again.
-8. Let the Store update back over it when the release ships.
+7. Build the previous release's tag in a scratch checkout, signed with the shared dev certificate. Its subject is the Store publisher, so the package carries the Store name and publisher (`27766TechnicallyReal.CopilotKeyRemapper`). For a tag whose script still has the retired certificate fallback, put an empty `RepilotMSIX/Repilot.pfx` in the scratch copy so the fallback never runs. Install it and give it that release's settings file.
+8. Build the new release with `npm run package:desktop:dev -- --store-identity` (a bundle, as the Store installs) and install it over it. Repeat steps 3, 5 and 6.
+
+Not verified: the Microsoft Store updating back over a sideloaded copy of the same identity. Microsoft documents the rules such an update follows (the same package family, a higher version, and a single package can be replaced by a bundle but not the other way round: [App package updates](https://learn.microsoft.com/windows/msix/app-package-updates)), but not the Store client's handling of a sideloaded install.
 
 ## Continuous integration
 

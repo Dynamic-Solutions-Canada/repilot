@@ -26,6 +26,6 @@ Steps:
 
 Release-specific checklist items:
 
-- The first release with the kit's restyled pages (package 12) needs new Store screenshots: capture them from the installed app on the Windows test VM, update `store-assets/web/screenshots/` and the Partner Center images, and remove this item afterwards.
+- The first release with the kit's restyled pages has new Store screenshots and captions (`store-assets/microsoft/screenshots/`, five per locale in `listings.json`). Partner Center still shows the old three: the maintainer uploads the new files in order and pastes each locale's captions with this submission (see `store-assets/README.md`). Remove this item afterwards.
 
 Report: the version, the commit and tag, who approved the notes, each CI run's result with its link, the Release link, and what is left for the maintainer (submitting the Store draft, post-release steps).
