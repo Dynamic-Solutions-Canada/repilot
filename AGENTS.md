@@ -51,7 +51,7 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 
 ## Commands
 
-Source is authoritative in WSL, with submodules initialised (`git submodule update --init`). Setup is in [DEVELOPING.md](DEVELOPING.md).
+Source is authoritative in WSL, with submodules initialised (`git submodule update --init`). Setup is in [docs/development.md](docs/development.md).
 
 | Command | Proves | Does not prove |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ Repilot ships only through the Microsoft Store, and a GitHub Release carries not
 
 | Guide, doc, or skill | Read or use when | Governs |
 | --- | --- | --- |
-| [DEVELOPING.md](DEVELOPING.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
+| [docs/development.md](docs/development.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
 | [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
 | [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
@@ -83,9 +83,9 @@ Repilot ships only through the Microsoft Store, and a GitHub Release carries not
 | A file, service or page added, moved or removed | The Architecture table above |
 | A file linked into the handler | The Architecture table, and check it stays WinUI-free and trim-safe |
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
-| An npm command | The Commands table above, `DEVELOPING.md`, the `desktop` skill, `paseo.json` |
+| An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
 | A Windows function | The catalog, every `Resources.resw` |
 | A language | The manifest, `Classes/AppLanguage.cs`, the localization test's list, `build-msix.ps1` |
 | A feature or requirement users can see | Behaviour above, `README.md` |
-| Release workflow or packaging | Release above, `DEVELOPING.md` |
+| Release workflow or packaging | Release above, `docs/development.md` |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |

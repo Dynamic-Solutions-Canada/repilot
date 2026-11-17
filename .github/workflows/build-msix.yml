@@ -14,7 +14,7 @@ name: Build and Package
 #
 # The install route is the Microsoft Store:
 # https://apps.microsoft.com/detail/9pb5fj08pnvj
-# Anyone who wants to run it from source can build it themselves (DEVELOPING.md).
+# Anyone who wants to run it from source can build it themselves (docs/development.md).
 # The Store package is produced by store-publish.yml, or locally with
 # `.\RepilotMSIX\build-msix.ps1 -NoSign`.
 
@@ -127,7 +127,7 @@ jobs:
             echo ""
             echo "## Installing"
             echo ""
-            echo "Repilot installs from the [Microsoft Store](https://apps.microsoft.com/detail/9pb5fj08pnvj), which also keeps it up to date. Releases here are notes only and carry no download: the app needs MSIX package identity to be assignable to the Copilot key, so an unpackaged build would not work. To run it from source, see [DEVELOPING.md](https://github.com/${GITHUB_REPOSITORY}/blob/main/DEVELOPING.md)."
+            echo "Repilot installs from the [Microsoft Store](https://apps.microsoft.com/detail/9pb5fj08pnvj), which also keeps it up to date. Releases here are notes only and carry no download: the app needs MSIX package identity to be assignable to the Copilot key, so an unpackaged build would not work. To run it from source, see the [development guide](https://github.com/${GITHUB_REPOSITORY}/blob/main/docs/development.md)."
             echo "RELEASE_EOF"
           } >> "$GITHUB_OUTPUT"
 
