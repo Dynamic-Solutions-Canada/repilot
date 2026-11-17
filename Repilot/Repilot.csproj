@@ -23,13 +23,13 @@
     <FrameworkReference Include="Microsoft.WindowsDesktop.App" />
 
     <!-- WinUI 3 (Windows App SDK) — Fluent Design, Mica, NavigationView -->
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.6.5" />
 
     <!-- MVVM source generators (ObservableProperty, RelayCommand) -->
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 
     <!-- Structured logging -->
-    <PackageReference Include="NLog" Version="6.1.1" />
+    <PackageReference Include="NLog" Version="6.2.2" />
   </ItemGroup>
 
   <!-- Content files to copy to output ────────────────────────────── -->
