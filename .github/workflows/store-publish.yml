@@ -1,8 +1,10 @@
+# Calls winui-app-kit's reusable Store workflow (CI-10, REL-7), copied from the kit's caller example.
+# Keep the `uses:` tag equal to the external/winui-app-kit pin; the kit's workflow stops at its first
+# step if they differ. A v* tag runs the gate, uploads both architectures to Partner Center as a draft
+# with the notes from release-notes/ as each listing locale's "What's new", and stops; a manual run on that tag with submit_draft set
+# submits it. dry_run builds and checks everything without any Store call. Packages are never
+# uploaded as artifacts: Repilot is a paid app in a public repo.
 name: Publish to Microsoft Store
-
-# Tags submit both architectures directly to Partner Center at the verified US $0.99 tier.
-# Manual runs default to draft-only review. Never expose paid MSIX files as artifacts.
-# The published submission reports Base; CLI 0.4.3 needs Tier1012 for this product.
 
 on:
   push:
@@ -10,6 +12,10 @@ on:
       - 'v*'
   workflow_dispatch:
     inputs:
+      dry_run:
+        description: 'Build, bundle and check, then stop before any Store call'
+        type: boolean
+        default: false
       no_commit:
         description: 'Stage a draft for review in Partner Center without submitting'
         type: boolean
@@ -22,144 +28,45 @@ on:
         description: 'Exact canceled tier submission ID to replace with a corrected release'
         type: string
         default: ''
+      submit_draft:
+        description: 'Draft ID from the tag run to submit for certification; run on that release tag with no_commit unchecked'
+        type: string
+        default: ''
+      replace_failed_draft:
+        description: 'Exact CommitFailed submission ID to replace after correcting its package'
+        type: string
+        default: ''
+      failed_upload:
+        description: 'Exact upload filename in the failed submission being replaced'
+        type: string
+        default: ''
 
 permissions:
   contents: read
 
+# One Store run at a time, and never cancel one that has started talking to Partner Center.
 concurrency:
   group: store-package
   cancel-in-progress: false
 
 jobs:
   publish:
-    runs-on: windows-2025
-
-    steps:
-      - name: Check publishing credentials
-        shell: pwsh
-        env:
-          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-          SELLER_ID: ${{ secrets.SELLER_ID }}
-          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
-          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
-        run: |
-          foreach ($name in @('AZURE_AD_TENANT_ID', 'SELLER_ID', 'AZURE_AD_APPLICATION_CLIENT_ID', 'AZURE_AD_APPLICATION_SECRET')) {
-            if ([string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
-              throw "Missing GitHub Actions secret: $name"
-            }
-          }
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
-
-      - name: Generate images
-        shell: pwsh
-        run: |
-          & "$env:GITHUB_WORKSPACE/RepilotMSIX/generate-msix-images.ps1"
-          if (-not $?) { throw 'Image generation failed' }
-
-      - name: Build MSIX packages (x64 + ARM64, unsigned for Store)
-        shell: pwsh
-        run: |
-          foreach ($plat in @('x64', 'ARM64')) {
-            Write-Host "::group::Build $plat MSIX"
-            & "$env:GITHUB_WORKSPACE\RepilotMSIX\build-msix.ps1" -Platform $plat -NoSign
-            if ($LASTEXITCODE -ne 0) { throw "build-msix.ps1 failed for $plat (exit $LASTEXITCODE)" }
-            Write-Host "::endgroup::"
-          }
-
-      # Keep paid Store packages on this runner; never upload public Actions artifacts.
-      - name: Bundle Store packages
-        shell: pwsh
-        run: |
-          [xml]$props = Get-Content "$env:GITHUB_WORKSPACE/Directory.Build.props"
-          $version = $props.SelectSingleNode("//Version").InnerText
-          $out = "$env:GITHUB_WORKSPACE/RepilotMSIX/bin/msix-output"
-          & "$env:GITHUB_WORKSPACE/.github/scripts/build-store-upload.ps1" -AppName Repilot -OutputDirectory $out -Version $version
-
-      - name: Setup Microsoft Store CLI
-        uses: microsoft/microsoft-store-apppublisher@v1.1
-        with:
-          version: 'v0.4.3'
-
-      - name: Remove selected canceled Store submission
-        if: inputs.replace_canceled_draft != ''
-        shell: pwsh
-        env:
-          SUBMISSION_ID: ${{ inputs.replace_canceled_draft }}
-          REPAIR_DRAFT: ${{ inputs.repair_draft }}
-          NO_COMMIT: ${{ inputs.no_commit }}
-          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
-          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
-        run: |
-          if ($env:REPAIR_DRAFT) { throw 'Choose repair_draft or replace_canceled_draft, not both.' }
-          if ($env:NO_COMMIT -ne 'false') { throw 'Replacing a canceled release requires a committed submission.' }
-          & ./.github/scripts/replace-canceled-store-draft.ps1 -AppId 9PB5FJ08PNVJ -SubmissionId $env:SUBMISSION_ID -PriceId Tier1012
-
-      - name: Configure Store credentials
-        if: inputs.repair_draft == ''
-        shell: pwsh
-        env:
-          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-          SELLER_ID: ${{ secrets.SELLER_ID }}
-          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
-          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
-        run: |
-          msstore reconfigure --tenantId "$env:AZURE_AD_TENANT_ID" --sellerId "$env:SELLER_ID" --clientId "$env:AZURE_AD_APPLICATION_CLIENT_ID" --clientSecret "$env:AZURE_AD_APPLICATION_SECRET"
-          if ($LASTEXITCODE -ne 0) { throw "Store authentication configuration failed (exit $LASTEXITCODE)" }
-          # The CLI deletes pending submissions before publishing. Preserve any existing draft.
-          $token = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$env:AZURE_AD_TENANT_ID/oauth2/token" -Body @{
-            grant_type = 'client_credentials'
-            client_id = $env:AZURE_AD_APPLICATION_CLIENT_ID
-            client_secret = $env:AZURE_AD_APPLICATION_SECRET
-            resource = 'https://manage.devcenter.microsoft.com'
-          }
-          $app = Invoke-RestMethod -Uri 'https://manage.devcenter.microsoft.com/v1.0/my/applications/9PB5FJ08PNVJ' -Headers @{ Authorization = "Bearer $($token.access_token)" }
-          if ($null -ne $app.pendingApplicationSubmission) {
-            throw 'An existing Store submission is pending. Review it in Partner Center before starting another run.'
-          }
-
-      - name: Publish to Microsoft Store
-        if: inputs.repair_draft == ''
-        shell: pwsh
-        env:
-          NO_COMMIT: ${{ github.event_name == 'workflow_dispatch' && inputs.no_commit }}
-        run: |
-          [xml]$props = Get-Content "$env:GITHUB_WORKSPACE/Directory.Build.props"
-          $version = $props.SelectSingleNode("//Version").InnerText
-          $publishArgs = @('publish', "$env:GITHUB_WORKSPACE/RepilotMSIX/bin/msix-output/Repilot-$version.msixupload", '-id', '9PB5FJ08PNVJ')
-          if ($env:NO_COMMIT -eq 'true') { $publishArgs += '--noCommit' }
-          # Tier1012 maps to US $0.99; regional prices can change when the tier is applied.
-          $publishArgs += @('--priceId', 'Tier1012')
-          & msstore @publishArgs
-          if ($LASTEXITCODE -ne 0) {
-            throw "Store publishing failed (exit $LASTEXITCODE). Review the submission in Partner Center."
-          }
-          if ($env:NO_COMMIT -eq 'true') {
-            'Store draft uploaded. Review pricing and packages in Partner Center before committing.' >> $env:GITHUB_STEP_SUMMARY
-          } else {
-            'Store submission committed. Publication depends on Microsoft certification and the submission publishing settings.' >> $env:GITHUB_STEP_SUMMARY
-          }
-
-      - name: Repair existing Store draft
-        if: inputs.repair_draft != ''
-        shell: pwsh
-        env:
-          SUBMISSION_ID: ${{ inputs.repair_draft }}
-          NO_COMMIT: ${{ inputs.no_commit }}
-          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
-          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
-        run: |
-          if ($env:NO_COMMIT -ne 'true') { throw 'Repairing a draft requires no_commit.' }
-          [xml]$props = Get-Content "$env:GITHUB_WORKSPACE/Directory.Build.props"
-          $version = $props.SelectSingleNode("//Version").InnerText
-          & ./.github/scripts/repair-store-draft.ps1 -AppId 9PB5FJ08PNVJ -SubmissionId $env:SUBMISSION_ID -PriceId Tier1012 -UploadPath "$env:GITHUB_WORKSPACE/RepilotMSIX/bin/msix-output/Repilot-$version.msixupload"
+    uses: Dynamic-Solutions-Canada/winui-app-kit/.github/workflows/store-publish.yml@v1.13.0
+    with:
+      store_product_id: 9PB5FJ08PNVJ
+      # Paid, US $0.99. The live submission reports PriceId "Base", which the Store CLI cannot
+      # round-trip, so the tier is named explicitly.
+      price_tier: Tier1012
+      # The MSIX images are generated, not committed in full.
+      pre_build: '& ./RepilotMSIX/generate-msix-images.ps1'
+      # The gate run first, on Linux; this is the default.
+      gate_command: 'npm run validate'
+      # A tag run is always a draft (REL-7); these only matter for manual runs.
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      no_commit: ${{ github.event_name == 'push' || inputs.no_commit }}
+      repair_draft: ${{ inputs.repair_draft || '' }}
+      replace_canceled_draft: ${{ inputs.replace_canceled_draft || '' }}
+      submit_draft: ${{ inputs.submit_draft || '' }}
+      replace_failed_draft: ${{ inputs.replace_failed_draft || '' }}
+      failed_upload: ${{ inputs.failed_upload || '' }}
+    secrets: inherit

@@ -79,21 +79,24 @@ This list is unconfirmed: it is taken from the code and has not yet been checked
 
 To delete Repilot's data without uninstalling, close the settings app and delete `settings.json`; the next launch starts from defaults.
 
+## Continuous integration
+
+- **CI** (`ci.yml`) runs `npm run validate` on Linux for every push to `main` and every pull request. When app source, packaging or build configuration changed, it also compiles the settings app and the key handler on Windows for x64 and ARM64.
+- **CodeQL** (`codeql.yml`) scans C# and the workflows, buildless on Linux, on push, pull request and weekly; the submodules are left to their own repos.
+- **Build and Package** (`build-msix.yml`) runs on `v*` tags and by hand: the gate, then both signed packages, then (on a tag) the GitHub Release.
+- **Publish to Microsoft Store** (`store-publish.yml`) and **Credential Expiry** (`credential-expiry.yml`) call winui-app-kit's reusable workflows. Their `uses:` tag must equal the `external/winui-app-kit` pin.
+
+## Releasing
+
+Use the `release` skill ([.agents/skills/release/SKILL.md](../.agents/skills/release/SKILL.md)). In short: write the notes for users in `release-notes/<version>.md`, plus one translation per other language (`<version>.<identity>.md` for es-ES, fr-FR, de-DE, zh-CN, pt-BR and ja-JP; each under 1,500 characters), and get them approved. Then bump `<Version>` in `Directory.Build.props` in the same commit (`Bump version to vX.Y.Z`), create an annotated `vX.Y.Z` tag and push both. The tag runs fail if the tag and the version differ or a notes file is missing or too long; they never fall back to commit subjects.
+
 ## Publishing to the Microsoft Store
 
-The `store-publish.yml` workflow submits to product `9PB5FJ08PNVJ`.
+`store-publish.yml` publishes product `9PB5FJ08PNVJ` through winui-app-kit's reusable Store workflow. A `v*` tag runs the gate, builds unsigned x64 and ARM64 packages with `RepilotMSIX/build-msix.ps1` (named in `windows-build.json`), bundles them into a versioned `.msixupload`, uploads it with the notes as "What's new", and stops at a draft. Submitting is a second, manual run of the workflow on the same tag with `submit_draft` set to the draft ID from the tag run's summary and `no_commit` unchecked. Manual runs can also do a `dry_run` (everything except Store calls, no secrets needed), repair a draft, or replace a canceled or failed submission. Packages are never uploaded as workflow artifacts.
 
-The workflow pins [Microsoft Store CLI v0.4.3](https://github.com/microsoft/msstore-cli/releases/tag/v0.4.3). It builds unsigned x64 and ARM64 packages on one runner, combines them into an architecture-aware `.msixbundle` stamped with the app version, wraps that in a versioned `.msixupload`, and submits directly to Partner Center on `v*` tags. It uploads no public binary artifacts. MakeAppx must receive `/bv` so the bundle does not get a date-based version that could outrank the next app release. Manual dispatch defaults `no_commit` to true for draft review; disable it to commit the submission. Certification and the submission's publishing settings determine when it becomes available.
+The published base price is US $0.99. The API may report it as `PriceId: "Base"`, which the Store CLI cannot round-trip, so the workflow explicitly supplies `Tier1012`, the US $0.99 tier identified by a [Microsoft maintainer](https://github.com/microsoft/msstore-cli/pull/175#issuecomment-5791491206). Tier pricing can change converted prices in other markets; review the draft in Partner Center before submitting. Each listing locale gets the notes for its language (en-CA and fr-CA use the en-US and fr-FR files).
 
-The published base price is US $0.99. The API may report it as `PriceId: "Base"`, which the CLI cannot round-trip, so the workflow explicitly supplies `Tier1012`, the US $0.99 tier identified by a [Microsoft maintainer](https://github.com/microsoft/msstore-cli/pull/175#issuecomment-5791491206). Tier pricing can change converted prices in other markets; review the ingested submission in Partner Center. The workflow checks for a pending submission before invoking the CLI, because the CLI would otherwise delete an existing draft.
-
-The repository secrets are `AZURE_AD_TENANT_ID`, `AZURE_AD_APPLICATION_CLIENT_ID`, `AZURE_AD_APPLICATION_SECRET`, and `SELLER_ID`. All four were present when checked on September 22, 2026. The first tier-based submission accepted authentication and Tier1012, but a ZIP of loose MSIX packages ingested as x64 only. Submission 7 was withdrawn to draft before publication. The API reports it as `Canceled`, so it cannot be edited. Run `replace_canceled_draft` with its exact ID and `no_commit` disabled to remove only that canceled submission and publish a corrected bundle. Verify both architectures and pricing in Partner Center after ingestion. Future tag runs use the MSIX bundle format.
-
-The corrected [Store run](https://github.com/RyanEwen/Repilot/actions/runs/35898180528) committed Submission 7 (`1152921505701962545`) with a 1.0.19.0 bundle covering x64 and ARM64. Partner Center shows US $0.99, with 36 of 240 regional prices changed from the published Base schedule. It is in certification and will publish automatically after passing.
-
-**Releasing:** bump `<Version>` in `Directory.Build.props`, commit, create the matching `vX.Y.Z` tag and push. Verify both the notes-only release and Store submission workflows.
-
-For a manual fallback, generate images and build both packages on Windows:
+For a manual fallback, generate images and build both packages on Windows, then upload the versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center:
 
 ```powershell
 .\RepilotMSIX\generate-msix-images.ps1
@@ -101,7 +104,7 @@ For a manual fallback, generate images and build both packages on Windows:
 .\RepilotMSIX\build-msix.ps1 -Platform ARM64 -NoSign
 ```
 
-Upload the individual versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center. The `.msixupload` container is used by CI's CLI submission.
+History: Submission 7 (`1152921505701962545`) was the first tier-based submission with a bundle covering x64 and ARM64 (1.0.19.0, committed by this [Store run](https://github.com/RyanEwen/Repilot/actions/runs/35898180528)); an earlier ZIP of loose packages ingested as x64 only, which is why uploads are bundles.
 
 ### What a GitHub release contains
 
@@ -113,6 +116,6 @@ The workflow still **builds the MSIX for x64 and ARM64 on every run**, even thou
 
 ### Publishing credentials
 
-Use the four repository secrets listed above. The Entra tenant and application IDs identify the app linked in Partner Center; the secret is its client-secret value, and `SELLER_ID` comes from Partner Center account settings.
+The Store credentials are organisation secrets shared with the other Store apps and visible to this repo: `AZURE_AD_TENANT_ID`, `AZURE_AD_APPLICATION_CLIENT_ID`, `AZURE_AD_APPLICATION_SECRET` and `SELLER_ID`, passed to the kit's workflow with `secrets: inherit`. The tenant and application IDs identify the app linked in Partner Center; the secret is its client-secret value, and `SELLER_ID` comes from Partner Center account settings. The organisation variable `STORE_SECRET_EXPIRES` holds the secret's expiry date; `credential-expiry.yml` fails from 60 days before it. Update it whenever the secret is rotated: `gh variable set STORE_SECRET_EXPIRES --org Dynamic-Solutions-Canada --body YYYY-MM-DD`.
 
 To create the linked app: Partner Center > Account settings > User management > Azure AD applications > Add Azure AD application. Give it the Manager role, then create its client secret in Entra. Renew the secret before expiry.

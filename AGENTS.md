@@ -1,6 +1,6 @@
 # Repilot: Agent Instructions
 
-Repilot lets Windows 11 users choose what the Copilot key does: a keyboard shortcut, typed text, an app, or a Windows function. It is a paid Microsoft Store app (product `9PB5FJ08PNVJ`) that claims the key through Microsoft's official Copilot hardware-key provider model, so it only works as a packaged MSIX. It is built from WSL through the shared Windows build bridge, and its "Our other apps" page comes from the apps-promo submodule at `external/promo`.
+Repilot lets Windows 11 users choose what the Copilot key does: a keyboard shortcut, typed text, an app, or a Windows function. It is a paid Microsoft Store app (product `9PB5FJ08PNVJ`) that claims the key as an official Copilot hardware-key provider, so it only works as a packaged MSIX. It is built from WSL through the shared Windows build bridge, and its "Our other apps" page comes from the apps-promo submodule at `external/promo`.
 
 ## Standards
 
@@ -29,16 +29,16 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 
 ## Behaviour
 
-- **The provider (`Id="App"`) must stay in the app list; never set `AppListEntry="none"` on it.** The "Customize Copilot key" picker offers only visible, launchable apps. A hidden provider still registers in the AppExtension catalog, so a catalog probe finds it, but Settings rejects it with "your PC doesn't have an app that meets the hardware key criteria". Both Start tiles are therefore required; the second one is not a bug. (This shipped broken in 1.0.13 and was fixed in 1.0.14.)
+- **The provider (`Id="App"`) must stay in the app list; never set `AppListEntry="none"` on it.** The "Customize Copilot key" picker offers only visible, launchable apps. A hidden provider still registers in the AppExtension catalog, but Settings rejects it ("your PC doesn't have an app that meets the hardware key criteria"). Both Start tiles are therefore required; the second one is not a bug. (This shipped broken in 1.0.13 and was fixed in 1.0.14.)
 - **One press runs the action once.** Holding the key auto-repeats the launch, so the handler debounces with a `repeat-state` timestamp and the named mutex `Repilot.HandlerState`. A press-and-hold activation (`repilot-key://?state=Up`) is a no-op: Windows does not reliably deliver a distinct hold gesture, so hold was dropped.
 - **`ActionExecutor`** sends key combos with `SendInput` (reusing a physically held Win key when triggered by Win+C), starts apps, URIs and `ms-settings:` with `Process.Start(UseShellExecute)`, and starts packaged apps through `explorer.exe shell:AppsFolder\{AUMID}`.
-- **Unpackaged builds cannot be assigned to the key**, because the key is claimed through the `com.microsoft.windows.copilotkeyprovider` AppExtension. `Pages/HomePage.xaml.cs` hides the Assign button and says so.
+- **Unpackaged builds cannot be assigned to the key** (the `com.microsoft.windows.copilotkeyprovider` AppExtension needs package identity); `Pages/HomePage.xaml.cs` hides the Assign button and says so.
 - **Check for Updates** opens the Store's Updates and downloads page for packaged copies, without claiming a scan finished. Unpackaged builds check GitHub Releases and offer "View Release", never a download.
 
 ## Conventions and gotchas
 
 - **Linked shared files stay WinUI-free and AOT/trim-safe:** no NLog, no reflection-heavy code. Handler errors go to `ActionExecutor.ErrorSink` in the settings app, or to the handler's own `key-handler.log`.
-- **Both executables resolve the same settings path,** `%AppData%\Repilot\settings.json`, which Windows redirects to package data when packaged.
+- **Both executables read `%AppData%\Repilot\settings.json`**, redirected to package data when packaged.
 - **Interface text uses `.resw`** (LOC-6), in `Repilot/Strings/<lang>/Resources.resw` for the seven distinct wordings; `build-msix.ps1` packages en-CA and fr-CA as copies of en-US and fr-FR. The shared locale rules are in [locales.md](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/locales.md). The manifest, the picker (`Classes/AppLanguage.cs`) and the test's language list must agree.
 - **XAML uses `x:Uid`** (`Name.Property` entries) and code uses `UiStrings.Get/Format`. Never give a plain code key the same name as an `x:Uid`: Windows turns the dot into a path, so `A` and `A.Content` collide.
 - **Stored data never changes language.** Settings keep function Ids and `WindowsFunctionText` translates at display time. The catalog stays English because the handler links it, and the handler shows no text, so nothing localization-related goes into `RepilotKey/` or the linked files.
@@ -60,7 +60,7 @@ Source is authoritative in WSL, with submodules initialised (`git submodule upda
 | `npm run install:desktop` | The dev package updates in place and launches | Key behaviour; check it in the running app |
 | `npm run package:desktop` | An unsigned Store package builds, with every language resolving | Signing; that it runs |
 | `npm run check:l10n` | Every language is complete and consistent with the XAML, code and catalog | That the text is translated well |
-| `npm test` | Every harness under `tests/` passes on Linux | What needs Windows, the installed package or a key press (see each README) |
+| `npm test` | Every harness under `tests/` passes on Linux | What needs Windows, the installed package or a key press |
 | `npm run validate` | The Linux gate: format, `.gitignore` shared block and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
 | `npm run format` | Rewrites C# outside `external/` to the kit's style | Behaviour |
 
@@ -70,7 +70,7 @@ Before finishing a change, run `npm run validate` and `npm run verify:desktop`; 
 
 ## Release
 
-Repilot ships only through the Microsoft Store; a GitHub Release carries notes and the tag, nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md), and the header of `build-msix.yml`). That workflow still builds and signs the MSIX on both platforms as CI's only packaging check; keep the step. A `v*` tag makes `store-publish.yml` upload the Store package (`Tier1012`, US $0.99; manual runs default to draft review). Keep `build-msix.ps1 -NoSign` working for local Store packages. Bump `<Version>` in `Directory.Build.props` for releases only; dev builds use a staging-only revision.
+Use the `release` skill; a `v*` tag fails without the committed `release-notes/` files. Repilot ships only through the Microsoft Store; a GitHub Release carries notes and nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md); the header of `build-msix.yml` says why). It still builds and signs both packages as CI's only packaging check; keep that step. `store-publish.yml` calls the kit's Store workflow (`Tier1012`, US $0.99): a tag stops at a draft, and submitting it is the maintainer's manual run. Keep `build-msix.ps1 -NoSign` working, since that workflow runs it.
 
 ## Guidance map
 
@@ -80,18 +80,19 @@ Repilot ships only through the Microsoft Store; a GitHub Release carries notes a
 | [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
 | [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, the kit's `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
+| `release` skill | Cutting a release | `Directory.Build.props`, `release-notes/**`, tags |
 
 ## Keeping docs current
 
 | What changed | Update |
 | --- | --- |
 | A file, service or page added, moved or removed | The Architecture table above |
-| A file linked into the handler | The Architecture table, and check it stays WinUI-free and trim-safe |
+| A file linked into the handler | The Architecture table; keep it WinUI-free and trim-safe |
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
 | An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
 | A Windows function | The catalog, every `Resources.resw` |
 | A language | The manifest, `Classes/AppLanguage.cs`, the localization harness's list, `build-msix.ps1` |
-| winui-app-kit pin bumped | The kit's `.editorconfig` if it changed, then `npm run format` |
+| winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
 | A feature or requirement users can see | Behaviour above, `README.md` |
-| Release workflow or packaging | Release above, `docs/development.md` |
+| Release workflow or packaging | Release above, the `release` skill, `docs/development.md` |
 | A guide or skill moved or removed | The guidance map above and every skill that names it |
