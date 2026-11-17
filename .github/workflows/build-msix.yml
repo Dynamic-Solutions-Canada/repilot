@@ -56,8 +56,11 @@ jobs:
           echo "VERSION=$ver" >> $env:GITHUB_OUTPUT
           Write-Host "Detected version: $ver"
 
-      # Every language complete and consistent with the XAML, code and catalog.
+      # Every language complete and consistent with the XAML, code and catalog. The check does
+      # not depend on the platform, so it runs once, on the x64 leg: the job's PLATFORM variable
+      # becomes MSBuild's Platform property, and an ARM64 test exe cannot start on this x64 runner.
       - name: Check string resources
+        if: matrix.platform == 'x64'
         shell: pwsh
         run: dotnet run --project tests/Repilot.LocalizationTests -c Release
 
