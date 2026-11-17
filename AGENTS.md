@@ -1,161 +1,91 @@
-# Repilot — Codex Instructions
+# Repilot: Agent Instructions
 
-## Project overview
+Repilot lets Windows 11 users choose what the Copilot key does: a keyboard shortcut, typed text, an app, or a Windows function. It is a paid Microsoft Store app (product `9PB5FJ08PNVJ`) that claims the key through Microsoft's official Copilot hardware-key provider model, so it only works as a packaged MSIX. It is built from WSL through the shared Windows build bridge, and its "Our other apps" page comes from the apps-promo submodule at `external/promo`.
 
-Repilot remaps the Windows 11 Copilot key via the **official Microsoft Copilot
-hardware-key provider** model. It must ship as a signed **MSIX** to be assignable in
-Settings. Reuses LittleLauncher patterns (WinUI 3 settings window, `SettingsManager`/
-`UserSettings`, MSIX build script, and a tiny standalone handler exe like
-LittleLauncher's Native-AOT companion).
+## Standards
 
-## Architecture — TWO processes (keep this split)
+This repo follows the shared standards at https://github.com/Dynamic-Solutions-Canada/app-standards. Read the index for this stack, https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/stacks/windows.md, then the topic file for the area you are changing. If `external/standards/` exists, it is the same content pinned for offline use. Where this file differs from the standards, this file wins and says why.
 
-The keypress path must stay thin and non-resident.
+## Architecture
 
-- **`RepilotKey.exe`** (project `RepilotKey/`) — the key handler. Self-contained,
-  ReadyToRun, trimmed, single-file (flip `<PublishAot>` if VC++ build tools exist).
-  Windows launches it on the key; `Program.cs` detects the gesture, reads
-  `settings.json`, calls `ActionExecutor.RunSync`, and exits. No window, nothing resident.
-  Shares model/catalog/executor with the settings app via **linked source files**
-  (`<Compile Include="..\Repilot\...">`), so those files must stay WinUI-free and
-  AOT/trim-safe (no NLog, no reflection-heavy code).
-- **`Repilot.exe`** (project `Repilot/`) — WinUI 3 settings UI only. Launched
-  on demand; `SettingsWindow` is the main window; not resident; not in the keypress path.
+Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress path must stay thin and non-resident.
 
-Both ship in one MSIX (`RepilotMSIX/`). Manifest has two `<Application>`s:
-`Id="App"` = the handler (provider + protocol extension; Start tile "Repilot Key") —
-**named "App" so the user's key assignment AUMID (`PFN!App`) survives updates**;
-`Id="Settings"` = the WinUI app (Start tile "Repilot").
+- **`RepilotKey.exe`** (`RepilotKey/`) is the key handler. Windows launches it on each key press; `Program.cs` detects the gesture, reads `settings.json`, calls `ActionExecutor.RunSync` and exits. No window, nothing resident. It is self-contained, ReadyToRun, trimmed and single-file.
+- **`Repilot.exe`** (`Repilot/`) is the WinUI 3 settings app, launched on demand. `SettingsWindow` is its only window. It is not resident and not in the keypress path.
+- The manifest has two `<Application>`s. `Id="App"` is the handler (provider and protocol extension; Start tile "Repilot Key"); it is named `App` so the user's key assignment (`PFN!App`) survives updates. `Id="Settings"` is the settings app (Start tile "Repilot").
 
-**CRITICAL — the provider (`Id="App"`) MUST be listed in the app list; do NOT set
-`AppListEntry="none"` on it.** The "Customize Copilot key" picker only offers visible,
-launchable apps. A hidden provider still registers in the AppExtension catalog (so a
-catalog probe finds it) but Settings rejects it with "your PC doesn't have an app that
-meets the hardware key criteria." Consequence: BOTH apps show a Start tile ("Repilot"
-= settings, "Repilot Key" = runs the action). That second tile is required for
-eligibility — it is not a bug to be cleaned up. (This shipped broken in 1.0.13; fixed
-in 1.0.14.)
-
-## How the key maps
-
-- Windows launches the handler (`Id="App"`) on a key press; it runs the single
-  configured `Action`. Holding the key auto-repeats the launch, so the handler
-  debounces (one press = one run) via a `repeat-state` timestamp + a named mutex.
-- A press-and-hold protocol activation (`repilot-key://?state=Up`) is a
-  no-op; the OS doesn't reliably deliver a distinct hold gesture, so hold was dropped.
-- `ActionExecutor` runs the `Action` from settings.json: `SendInput` for key combos
-  (it reuses a physically-held Win when triggered via Win+C), `Process.Start(UseShellExecute)`
-  for app/URI/`ms-settings:`, and `explorer.exe` for `shell:AppsFolder\{AUMID}` apps.
-
-## Shared types (WinUI-free, in `Repilot/` but linked into the handler)
-
-| File | Role |
+| Area | Files |
 |---|---|
-| `Models/KeyCombo.cs` | Modifiers + VK; display string. |
-| `Models/CopilotActionData.cs` | Plain POCO action (Type, Combo, LaunchPath, WindowsFunctionId). |
-| `Models/WindowsFunction.cs` | Catalog entry. |
-| `Services/WindowsFunctionCatalog.cs` | Curated grouped catalog. |
-| `Services/ActionExecutor.cs` | `RunSync` (handler) / `Run` (UI test button); self-contained SendInput. |
+| Shared with the handler through linked source (`<Compile Include="..\Repilot\...">`) | `Models/KeyCombo.cs`, `Models/CopilotActionData.cs`, `Models/WindowsFunction.cs`, `Services/WindowsFunctionCatalog.cs`, `Services/ActionExecutor.cs` |
+| Handler: gesture, debounce, log | `RepilotKey/Program.cs` |
+| Settings window and pages | `SettingsWindow.xaml(.cs)`, `Pages/*` |
+| Key assignment status | `Services/CopilotKeyProvider.cs` (`HandlerAppId = "App"`) |
+| Action summary, installed apps, function text | `Services/ActionSummary.cs`, `Services/InstalledAppsService.cs`, `Services/WindowsFunctionText.cs` |
+| Settings | `ViewModels/UserSettings.cs`, `Classes/Settings/SettingsManager.cs` |
+| Repository name, used by About and the update check | `Classes/AboutContent.cs` |
+| Update check | `Services/UpdateService.cs` |
+| Interface text (nine languages) | `Strings/<lang>/Resources.resw`, `Services/UiStrings.cs`, `Classes/AppLanguage.cs` |
+| "Our other apps" page | `external/promo` submodule; English-copy adapter in `Pages/PromotedAppsPage.Localization.cs` |
 
-WinUI-only: `Services/ActionSummary.cs`, `Services/CopilotKeyProvider.cs`
-(assignment-status reader; `HandlerAppId = "App"`), `ViewModels/UserSettings.cs`,
-`Classes/NativeMethods.cs` (settings-window P/Invoke only), pages, `SettingsWindow`.
+## Behaviour
 
-## Conventions / gotchas
+- **The provider (`Id="App"`) must stay in the app list; never set `AppListEntry="none"` on it.** The "Customize Copilot key" picker offers only visible, launchable apps. A hidden provider still registers in the AppExtension catalog, so a catalog probe finds it, but Settings rejects it with "your PC doesn't have an app that meets the hardware key criteria". Both Start tiles are therefore required; the second one is not a bug. (This shipped broken in 1.0.13 and was fixed in 1.0.14.)
+- **One press runs the action once.** Holding the key auto-repeats the launch, so the handler debounces with a `repeat-state` timestamp and the named mutex `Repilot.HandlerState`. A press-and-hold activation (`repilot-key://?state=Up`) is a no-op: Windows does not reliably deliver a distinct hold gesture, so hold was dropped.
+- **`ActionExecutor`** sends key combos with `SendInput` (reusing a physically held Win key when triggered by Win+C), starts apps, URIs and `ms-settings:` with `Process.Start(UseShellExecute)`, and starts packaged apps through `explorer.exe shell:AppsFolder\{AUMID}`.
+- **Unpackaged builds cannot be assigned to the key**, because the key is claimed through the `com.microsoft.windows.copilotkeyprovider` AppExtension. `Pages/HomePage.xaml.cs` hides the Assign button and says so.
+- **Check for Updates** opens the Store's Updates and downloads page (`ms-windows-store://downloadsandupdates`) for packaged copies; it does not claim a scan finished. Unpackaged builds check GitHub Releases and offer "View Release", never a download.
 
-- Settings at `%AppData%\Repilot\settings.json` (auto-redirected to package data
-  when packaged — both exes resolve the same path).
-- Linked shared files must be AOT/trim-safe — **no NLog** there (handler errors go to
-  `ActionExecutor.ErrorSink` in the UI, or the handler's own `key-handler.log`).
-- `global::` does not parse inside interpolated strings — assign to a local first.
-- Fully-qualify `Microsoft.UI.Xaml.Visibility`/`FocusState` in page code-behind.
-- **PowerShell build scripts must be ASCII** (Windows PowerShell 5.1 reads BOM-less
-  `.ps1` as ANSI; a UTF-8 em-dash inside a string becomes a curly quote and breaks parsing).
-- MSIX blocks reinstalling the same version with different content — bump
-  `<Version>` in `Directory.Build.props` for releases only. Dev builds use a staging-only revision.
+## Conventions and gotchas
 
-## Update checking (`Services/UpdateService.cs`)
+- **Linked shared files stay WinUI-free and AOT/trim-safe:** no NLog, no reflection-heavy code. Handler errors go to `ActionExecutor.ErrorSink` in the settings app, or to the handler's own `key-handler.log`.
+- **Both executables resolve the same settings path,** `%AppData%\Repilot\settings.json`, which Windows redirects to package data when packaged.
+- **Interface text uses `.resw`** (LOC-6), in `Repilot/Strings/<lang>/Resources.resw` for the seven distinct wordings; `build-msix.ps1` packages en-CA and fr-CA as copies of en-US and fr-FR. The shared locale rules are in [locales.md](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/locales.md). The manifest, the picker (`Classes/AppLanguage.cs`) and the test's language list must agree.
+- **XAML uses `x:Uid`** (`Name.Property` entries) and code uses `UiStrings.Get/Format`. Never give a plain code key the same name as an `x:Uid`: Windows turns the dot into a path, so `A` and `A.Content` collide.
+- **Stored data never changes language.** Settings keep function Ids and `WindowsFunctionText` translates at display time. The catalog stays English because the handler links it, and the handler shows no text, so nothing localization-related goes into `RepilotKey/` or the linked files.
+- **A language change needs the settings app reopened.** The choice is applied in the `App` constructor through `ApplicationLanguages.PrimaryLanguageOverride`, before any XAML loads; there is no live relabelling.
+- **Packaging strips makepri's language splitting,** because split PRIs are dropped from a flat MSIX and every translation would be lost silently. The build fails unless a probe string resolves in every declared language.
+- **`external/promo` is never edited.** `Pages/PromotedAppsPage.Localization.cs` translates exact known English copy from it; unknown remote copy stays English.
+- **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
+- `global::` does not parse inside interpolated strings; assign to a local first. Fully qualify `Microsoft.UI.Xaml.Visibility` and `FocusState` in page code-behind.
+- **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 
-For packaged copies, About opens the Microsoft Store's Updates and downloads page with
-`ms-windows-store://downloadsandupdates`. The Store handles the account-wide check and
-installation. This URI opens the page; the app does not assert that a fresh scan completed.
-The button remains labeled **Check for Updates**; the Store handles any update or restart prompt.
+## Commands
 
-Unpackaged development builds still check GitHub Releases and offer **View Release**.
-Neither route downloads or installs a package inside Repilot.
+Source is authoritative in WSL, with submodules initialised (`git submodule update --init`). Setup is in [DEVELOPING.md](DEVELOPING.md).
 
-## Building
+| Command | Proves | Does not prove |
+| --- | --- | --- |
+| `npm run verify:desktop` | The settings app compiles on Windows (Debug), XAML included | That the handler publishes, or that it packages or runs |
+| `npm run build:desktop` | A signed dev package builds, handler included | That it installs or runs |
+| `npm run install:desktop` | The dev package updates in place and launches | Key behaviour; check it in the running app |
+| `npm run package:desktop` | An unsigned Store package builds, with every language resolving | Signing; that it runs |
+| `dotnet run --project tests/Repilot.LocalizationTests -c Release` | Every language is complete and consistent with the XAML, code and catalog (runs on Linux) | That the text is translated well |
 
-- Dev compile from WSL: `npm run verify:desktop` (Windows tools, including XAML).
-- Handler: `dotnet publish RepilotKey/RepilotKey.csproj -c Release -r win-arm64`.
-- Dev package/install from WSL: `npm run build:desktop` and `npm run install:desktop`.
-  These invoke the existing packaging script inside disposable C: TEMP.
-  NuGet package). `-NoSign` for Store. Set `<Identity>` from Partner Center first.
+Use the `desktop` skill for builds and installs.
 
-## Releases and distribution (no public binaries, ever)
+## Release
 
-- **The Microsoft Store is the install route** (product `9PB5FJ08PNVJ`). Repilot is a paid
-  app in a public repo, so there is nothing to give away here, and an unpackaged build is
-  not a usable product anyway: the key is claimed through the
-  `com.microsoft.windows.copilotkeyprovider` AppExtension, so without package identity it
-  cannot be assigned (`Pages/HomePage.xaml.cs` hides the Assign button and says exactly that).
-  Anyone who wants to run it from source builds it themselves.
-- **A GitHub release carries notes and the tag, nothing downloadable.**
-  `build-msix.yml` attaches no release assets and uploads no Actions artifact; artifacts on
-  a public repo need only read access, which for a public repo means anybody. Do not add
-  either back, and do not invent a portable build to fill the gap: there isn't one.
-- **It still builds the MSIX on both platforms every run, and that step stays.** It is CI's
-  only check that manifest stamping, `makepri`, `makeappx` and signing work. Delete it and
-  the first sign of a break is a failed Store submission.
-- The Store package comes from `store-publish.yml` on release tags (using `Tier1012` for
-  the US $0.99 base price; manual runs default to draft review) or locally from
-  `build-msix.ps1 -NoSign`, which
-  keeps the real Partner Center identity and leaves the package unsigned because the Store
-  re-signs at ingestion. Keep that local path working.
-- Unpackaged copies check GitHub Releases and offer "View Release", a link to the release
-  page, never an asset download, so notes-only releases are fine for that path.
+Repilot ships only through the Microsoft Store, and a GitHub Release carries notes and the tag, nothing downloadable ([DIST-5](https://github.com/Dynamic-Solutions-Canada/app-standards/blob/main/standards/distribution.md)); the header of `build-msix.yml` says why. That workflow still builds and signs the MSIX on both platforms every run as CI's only packaging check, so keep the step. A `v*` tag makes `store-publish.yml` upload the Store package (price tier `Tier1012`, US $0.99; manual runs default to draft review). `build-msix.ps1 -NoSign` builds the same unsigned Store package locally; keep that path working. Bump `<Version>` in `Directory.Build.props` for releases only: MSIX refuses the same version with different content, and dev builds use a staging-only revision.
 
-## Adding a Windows function
+## Guidance map
 
-Add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`,
-`Description`, and a `Combo` or `ShellTarget`). It appears in the picker and is usable
-by the handler automatically (the file is linked into both projects). Also add its
-`Function_<id>_Name` and `Function_<id>_Description` strings (and a `FunctionGroup_*`
-string for a new group) to every `Repilot/Strings/*/Resources.resw`; the localization
-test fails until they exist and the en-US text matches the catalog.
+| Guide, doc, or skill | Read or use when | Governs |
+| --- | --- | --- |
+| [DEVELOPING.md](DEVELOPING.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
+| [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
+| [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, `scripts/windows-build` |
+| `desktop` skill | Building, verifying or installing locally | Local Windows builds |
 
-## Localization (settings app only)
+## Keeping docs current
 
-- **Nine languages, matching Persistent:** en-US, en-CA, es-ES, fr-FR, fr-CA, de-DE, zh-CN,
-  pt-BR, ja-JP. Text lives in `Repilot/Strings/<lang>/Resources.resw` for the seven
-  distinct wordings; `build-msix.ps1` packages en-CA and fr-CA as copies of en-US and
-  fr-FR. The manifest, the picker (`Classes/AppLanguage.cs`) and the test list must agree.
-- **XAML uses `x:Uid`** (`Name.Property` entries); **code uses `UiStrings.Get/Format`**.
-  Never give a plain code key the same name as an `x:Uid`: Windows turns the dot into a
-  path, so `A` and `A.Content` collide.
-- **Stored data never changes language.** Settings keep function Ids; `WindowsFunctionText`
-  translates at display time. The catalog stays English because the handler links it.
-- **The handler shows no text**, so nothing localization-related goes into `RepilotKey/`
-  or the linked shared files.
-- **Language picker:** "Follow Windows" or a saved tag in `settings.json`, applied in the
-  `App` constructor via `ApplicationLanguages.PrimaryLanguageOverride` before any XAML
-  loads. A change needs the settings app reopened; there is no live relabelling.
-- **Packaging:** `build-msix.ps1` strips makepri's language splitting (split PRIs are
-  dropped from a flat MSIX, silently losing every translation) and fails the build unless
-  a probe string resolves in every declared language.
-- **"Our other apps":** `Pages/PromotedAppsPage.Localization.cs` translates exact known
-  English copy from the promo submodule; unknown remote copy stays English. Leave the
-  submodule itself unchanged.
-- **Check:** `dotnet run --project tests/Repilot.LocalizationTests -c Release` (portable;
-  runs in a `mcr.microsoft.com/dotnet/sdk:10.0` container). Translations are
-  machine-generated with no native-speaker review.
-
-## Windows desktop workflow
-
-Source is authoritative in WSL. Read `.codex/docs/windows-development.md` and use
-`npm run build:desktop`, `npm run verify:desktop`, `npm run install:desktop`, and
-`npm run package:desktop` from the repository root. The common bridge builds in
-a disposable C: Windows TEMP directory and cleans it after use. Never use a D:
-checkout or build directly against WSL source with Windows tools. Dev install
-versions change only in the temporary copy; never uninstall to bypass an update
-error. Store releases keep their existing project-specific release workflow.
+| What changed | Update |
+| --- | --- |
+| A file, service or page added, moved or removed | The Architecture table above |
+| A file linked into the handler | The Architecture table, and check it stays WinUI-free and trim-safe |
+| A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
+| An npm command | The Commands table above, `DEVELOPING.md`, the `desktop` skill, `paseo.json` |
+| A Windows function | The catalog, every `Resources.resw` |
+| A language | The manifest, `Classes/AppLanguage.cs`, the localization test's list, `build-msix.ps1` |
+| A feature or requirement users can see | Behaviour above, `README.md` |
+| Release workflow or packaging | Release above, `DEVELOPING.md` |
+| A guide or skill moved or removed | The guidance map above and every skill that names it |

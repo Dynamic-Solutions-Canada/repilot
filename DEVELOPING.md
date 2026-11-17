@@ -159,7 +159,7 @@ its client secret in Entra. Renew the secret before expiry.
 
 ## Windows desktop workflow
 
-Source is authoritative in WSL. Read `.codex/docs/windows-development.md` and use
+Source is authoritative in WSL. Read the [shared Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) guide and use
 `npm run build:desktop`, `npm run verify:desktop`, `npm run install:desktop`, and
 `npm run package:desktop` from the repository root. The common bridge builds in
 a disposable C: Windows TEMP directory and cleans it after use. Never use a D:
