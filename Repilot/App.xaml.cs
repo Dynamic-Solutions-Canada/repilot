@@ -46,9 +46,10 @@ public partial class App : Application
 
         if (!SingleInstance.TryClaim(InstanceMutexName))
         {
-            // Restore and bring forward the running copy's window, using this launch's foreground right.
+            // Restore and bring forward the running copy's window, using this launch's foreground right,
+            // then end this launch off the UI thread (the kit's safe exit for a second launch).
             SingleInstance.BringRunningInstanceForward(InstanceMutexName);
-            Environment.Exit(0);
+            SingleInstance.ExitThisLaunch();
         }
 
         AppBootstrap.InstallCrashLogging(this);
