@@ -24,6 +24,9 @@
     },
     "test": {
       "command": "npm test"
+    },
+    "icons": {
+      "command": "npm run icons"
     }
   }
 }

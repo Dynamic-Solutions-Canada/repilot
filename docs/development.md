@@ -42,11 +42,14 @@ The Linux checks need no Windows machine. They run through winui-app-kit's `scri
 
 | Command | What it does |
 | --- | --- |
-| `npm run validate` | The whole Linux gate: `format:check`, `check:gitignore`, `check:l10n`, then `npm test` |
+| `npm run validate` | The whole Linux gate: `format:check`, `check:gitignore`, `check:icons`, `check:notices`, `check:screenshots`, `check:listing`, `check:l10n`, then `npm test` |
 | `npm test` | Runs every harness under `tests/` (found by walking the folder) |
 | `npm run check:l10n` | The localization harness (`tests/Repilot.Localization.Tests`) |
 | `npm run check:gitignore` | Checks `.gitignore` ends with the kit's shared block unchanged |
+| `npm run icons` / `check:icons` | Writes every app icon from the masters in `assets/brand/`, or fails when a committed icon differs from what they make (devkit; Node 22.12 or later, below 25) |
 | `npm run format` / `format:check` | Formats C# outside `external/` to the kit's `.editorconfig`, or fails on a difference |
+
+The app icon and MSIX images come from the SVG masters in `assets/brand/` (`icon.svg`, and `icon-mono.svg` for the light taskbar), sized by devkit through `npm run icons`, which writes `RepilotMSIX/Images/`, `Repilot/Resources/Repilot.ico` and `.png`, and `assets/generated/` (the README, website and promo icon). The output is committed; never edit it by hand. After changing a master, run `npm run icons` and commit the output.
 
 `tests-native/Repilot.InputTests` sends real keystrokes, so it never runs from these commands or CI; its README says how to run it deliberately on Windows.
 
@@ -119,10 +122,9 @@ Use the `release` skill ([.agents/skills/release/SKILL.md](../.agents/skills/rel
 
 The published base price is US $0.99. The API may report it as `PriceId: "Base"`, which the Store CLI cannot round-trip, so the workflow explicitly supplies `Tier1012`, the US $0.99 tier identified by a [Microsoft maintainer](https://github.com/microsoft/msstore-cli/pull/175#issuecomment-5791491206). Tier pricing can change converted prices in other markets; review the draft in Partner Center before submitting. Each listing locale gets the notes for its language (en-CA and fr-CA use the en-US and fr-FR files).
 
-For a manual fallback, generate images and build both packages on Windows with PowerShell 7 from the repository root, then upload the versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center:
+For a manual fallback, build both packages on Windows with PowerShell 7 from the repository root (the MSIX images are committed), then upload the versioned `.msix` files from `RepilotMSIX/bin/msix-output` in Partner Center:
 
 ```powershell
-.\RepilotMSIX\generate-msix-images.ps1
 pwsh -File external/winui-app-kit/build/build-msix.ps1 -Platform x64 -NoSign
 pwsh -File external/winui-app-kit/build/build-msix.ps1 -Platform ARM64 -NoSign
 ```

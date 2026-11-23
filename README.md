@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="RepilotMSIX/Images/Square150x150Logo.png" alt="Repilot" width="120">
+  <img src="assets/generated/icon-256.png" alt="Repilot" width="120">
 </p>
 
 <h1 align="center">Repilot</h1>

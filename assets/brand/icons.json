@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "windows": {
+      "images": "RepilotMSIX/Images",
+      "ico": "Repilot/Resources/Repilot.ico",
+      "tiles": false
+    }
+  }
+}
