@@ -2,7 +2,7 @@
 
 `listings.json` is the listing text in the shared `schemaVersion: 1` / `locales` shape (LIST-3), for the app's nine locale identities: `en-US`, `en-CA`, `es-ES`, `fr-FR`, `fr-CA`, `de-DE`, `zh-CN`, `pt-BR` and `ja-JP` (the same set the package manifest declares). Seven records hold wording; `en-CA` is `{ "copyFrom": "en-US" }` and `fr-CA` is `{ "copyFrom": "fr-FR" }`, matching the app's string folders. Fields are semantic names, not Partner Center field IDs. No publisher reads this file yet, so Partner Center is changed by hand to match it (LIST-9).
 
-The text was taken from the live listing (submission 1152921505702429646, 2026-11-17): descriptions, features and keywords. The five screenshot captions are new with the restyled screenshots (the live listing has three), in the order of `store-assets/manifest.json`; the en-US ones were drafted for this release and the other six are AI-drafted. Image files and their URLs stay in Partner Center. `shortDescription` was empty live and is new: the `en-US` text is the README tagline, and the six translations were drafted by AI. Every translation in the listing and in the release notes is AI-drafted, without native-speaker review (LOC-12). Translated wording uses the terms in `Repilot/Strings/<lang>/Resources.resw` so the listing matches what people see.
+The text was taken from the live listing (submission 1152921505702429646, 2026-11-17): descriptions, features and keywords. The five screenshot captions are new with the restyled screenshots (the live listing has three), in the order of `store-assets/manifest.json`; the en-US ones were drafted for this release and the other six are AI-drafted. A sixth comes first: the generated hero (D-123), captioned with its subline; its `heroHeadline` and `heroSubline` translate the maintainer's approved English the same way, and claim only what the short description says. Image files and their URLs stay in Partner Center. `shortDescription` was empty live and is new: the `en-US` text is the README tagline, and the six translations were drafted by AI. Every translation in the listing and in the release notes is AI-drafted, without native-speaker review (LOC-12). Translated wording uses the terms in `Repilot/Strings/<lang>/Resources.resw` so the listing matches what people see.
 
 Release notes are not in this file. Each version's "What's new" text is `release-notes/<version>.md` (`en-US`) plus one `release-notes/<version>.<identity>.md` per other wording catalog, the same text the GitHub Release uses (REL-6, LIST-10); `store-publish.yml` sends each listing locale its notes.
 
@@ -16,7 +16,7 @@ Release notes are not in this file. Each version's "What's new" text is `release
 | Short description | 270 characters | 167 (de-DE) |
 | Features | Up to 20, each up to 200 characters | 9, longest 72 (de-DE) |
 | Keywords | Up to 7, each up to 40 characters, 21 words combined | 7 per locale, at most 20 words (pt-BR) |
-| Screenshot captions | One per screenshot, up to 200 characters | 5 per locale, longest 107 (fr-FR) |
+| Screenshot captions | One per screenshot, up to 200 characters | 6 per locale, longest 107 (fr-FR) |
 | Release notes (`release-notes/`) | 1,500 characters | none yet |
 
 ## Claims to keep true

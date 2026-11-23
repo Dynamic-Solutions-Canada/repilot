@@ -42,11 +42,12 @@ The Linux checks need no Windows machine. They run through winui-app-kit's `scri
 
 | Command | What it does |
 | --- | --- |
-| `npm run validate` | The whole Linux gate: `format:check`, `check:gitignore`, `check:icons`, `check:notices`, `check:screenshots`, `check:listing`, `check:l10n`, then `npm test` |
+| `npm run validate` | The whole Linux gate: `format:check`, `check:gitignore`, `check:icons`, `check:notices`, `check:screenshots`, `check:hero`, `check:listing`, `check:l10n`, then `npm test` |
 | `npm test` | Runs every harness under `tests/` (found by walking the folder) |
 | `npm run check:l10n` | The localization harness (`tests/Repilot.Localization.Tests`) |
 | `npm run check:gitignore` | Checks `.gitignore` ends with the kit's shared block unchanged |
 | `npm run icons` / `check:icons` | Writes every app icon from the masters in `assets/brand/`, or fails when a committed icon differs from what they make (devkit; Node 22.12 or later, below 25) |
+| `npm run hero` / `check:hero` | Draws the first Store screenshot in every listing locale from the icon, the Home page capture and each locale's `heroHeadline` and `heroSubline`, or fails when a committed one differs from what they draw (devkit; the first run downloads its pinned fonts, about 27 MB, into the user's cache) |
 | `npm run format` / `format:check` | Formats C# outside `external/` to the kit's `.editorconfig`, or fails on a difference |
 
 The app icon and MSIX images come from the SVG masters in `assets/brand/` (`icon.svg`, and `icon-mono.svg` for the light taskbar), sized by devkit through `npm run icons`, which writes `RepilotMSIX/Images/`, `Repilot/Resources/Repilot.ico` and `.png`, and `assets/generated/` (the README, website and promo icon). The output is committed; never edit it by hand. After changing a master, run `npm run icons` and commit the output.

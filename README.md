@@ -15,11 +15,11 @@
 </p>
 
 <p align="center">
-  <img src="store-assets/microsoft/screenshots/00-home-dark.png" alt="Repilot's Home page: the Copilot key is assigned to Repilot and set to Task View" width="250">
+  <img src="store-assets/microsoft/screenshots/01-home-dark.png" alt="Repilot's Home page: the Copilot key is assigned to Repilot and set to Task View" width="250">
   &nbsp;
-  <img src="store-assets/microsoft/screenshots/01-shortcut-dark.png" alt="Map the Copilot key to a keyboard shortcut such as Alt + Tab" width="250">
+  <img src="store-assets/microsoft/screenshots/02-shortcut-dark.png" alt="Map the Copilot key to a keyboard shortcut such as Alt + Tab" width="250">
   &nbsp;
-  <img src="store-assets/microsoft/screenshots/02-text-dark.png" alt="Map the Copilot key to typing a phrase" width="250">
+  <img src="store-assets/microsoft/screenshots/03-text-dark.png" alt="Map the Copilot key to typing a phrase" width="250">
 </p>
 
 Repilot lets you choose what your keyboard's dedicated **Copilot key** (or **Windows logo key + C**) does. It uses Microsoft's official "Copilot hardware key provider" support, so it appears right in **Settings > Bluetooth & devices > Keyboard > Customize Copilot key**.
