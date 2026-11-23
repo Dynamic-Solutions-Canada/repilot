@@ -56,8 +56,9 @@ Source is authoritative in WSL, with submodules initialised (`git submodule upda
 | `npm run package:desktop` | An unsigned Store package builds, with every language resolving | Signing; that it runs |
 | `npm run check:l10n` | Every language is complete and consistent with the XAML, code and catalog | That the text is translated well |
 | `npm test` | Every harness under `tests/` passes on Linux | What needs Windows, the installed package or a key press |
-| `npm run validate` | The Linux gate: format, `.gitignore` shared block, icon, notices, screenshot, listing and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
+| `npm run validate` | The Linux gate: format, `.gitignore` shared block, icon, notices, screenshot, hero, listing and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
 | `npm run icons` | Writes every app icon from `assets/brand/` (devkit; `check:icons` in `validate` fails when a committed icon differs from what the masters make) | How the icon looks; check it on a light and a dark taskbar |
+| `npm run hero` | Draws the first Store screenshot in every listing locale (devkit; `check:hero` in `validate` compares the pixels) | That the text reads well; the maintainer approves new heroes |
 | `npm run format` | Rewrites C# outside `external/` to the kit's style | Behaviour |
 
 `tests-native/Repilot.InputTests` sends real keystrokes: never part of `test`, `validate` or CI; Windows only, with `REPILOT_INPUT_TESTS=1` (see its README).

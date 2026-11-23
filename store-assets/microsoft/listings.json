@@ -26,12 +26,15 @@
         "Copilot key shortcut"
       ],
       "screenshotCaptions": [
+        "A keyboard shortcut, text, an app or link, or a Windows function.",
         "Choose what your Copilot key does, and see that Windows has it assigned to Repilot.",
         "Record any keyboard shortcut, including system ones like Alt+Tab.",
         "Type a character or a phrase with one press, whatever your keyboard layout.",
         "Open an installed app, a file, a website or a Windows Settings page.",
         "Find Task View, Snap layouts, Lock PC, Magnifier and more by name."
-      ]
+      ],
+      "heroHeadline": "Make the Copilot key do what you want.",
+      "heroSubline": "A keyboard shortcut, text, an app or link, or a Windows function."
     },
     "en-CA": {
       "copyFrom": "en-US"
@@ -61,12 +64,15 @@
         "remapear teclado"
       ],
       "screenshotCaptions": [
+        "Un atajo de teclado, texto, una aplicación o enlace, o una función de Windows.",
         "Elige qué hace la tecla Copilot y comprueba que Windows la tiene asignada a Repilot.",
         "Graba cualquier atajo de teclado, incluidos los del sistema como Alt+Tab.",
         "Escribe un carácter o una frase con una sola pulsación, sea cual sea la distribución de tu teclado.",
         "Abre una aplicación instalada, un archivo, un sitio web o una página de la Configuración de Windows.",
         "Encuentra por nombre Vista de tareas, Diseños de acoplamiento, Bloquear equipo, Lupa y más."
-      ]
+      ],
+      "heroHeadline": "Haz que la tecla Copilot haga lo que quieras.",
+      "heroSubline": "Un atajo de teclado, texto, una aplicación o enlace, o una función de Windows."
     },
     "fr-FR": {
       "title": "Repilot",
@@ -93,12 +99,15 @@
         "remappage clavier"
       ],
       "screenshotCaptions": [
+        "Un raccourci clavier, du texte, une application ou un lien, ou une fonction Windows.",
         "Choisissez ce que fait la touche Copilot et vérifiez que Windows l’a bien attribuée à Repilot.",
         "Enregistrez n’importe quel raccourci clavier, y compris ceux du système comme Alt+Tab.",
         "Saisissez un caractère ou une phrase d’une seule pression, quelle que soit la disposition de votre clavier.",
         "Ouvrez une application installée, un fichier, un site web ou une page des Paramètres Windows.",
         "Trouvez par leur nom Affichage des tâches, Dispositions d’ancrage, Verrouiller le PC, Loupe et plus encore."
-      ]
+      ],
+      "heroHeadline": "Réattribuez la touche Copilot à ce que vous voulez.",
+      "heroSubline": "Un raccourci clavier, du texte, une application ou un lien, ou une fonction Windows."
     },
     "fr-CA": {
       "copyFrom": "fr-FR"
@@ -128,12 +137,15 @@
         "Tastatur anpassen"
       ],
       "screenshotCaptions": [
+        "Ein Tastenkurzbefehl, Text, eine App oder ein Link oder eine Windows-Funktion.",
         "Wählen Sie, was die Copilot-Taste tut, und sehen Sie, dass Windows sie Repilot zugewiesen hat.",
         "Zeichnen Sie jeden Tastenkurzbefehl auf, auch Systemkürzel wie Alt+Tab.",
         "Geben Sie mit einem Tastendruck ein Zeichen oder einen Satz ein, unabhängig vom Tastaturlayout.",
         "Öffnen Sie eine installierte App, eine Datei, eine Website oder eine Seite der Windows-Einstellungen.",
         "Finden Sie Taskansicht, Andocklayouts, PC sperren, Bildschirmlupe und mehr über den Namen."
-      ]
+      ],
+      "heroHeadline": "Belegen Sie die Copilot-Taste nach Ihren Wünschen.",
+      "heroSubline": "Ein Tastenkurzbefehl, Text, eine App oder ein Link oder eine Windows-Funktion."
     },
     "zh-CN": {
       "title": "Repilot",
@@ -160,12 +172,15 @@
         "键盘映射"
       ],
       "screenshotCaptions": [
+        "快捷键、文本、应用或链接，或 Windows 功能。",
         "选择 Copilot 键执行的操作，并确认 Windows 已将它分配给 Repilot。",
         "录制任意键盘快捷键，包括 Alt+Tab 等系统快捷键。",
         "按一下即可输入一个字符或一句话，与键盘布局无关。",
         "打开已安装的应用、文件、网站或 Windows 设置页面。",
         "按名称查找任务视图、贴靠布局、锁定电脑、放大镜等功能。"
-      ]
+      ],
+      "heroHeadline": "让 Copilot 键执行你想要的操作。",
+      "heroSubline": "快捷键、文本、应用或链接，或 Windows 功能。"
     },
     "pt-BR": {
       "title": "Repilot",
@@ -192,12 +207,15 @@
         "remapeamento de teclado"
       ],
       "screenshotCaptions": [
+        "Um atalho de teclado, texto, um aplicativo ou link, ou uma função do Windows.",
         "Escolha o que a tecla Copilot faz e confira se o Windows a atribuiu ao Repilot.",
         "Grave qualquer atalho de teclado, incluindo atalhos do sistema como Alt+Tab.",
         "Digite um caractere ou uma frase com um toque, seja qual for o layout do seu teclado.",
         "Abra um aplicativo instalado, um arquivo, um site ou uma página das Configurações do Windows.",
         "Encontre pelo nome Visão de Tarefas, Layouts de ajuste, Bloquear computador, Lupa e muito mais."
-      ]
+      ],
+      "heroHeadline": "Faça a tecla Copilot fazer o que você quiser.",
+      "heroSubline": "Um atalho de teclado, texto, um aplicativo ou link, ou uma função do Windows."
     },
     "ja-JP": {
       "title": "Repilot",
@@ -224,12 +242,15 @@
         "キーマッピング"
       ],
       "screenshotCaptions": [
+        "ショートカット、テキスト、アプリまたはリンク、Windows の機能。",
         "Copilot キーの動作を選び、Windows で Repilot に割り当てられていることを確認できます。",
         "Alt+Tab などのシステムのショートカットも含め、任意のキーボード ショートカットを記録できます。",
         "キーボード レイアウトに関係なく、1 回押すだけで文字やフレーズを入力できます。",
         "インストール済みのアプリ、ファイル、Web サイト、Windows の設定ページを開けます。",
         "タスクビュー、スナップレイアウト、PC をロック、拡大鏡などを名前で検索できます。"
-      ]
+      ],
+      "heroHeadline": "Copilot キーを、\n好きな動作に。",
+      "heroSubline": "ショートカット、テキスト、アプリまたはリンク、Windows の機能。"
     }
   }
 }
