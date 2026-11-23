@@ -53,6 +53,12 @@ jobs:
         with:
           global-json-file: global.json
 
+      # check:icons runs devkit, which needs Node 22.12 or later, below 25 (the kit's Store workflow uses 24).
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
       - name: Validate
         run: npm run validate
 
@@ -75,10 +81,6 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
-
-      - name: Generate images
-        shell: pwsh
-        run: ./RepilotMSIX/generate-msix-images.ps1
 
       # Nothing consumes this package, and that is not a reason to delete the step. It is CI's only
       # check that manifest stamping, makepri, makeappx and signing still work on both platforms;

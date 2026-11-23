@@ -39,7 +39,14 @@ jobs:
         with:
           global-json-file: global.json
 
-      # format:check, check:gitignore, check:l10n, then the portable harnesses under tests/.
+      # check:icons runs devkit, which needs Node 22.12 or later, below 25 (the kit's Store workflow uses 24).
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      # format:check, check:gitignore, check:icons, check:notices, check:screenshots, check:listing,
+      # check:l10n, then the portable harnesses under tests/.
       - name: Validate
         run: npm run validate
 

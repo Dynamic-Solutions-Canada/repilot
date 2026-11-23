@@ -23,6 +23,7 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 | Action summary, installed apps, function text | `Services/ActionSummary.cs`, `Services/InstalledAppsService.cs`, `Services/WindowsFunctionText.cs` |
 | Settings (the kit's versioned store, with Reset) | `ViewModels/UserSettings.cs`, `Classes/Settings/SettingsManager.cs`, `Classes/Settings/SettingsMigrations.cs` |
 | About content, repository, privacy URL, notices path, update check | `Classes/AboutContent.cs`; notices generated into `Repilot/THIRD-PARTY-NOTICES.txt` |
+| App icon and MSIX images | the icon masters `assets/brand/icon.svg` and `icon-mono.svg` with `icons.json`, from which `npm run icons` (devkit) writes `RepilotMSIX/Images/`, `Repilot.ico` and `Repilot.png` in `Repilot/Resources/`, and `assets/generated/` (committed output) |
 | Interface text (nine languages) | `Strings/<lang>/Resources.resw`, `Services/UiStrings.cs`, `Classes/AppLanguage.cs` |
 | "Our other apps" page | `external/promo` submodule; it follows the app's language through `PromoLocalization.LocaleProvider` (set in `App`) |
 
@@ -55,7 +56,8 @@ Source is authoritative in WSL, with submodules initialised (`git submodule upda
 | `npm run package:desktop` | An unsigned Store package builds, with every language resolving | Signing; that it runs |
 | `npm run check:l10n` | Every language is complete and consistent with the XAML, code and catalog | That the text is translated well |
 | `npm test` | Every harness under `tests/` passes on Linux | What needs Windows, the installed package or a key press |
-| `npm run validate` | The Linux gate: format, `.gitignore` shared block and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
+| `npm run validate` | The Linux gate: format, `.gitignore` shared block, icon, notices, screenshot, listing and l10n checks, then `npm test` | A Windows compile; also run `verify:desktop` |
+| `npm run icons` | Writes every app icon from `assets/brand/` (devkit; `check:icons` in `validate` fails when a committed icon differs from what the masters make) | How the icon looks; check it on a light and a dark taskbar |
 | `npm run format` | Rewrites C# outside `external/` to the kit's style | Behaviour |
 
 `tests-native/Repilot.InputTests` sends real keystrokes: never part of `test`, `validate` or CI; Windows only, with `REPILOT_INPUT_TESTS=1` (see its README).

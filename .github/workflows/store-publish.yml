@@ -65,8 +65,8 @@ jobs:
       # Paid, US $0.99. The live submission reports PriceId "Base", which the Store CLI cannot
       # round-trip, so the tier is named explicitly.
       price_tier: Tier1012
-      # The MSIX images are generated, not committed in full.
-      pre_build: '& ./RepilotMSIX/generate-msix-images.ps1'
+      # No steps of its own: the MSIX images are committed (npm run icons output).
+      pre_build: ''
       # The gate run first, on Linux; this is the default.
       gate_command: 'npm run validate'
       # A tag run is always a draft (REL-7); these only matter for manual runs.
