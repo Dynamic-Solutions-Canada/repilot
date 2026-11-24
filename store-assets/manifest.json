@@ -8,7 +8,8 @@
         "layout": "split",
         "icon": "assets/generated/icon-256.png",
         "primary": "#A21CAF",
-        "accent": "#F0ABFC"
+        "accent": "#F0ABFC",
+        "textFreeFile": "text-free/00-hero-dark.png"
       },
       "caption": "A keyboard shortcut, text, an app or link, or a Windows function.",
       "alt": "Repilot's name and the headline \"Make the Copilot key do what you want.\" on a purple panel, beside Repilot's Copilot key action page, enlarged, with Windows function selected and Task View chosen from the grouped list of window-management functions."
