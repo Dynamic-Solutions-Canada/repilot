@@ -2,22 +2,22 @@
 
 `listings.json` is the listing text in the shared `schemaVersion: 1` / `locales` shape (LIST-3), for the app's nine locale identities: `en-US`, `en-CA`, `es-ES`, `fr-FR`, `fr-CA`, `de-DE`, `zh-CN`, `pt-BR` and `ja-JP` (the same set the package manifest declares). Seven records hold wording; `en-CA` is `{ "copyFrom": "en-US" }` and `fr-CA` is `{ "copyFrom": "fr-FR" }`, matching the app's string folders. Fields are semantic names, not Partner Center field IDs. The Store workflow reads only the screenshot captions from it, when it uploads the screenshots; the rest of Partner Center is changed by hand to match it (LIST-9).
 
-The text was taken from the live listing (submission 1152921505702429646, 2026-11-17): descriptions, features and keywords. The five screenshot captions are new with the restyled screenshots (the live listing has three), in the order of `store-assets/manifest.json`; the en-US ones were drafted for this release and the other six are AI-drafted. A sixth comes first: the generated hero (D-123), captioned with its subline; its `heroHeadline` and `heroSubline` translate the maintainer's approved English the same way, and claim only what the short description says. The Store workflow uploads the screenshot files from `store-assets/` (`screenshots: true`); the logos stay in Partner Center. `shortDescription` was empty live and is new: the `en-US` text is the README tagline, and the six translations were drafted by AI. Every translation in the listing and in the release notes is AI-drafted, without native-speaker review (LOC-12). Translated wording uses the terms in `Repilot/Strings/<lang>/Resources.resw` so the listing matches what people see.
+The text was taken from the live listing (submission 1152921505702429646, 2026-11-17): descriptions, features and keywords. The copy review of 2026-11-24 rewrote the full description and the features in every locale: the opening line is the hero headline, the language caveats are gone (the app says when to reopen), "no telemetry" is stated, and the languages sentence names the seven languages. Its translations are AI-drafted like the rest; the GET STARTED sentence is unchanged until the name the Windows key picker shows is confirmed. The five screenshot captions are new with the restyled screenshots (the live listing has three), in the order of `store-assets/manifest.json`; the en-US ones were drafted for this release and the other six are AI-drafted. A sixth comes first: the generated hero (D-123), captioned with its subline; its `heroHeadline` and `heroSubline` translate the maintainer's approved English the same way, and claim only what the short description says. The Store workflow uploads the screenshot files from `store-assets/` (`screenshots: true`); the logos stay in Partner Center. `shortDescription` was empty live and is new: the `en-US` text is the README tagline, and the six translations were drafted by AI. Every translation in the listing and in the release notes is AI-drafted, without native-speaker review (LOC-12). Translated wording uses the terms in `Repilot/Strings/<lang>/Resources.resw` so the listing matches what people see.
 
 Release notes are not in this file. Each version's "What's new" text is `release-notes/<version>.md` (`en-US`) plus one `release-notes/<version>.<identity>.md` per other wording catalog, the same text the GitHub Release uses (REL-6, LIST-10); `store-publish.yml` sends each listing locale its notes.
 
-`npm run check:listing` checks this file and the current version's notes: the locales and aliases, every field, the limits below, matching caption counts, no em dashes or retired names, and that the README tagline is the first sentence of the `en-US` short description. It reads the wording catalogs from the `Repilot/Strings/<lang>` folders (`catalog_layout: "folders"` in `windows-build.json`). It is not part of `npm run validate` yet, because the current version (1.0.22) has no notes files; it joins `validate` in the release bump that adds the first ones.
+`npm run check:listing` checks this file and the current version's notes: the locales and aliases, every field, the limits below, matching caption counts, no em dashes or retired names, and that the README tagline is the first sentence of the `en-US` short description. It reads the wording catalogs from the `Repilot/Strings/<lang>` folders (`catalog_layout: "folders"` in `windows-build.json`). It is part of `npm run validate`.
 
 ## Limits
 
 | Text | Limit | Longest |
 | --- | --- | --- |
-| Full description | 4,000 characters | 2,015 (fr-FR) |
+| Full description | 4,000 characters | 1,832 (fr-FR) |
 | Short description | 270 characters | 167 (de-DE) |
-| Features | Up to 20, each up to 200 characters | 9, longest 72 (de-DE) |
+| Features | Up to 20, each up to 200 characters | 10, longest 82 (fr-FR) |
 | Keywords | Up to 7, each up to 40 characters, 21 words combined | 7 per locale, at most 20 words (pt-BR) |
 | Screenshot captions | One per screenshot, up to 200 characters | 6 per locale, longest 107 (fr-FR) |
-| Release notes (`release-notes/`) | 1,500 characters | none yet |
+| Release notes (`release-notes/`) | 1,500 characters | 522 (1.1.0, de-DE) |
 
 ## Claims to keep true
 
