@@ -30,19 +30,15 @@ Two processes ship in one MSIX (`RepilotMSIX/`). Keep the split: the keypress pa
 ## Behaviour
 
 - **The provider (`Id="App"`) must stay in the app list; never set `AppListEntry="none"` on it.** The "Customize Copilot key" picker offers only visible, launchable apps. A hidden provider still registers in the AppExtension catalog, but Settings rejects it ("your PC doesn't have an app that meets the hardware key criteria"). Both Start tiles are therefore required; the second one is not a bug. (This shipped broken in 1.0.13 and was fixed in 1.0.14.)
-- **One press runs the action once.** Holding the key auto-repeats the launch, so the handler debounces with a `repeat-state` timestamp and the named mutex `Repilot.HandlerState`. A press-and-hold activation (`repilot-key://?state=Up`) is a no-op: Windows does not reliably deliver a distinct hold gesture, so hold was dropped.
-- **`ActionExecutor`** sends key combos with `SendInput` (reusing a physically held Win key when triggered by Win+C), starts apps, URIs and `ms-settings:` with `Process.Start(UseShellExecute)`, and starts packaged apps through `explorer.exe shell:AppsFolder\{AUMID}`.
-- **Unpackaged builds cannot be assigned to the key** (the `com.microsoft.windows.copilotkeyprovider` AppExtension needs package identity); `Pages/HomePage.xaml.cs` hides the Assign button and says so.
+- **One press runs the action once**, and unpackaged builds cannot be assigned to the key. The debounce, how `ActionExecutor` runs each action type, and how to add a Windows function are in the [key handler guide](.agents/guides/key-handler.md).
 - **Check for Updates** opens the Store's Updates and downloads page for packaged copies, without claiming a scan finished. Unpackaged builds check GitHub Releases and offer "View Release", never a download.
 
 ## Conventions and gotchas
 
-- **Linked shared files stay WinUI-free and AOT/trim-safe:** no NLog, no reflection-heavy code. Handler errors go to `ActionExecutor.ErrorSink` in the settings app, or to the handler's own `key-handler.log`.
-- **Both executables read `%AppData%\Repilot\settings.json`**, redirected to package data when packaged.
+- **Linked shared files stay WinUI-free and AOT/trim-safe**, and both executables read `%AppData%\Repilot\settings.json` (see the key handler guide).
 - **`external/` is never edited** (KIT-8): change winui-app-kit or apps-promo in their own repos and bump the pin. The kit supplies the build props, logging, crash handling, theme, update check and the shared labels (`UiText`, configured in `App` for `kit.*` keys only).
 - **Interface text is `.resw`, in nine languages;** read the localization guide before changing any text, language or the language picker.
 - **PowerShell scripts must be ASCII.** Windows PowerShell 5.1 reads a BOM-less `.ps1` as ANSI, so a UTF-8 dash inside a string becomes a curly quote and breaks parsing.
-- **Adding a Windows function:** add an entry to `Services/WindowsFunctionCatalog.All` (unique `Id`, `Name`, `Group`, `Description`, and a `Combo` or `ShellTarget`). The picker and the handler pick it up through the linked file. Add `Function_<id>_Name` and `Function_<id>_Description` (and `FunctionGroup_*` for a new group) to every `Resources.resw`; the localization test fails until they exist and the en-US text matches the catalog.
 
 ## Commands
 
@@ -75,6 +71,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | --- | --- | --- |
 | [docs/development.md](docs/development.md) | Building, packaging, Store setup, or the CI workflows | Build setup, `.github/workflows/**` |
 | [.agents/guides/ui-conventions.md](.agents/guides/ui-conventions.md) | Any window, page, card or setting row | `Repilot/**/*.xaml(.cs)` |
+| [.agents/guides/key-handler.md](.agents/guides/key-handler.md) | Changing the handler, an action type, a linked file or the Windows function catalog | `RepilotKey/**`, `Services/ActionExecutor.cs`, `Services/WindowsFunctionCatalog.cs`, `Models/**` |
 | [.agents/guides/localization.md](.agents/guides/localization.md) | Changing interface text, a language or the picker | `Repilot/Strings/**`, `Classes/AppLanguage.cs`, `Services/UiStrings.cs` |
 | [Windows build tools](https://github.com/Dynamic-Solutions-Canada/windows-build-tools) | A Windows build, install or packaging problem | `windows-build.json`, the kit's `scripts/windows-build` |
 | `desktop` skill | Building, verifying or installing locally | Local Windows builds |
@@ -89,7 +86,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | A file linked into the handler | The Architecture table; keep it WinUI-free and trim-safe |
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
 | An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
-| A Windows function | The catalog, every `Resources.resw` |
+| A Windows function | The catalog, every `Resources.resw` (see the key handler guide) |
 | A setting's shape | A step in `SettingsMigrations.cs` and a scenario in `tests/Repilot.Settings.Tests/`; `Action` is read by the handler too |
 | A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list |
 | winui-app-kit pin bumped | The `uses:` tag in `store-publish.yml` and `credential-expiry.yml`; the kit's `.editorconfig` if it changed, then `npm run format` |
