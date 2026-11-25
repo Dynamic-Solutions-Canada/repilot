@@ -7,12 +7,12 @@ using Repilot.Models;
 namespace RepilotKey;
 
 /// <summary>
-/// The Copilot key handler — the ONLY thing in the keypress path. Windows launches
+/// The Copilot key handler: the ONLY thing in the keypress path. Windows launches
 /// this on a key press; it reads settings.json, runs the configured action, and exits.
 /// Native single-file: fast startup, no resident process.
 ///
 /// Windows auto-repeats the launch while the key is held, so a short debounce keeps a
-/// hold from spamming the action — one press runs it once.
+/// hold from spamming the action; one press runs it once.
 /// </summary>
 internal static class Program
 {

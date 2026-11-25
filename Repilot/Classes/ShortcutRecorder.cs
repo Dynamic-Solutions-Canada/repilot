@@ -8,7 +8,7 @@ namespace Repilot.Classes;
 
 /// <summary>
 /// Captures a keyboard chord by installing a temporary low-level keyboard hook that
-/// SUPPRESSES the keys while recording — so system shortcuts (Alt+Tab, Win+Tab, …)
+/// SUPPRESSES the keys while recording, so system shortcuts (Alt+Tab, Win+Tab, …)
 /// don't actually fire and steal focus. Reports modifiers live and the final combo.
 /// Only active between <see cref="Start"/> and <see cref="Stop"/>.
 /// </summary>

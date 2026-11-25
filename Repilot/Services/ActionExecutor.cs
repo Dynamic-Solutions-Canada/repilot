@@ -28,7 +28,7 @@ public static class ActionExecutor
 
     /// <summary>
     /// Runs the action on the calling thread (used by the key handler, which then
-    /// exits). May throw — callers that need it should catch.
+    /// exits). May throw; callers that need it should catch.
     /// </summary>
     public static void RunSync(CopilotActionData action)
     {
@@ -143,7 +143,7 @@ public static class ActionExecutor
         var m = combo.Mods;
 
         // When triggered via Win+C the user is physically holding Win. If the action
-        // also uses Win, REUSE that held key instead of injecting our own Win events —
+        // also uses Win, REUSE that held key instead of injecting our own Win events:
         // injecting (or releasing) Win while it's physically held desyncs the key and
         // can pop the Start menu. By only sending the non-Win keys here, repeated Win+C
         // taps keep firing. The dedicated Copilot key holds nothing, so we inject Win

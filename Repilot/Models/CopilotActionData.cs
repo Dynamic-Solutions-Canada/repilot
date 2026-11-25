@@ -17,7 +17,7 @@ public enum CopilotActionType
 
 /// <summary>
 /// Plain serializable action data shared by the WinUI settings app and the
-/// Native-AOT key handler. (No INotifyPropertyChanged — kept POCO so it works
+/// Native-AOT key handler. (No INotifyPropertyChanged: kept POCO so it works
 /// under AOT and round-trips identically through System.Text.Json in both.)
 /// </summary>
 public sealed class CopilotActionData

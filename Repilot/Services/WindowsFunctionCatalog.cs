@@ -8,7 +8,7 @@ namespace Repilot.Services;
 
 /// <summary>
 /// Curated, grouped catalog of Windows functions a user can bind the Copilot
-/// key to by name — instead of having to know the underlying shortcut. Each
+/// key to by name, instead of having to know the underlying shortcut. Each
 /// entry runs either a synthesized keystroke or a shell launch.
 /// </summary>
 public static class WindowsFunctionCatalog

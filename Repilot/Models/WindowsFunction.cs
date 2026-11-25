@@ -4,7 +4,7 @@ namespace Repilot.Models;
 /// A single entry in the curated Windows-function catalog. Each function is
 /// executed either by synthesizing a <see cref="Combo"/> keystroke or by
 /// shell-launching <see cref="ShellTarget"/> (an exe, ms-settings: URI, or
-/// shell: location). Catalog entries are defined in code, not serialized —
+/// shell: location). Catalog entries are defined in code, not serialized;
 /// only the <see cref="Id"/> is stored in settings.
 /// </summary>
 public sealed class WindowsFunction

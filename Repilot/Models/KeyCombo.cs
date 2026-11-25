@@ -19,7 +19,7 @@ public enum KeyMods
 /// <summary>
 /// A keyboard chord: zero or more modifiers plus an optional main virtual key.
 /// Used both for "custom key combination" actions and as the backing for many
-/// catalog Windows functions. Plain serializable data (no INotifyPropertyChanged) —
+/// catalog Windows functions. Plain serializable data (no INotifyPropertyChanged);
 /// the owning <see cref="CopilotActionData"/> carries it.
 /// </summary>
 public sealed class KeyCombo

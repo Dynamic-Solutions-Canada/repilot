@@ -19,7 +19,7 @@
     <!-- System.Drawing for runtime tray-icon rendering -->
     <FrameworkReference Include="Microsoft.WindowsDesktop.App" />
 
-    <!-- WinUI 3 (Windows App SDK) — Fluent Design, Mica, NavigationView -->
+    <!-- WinUI 3 (Windows App SDK): Fluent Design, Mica, NavigationView -->
     <PackageReference Include="Microsoft.WindowsAppSDK" />
 
     <!-- MVVM source generators (ObservableProperty, RelayCommand) -->

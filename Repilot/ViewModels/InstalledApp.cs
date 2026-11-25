@@ -8,7 +8,7 @@ public partial class InstalledApp : ObservableObject
 {
     public string Name { get; }
 
-    /// <summary>The shell path from AppsFolder — either an AUMID or a file path.</summary>
+    /// <summary>The shell path from AppsFolder: either an AUMID or a file path.</summary>
     public string Aumid { get; }
 
     private bool IsFilePath => Aumid.Length >= 2 && (Aumid[1] == ':' || Aumid.StartsWith(@"\\"));
@@ -19,7 +19,7 @@ public partial class InstalledApp : ObservableObject
     /// </summary>
     public string LaunchPath => IsFilePath ? Aumid : $@"shell:AppsFolder\{Aumid}";
 
-    /// <summary>Icon — assigned asynchronously after enumeration.</summary>
+    /// <summary>Icon, assigned asynchronously after enumeration.</summary>
     [ObservableProperty]
     public partial ImageSource? Icon { get; set; }
 

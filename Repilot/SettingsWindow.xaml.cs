@@ -9,7 +9,7 @@ using WinUIAppKit.Windowing;
 
 namespace Repilot;
 
-/// <summary>The settings window — the app's only window. Plain on-demand UI.</summary>
+/// <summary>The settings window, the app's only window. Plain on-demand UI.</summary>
 public sealed partial class SettingsWindow : Window
 {
     private static SettingsWindow? _instance;
