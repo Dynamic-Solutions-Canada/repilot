@@ -59,7 +59,7 @@ concurrency:
 
 jobs:
   publish:
-    uses: Dynamic-Solutions-Canada/winui-app-kit/.github/workflows/store-publish.yml@v2.7.1
+    uses: Dynamic-Solutions-Canada/winui-app-kit/.github/workflows/store-publish.yml@v2.8.0
     with:
       store_product_id: 9PB5FJ08PNVJ
       # Paid, US $0.99. The live submission reports PriceId "Base", which the Store CLI cannot
