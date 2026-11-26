@@ -2,7 +2,7 @@
   "microsoft": [
     {
       "file": "screenshots/{locale}/00-hero-dark.png",
-      "source": "raw/microsoft/04-windows-function-dark.png",
+      "source": "raw/microsoft/{locale}/04-windows-function-dark.png",
       "theme": "dark",
       "hero": {
         "layout": "split",
@@ -15,36 +15,36 @@
       "alt": "Repilot's name and the headline \"Make the Copilot key do what you want.\" on a purple panel, beside Repilot's Copilot key action page, enlarged, with Windows function selected and Task View chosen from the grouped list of window-management functions."
     },
     {
-      "file": "screenshots/01-home-dark.png",
-      "source": "raw/microsoft/00-home-dark.png",
+      "file": "screenshots/{locale}/01-home-dark.png",
+      "source": "raw/microsoft/{locale}/00-home-dark.png",
       "theme": "dark",
       "caption": "Choose what your Copilot key does, and see that Windows has it assigned to Repilot.",
       "alt": "Repilot's Home page in the dark theme: the Copilot key shows as assigned to Repilot, and the key is set to the Windows function Task View, with Change action and Test it now buttons."
     },
     {
-      "file": "screenshots/02-shortcut-dark.png",
-      "source": "raw/microsoft/01-shortcut-dark.png",
+      "file": "screenshots/{locale}/02-shortcut-dark.png",
+      "source": "raw/microsoft/{locale}/01-shortcut-dark.png",
       "theme": "dark",
       "caption": "Record any keyboard shortcut, including system ones like Alt+Tab.",
       "alt": "The Copilot key action page in the dark theme with Shortcut selected and the recorded shortcut Alt + Tab."
     },
     {
-      "file": "screenshots/03-text-dark.png",
-      "source": "raw/microsoft/02-text-dark.png",
+      "file": "screenshots/{locale}/03-text-dark.png",
+      "source": "raw/microsoft/{locale}/02-text-dark.png",
       "theme": "dark",
       "caption": "Type a character or a phrase with one press, whatever your keyboard layout.",
       "alt": "The Copilot key action page in the dark theme with Text selected and the phrase \"Thanks, talk soon!\" entered."
     },
     {
-      "file": "screenshots/04-app-or-link-dark.png",
-      "source": "raw/microsoft/03-app-or-link-dark.png",
+      "file": "screenshots/{locale}/04-app-or-link-dark.png",
+      "source": "raw/microsoft/{locale}/03-app-or-link-dark.png",
       "theme": "dark",
       "caption": "Open an installed app, a file, a website or a Windows Settings page.",
       "alt": "The Copilot key action page in the dark theme with App or link selected and the installed-apps list searched for \"Note\", showing Notepad and Sticky Notes."
     },
     {
-      "file": "screenshots/05-windows-function-dark.png",
-      "source": "raw/microsoft/04-windows-function-dark.png",
+      "file": "screenshots/{locale}/05-windows-function-dark.png",
+      "source": "raw/microsoft/{locale}/04-windows-function-dark.png",
       "theme": "dark",
       "caption": "Find Task View, Snap layouts, Lock PC, Magnifier and more by name.",
       "alt": "The Copilot key action page in the dark theme with Windows function selected and Task View chosen from the grouped, searchable list."
