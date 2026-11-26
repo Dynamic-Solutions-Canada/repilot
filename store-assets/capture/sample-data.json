@@ -1,12 +1,12 @@
 {
-  "about": "The synthetic data the Store screenshots show, in each listing language (LIST-8), read by capture.ps1: the phrase the Text action types, and for the App or link shot the search typed into the installed-apps list and the app chosen from it. The app names are Windows' own names for Notepad in that display language, which capture.ps1 matches in the list; check them on the first capture in each language. en-CA and fr-CA reuse en-US and fr-FR, as their listings do.",
+  "about": "The synthetic data the Store screenshots show, in each listing language (LIST-8), read by capture.ps1: the phrase the Text action types, and for the App or link shot the search typed into the installed-apps list and the app chosen from it. The app is Task Manager, a classic Windows app whose name Windows translates (inbox Store apps such as Notepad keep their English names on the test VM). Its names are Windows' own: the Start menu shortcut's localized name, string 32420 of Taskmgr.exe's resources in each display language, read on the test VM on November 26, 2026. en-CA and fr-CA reuse en-US and fr-FR, as their listings do.",
   "locales": {
-    "en-US": { "text": "Thanks, talk soon!", "appSearch": "Note", "appName": "Notepad" },
-    "es-ES": { "text": "¡Gracias, hablamos pronto!", "appSearch": "Bloc", "appName": "Bloc de notas" },
-    "fr-FR": { "text": "Merci, à bientôt !", "appSearch": "Bloc", "appName": "Bloc-notes" },
-    "de-DE": { "text": "Danke, bis bald!", "appSearch": "Editor", "appName": "Editor" },
-    "zh-CN": { "text": "谢谢，回头聊！", "appSearch": "记事本", "appName": "记事本" },
-    "pt-BR": { "text": "Valeu, até logo!", "appSearch": "Bloco", "appName": "Bloco de Notas" },
-    "ja-JP": { "text": "ありがとう、またね！", "appSearch": "メモ", "appName": "メモ帳" }
+    "en-US": { "text": "Thanks, talk soon!", "appSearch": "Task", "appName": "Task Manager" },
+    "es-ES": { "text": "¡Gracias, hablamos pronto!", "appSearch": "Administrador", "appName": "Administrador de tareas" },
+    "fr-FR": { "text": "Merci, à bientôt !", "appSearch": "Gestionnaire", "appName": "Gestionnaire des tâches" },
+    "de-DE": { "text": "Danke, bis bald!", "appSearch": "Task", "appName": "Task-Manager" },
+    "zh-CN": { "text": "谢谢，回头聊！", "appSearch": "任务", "appName": "任务管理器" },
+    "pt-BR": { "text": "Valeu, até logo!", "appSearch": "Gerenciador", "appName": "Gerenciador de Tarefas" },
+    "ja-JP": { "text": "ありがとう、またね！", "appSearch": "タスク", "appName": "タスク マネージャー" }
   }
 }

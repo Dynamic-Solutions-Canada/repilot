@@ -99,10 +99,12 @@ Set-ItemProperty $keyPath AppAumid "$($pkg.PackageFamilyName)!App"
 
 # --- The shots ---------------------------------------------------------------------------------
 
-# The Text action types this language's phrase, and the App or link action opens Notepad under its
-# name in this language (the shot also picks it in the list). Each Action is Repilot's own JSON shape.
+# The Text action types this language's phrase, and the App or link action opens Task Manager under
+# its name in this language (the shot also picks it in the list). Task Manager, not Notepad: a classic
+# app's name follows Windows' display language, while inbox Store apps such as Notepad stay English
+# on the test VM. Each Action is Repilot's own JSON shape.
 $textAction = [ordered]@{ Type = 4; Text = $sample.text } | ConvertTo-Json -Compress
-$appAction = [ordered]@{ Type = 2; LaunchPath = 'notepad.exe'; LaunchDisplayName = $sample.appName } | ConvertTo-Json -Compress
+$appAction = [ordered]@{ Type = 2; LaunchPath = 'taskmgr.exe'; LaunchDisplayName = $sample.appName } | ConvertTo-Json -Compress
 $shots = @(
     @{ Name = '00-home-dark';             Page = 'NavHome';   Action = '{ "Type": 3, "WindowsFunctionId": "task-view" }' },
     @{ Name = '01-shortcut-dark';         Page = 'NavAction'; Action = '{ "Type": 1, "Combo": { "Modifiers": 2, "VirtualKey": 9 } }' },
