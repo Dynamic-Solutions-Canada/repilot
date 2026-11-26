@@ -40,7 +40,7 @@
       "source": "raw/microsoft/{locale}/03-app-or-link-dark.png",
       "theme": "dark",
       "caption": "Open an installed app, a file, a website or a Windows Settings page.",
-      "alt": "The Copilot key action page in the dark theme with App or link selected and the installed-apps list searched for \"Task\", showing Task Manager, selected, and Task Scheduler."
+      "alt": "The Copilot key action page in the dark theme with App or link selected and the installed-apps list searched by name and Task Manager selected."
     },
     {
       "file": "screenshots/{locale}/05-windows-function-dark.png",

@@ -78,8 +78,8 @@
     },
     "fr-FR": {
       "title": "Repilot",
-      "shortDescription": "Réattribuez la touche Copilot de Windows 11 à ce que vous voulez : un raccourci clavier, du texte, une application ou un lien, ou une fonction Windows intégrée.",
-      "fullDescription": "Réattribuez la touche Copilot à ce que vous voulez.\n\nChoisissez ce que fait la touche Copilot ou le raccourci Windows + C : envoyer un raccourci clavier, saisir du texte, ouvrir une application, un fichier ou un site, exécuter une fonction Windows ou ne rien faire.\n\nVOTRE TOUCHE, VOTRE ACTION\n• Raccourci clavier : enregistrez des combinaisons comme Alt+Tab, Windows+Tab ou Ctrl+Maj+Échap.\n• Texte : saisissez un caractère ou une phrase, quelle que soit la disposition de votre clavier.\n• Application, fichier ou lien : recherchez vos applications installées ou indiquez un chemin de fichier, un site ou un lien vers les paramètres Windows.\n• Fonction Windows : trouvez par leur nom l'affichage des tâches, les dispositions d'ancrage, les bureaux virtuels, le verrouillage du PC, la capture d'écran, la loupe, l'historique du presse-papiers, les paramètres rapides et plus encore.\n• Rien : désactivez la touche pour qu'un appui involontaire ne vous interrompe pas.\n\nRIEN EN ARRIÈRE-PLAN\nRepilot n'a ni service, ni icône dans la zone de notification, ni tâche de démarrage. Lorsque vous appuyez sur la touche, un petit processus exécute votre action puis se ferme. L'application de paramètres ne fonctionne que lorsqu'elle est ouverte.\n\nPRIVÉ ET SIMPLE\nAucun compte ni connexion. Vos paramètres restent sur votre PC, et Repilot ne collecte aucune télémétrie.\n\nVOTRE LANGUE\nDisponible en anglais, espagnol, français, allemand, chinois simplifié, portugais du Brésil et japonais. Repilot suit la langue d'affichage de Windows, sauf si vous en choisissez une autre dans l'application.\n\nPOUR COMMENCER\nSélectionnez Repilot Key dans Paramètres Windows > Bluetooth et appareils > Clavier > Personnaliser la touche Copilot, puis choisissez votre action dans Repilot.\n\nNécessite Windows 11. Compatible avec la touche Copilot et Windows + C.",
+      "shortDescription": "Choisissez ce que fait la touche Copilot de Windows 11 : un raccourci clavier, du texte, une application ou un lien, ou une fonction Windows intégrée.",
+      "fullDescription": "La touche Copilot fait ce que vous voulez.\n\nChoisissez ce que fait la touche Copilot ou le raccourci Windows + C : envoyer un raccourci clavier, saisir du texte, ouvrir une application, un fichier ou un site, exécuter une fonction Windows ou ne rien faire.\n\nVOTRE TOUCHE, VOTRE ACTION\n• Raccourci clavier : enregistrez des combinaisons comme Alt+Tab, Windows+Tab ou Ctrl+Maj+Échap.\n• Texte : saisissez un caractère ou une phrase, quelle que soit la disposition de votre clavier.\n• Application, fichier ou lien : recherchez vos applications installées ou indiquez un chemin de fichier, un site ou un lien vers les paramètres Windows.\n• Fonction Windows : trouvez par leur nom l'affichage des tâches, les dispositions d'ancrage, les bureaux virtuels, le verrouillage du PC, la capture d'écran, la loupe, l'historique du presse-papiers, les paramètres rapides et plus encore.\n• Rien : désactivez la touche pour qu'un appui involontaire ne vous interrompe pas.\n\nRIEN EN ARRIÈRE-PLAN\nRepilot n'a ni service, ni icône dans la zone de notification, ni tâche de démarrage. Lorsque vous appuyez sur la touche, un petit processus exécute votre action puis se ferme. L'application de paramètres ne fonctionne que lorsqu'elle est ouverte.\n\nPRIVÉ ET SIMPLE\nAucun compte ni connexion. Vos paramètres restent sur votre PC, et Repilot ne collecte aucune télémétrie.\n\nVOTRE LANGUE\nDisponible en anglais, espagnol, français, allemand, chinois simplifié, portugais du Brésil et japonais. Repilot suit la langue d'affichage de Windows, sauf si vous en choisissez une autre dans l'application.\n\nPOUR COMMENCER\nSélectionnez Repilot Key dans Paramètres Windows > Bluetooth et appareils > Clavier > Personnaliser la touche Copilot, puis choisissez votre action dans Repilot.\n\nNécessite Windows 11. Compatible avec la touche Copilot et Windows + C.",
       "features": [
         "Réattribuez la touche Copilot ou Windows + C à l'action de votre choix",
         "Rien en arrière-plan : ni service, ni icône de notification, ni tâche de démarrage",
@@ -109,7 +109,7 @@
         "Ouvrez une application installée, un fichier, un site web ou une page des Paramètres Windows.",
         "Trouvez par leur nom Affichage des tâches, Dispositions d’ancrage, Verrouiller le PC, Loupe et plus encore."
       ],
-      "heroHeadline": "Réattribuez la touche Copilot à ce que vous voulez.",
+      "heroHeadline": "La touche Copilot fait ce que vous voulez.",
       "heroSubline": "Un raccourci clavier, du texte, une application ou un lien, ou une fonction Windows."
     },
     "fr-CA": {
@@ -117,7 +117,7 @@
     },
     "de-DE": {
       "title": "Repilot",
-      "shortDescription": "Belegen Sie die Copilot-Taste von Windows 11 nach Ihren Wünschen: mit einem Tastenkurzbefehl, Text, einer App oder einem Link oder einer integrierten Windows-Funktion.",
+      "shortDescription": "Belege die Copilot-Taste von Windows 11 nach deinen Wünschen: mit einem Tastenkurzbefehl, Text, einer App oder einem Link oder einer integrierten Windows-Funktion.",
       "fullDescription": "Belege die Copilot-Taste nach deinen Wünschen.\n\nLege fest, was die Copilot-Taste oder Windows + C ausführt: eine Tastenkombination senden, Text eingeben, eine App, Datei oder Website öffnen, eine Windows-Funktion ausführen oder nichts tun.\n\nDEINE TASTE, DEINE AKTION\n• Tastenkombination: Zeichne Kombinationen wie Alt+Tab, Windows+Tab oder Strg+Umschalt+Esc auf.\n• Text: Gib ein Zeichen oder einen Text ein, unabhängig vom Tastaturlayout.\n• App, Datei oder Link: Suche installierte Apps oder gib einen Dateipfad, eine Website oder einen Link zu den Windows-Einstellungen ein.\n• Windows-Funktion: Finde Taskansicht, Snap-Layouts, virtuelle Desktops, PC-Sperre, Bildschirmausschnitt, Bildschirmlupe, Zwischenablageverlauf, Schnelleinstellungen und mehr über ihren Namen.\n• Nichts: Schalte die Taste ab, damit dich ein versehentlicher Druck nicht unterbricht.\n\nNICHTS LÄUFT IM HINTERGRUND\nRepilot hat keinen Dienst, kein Symbol im Infobereich und keine Autostart-Aufgabe. Beim Tastendruck führt ein kleiner Prozess deine Aktion aus und beendet sich danach. Die Einstellungen-App läuft nur, solange du sie geöffnet hast.\n\nPRIVAT UND EINFACH\nKein Konto und keine Anmeldung. Deine Einstellungen bleiben auf deinem PC, und Repilot erfasst keine Telemetrie.\n\nDEINE SPRACHE\nVerfügbar auf Englisch, Spanisch, Französisch, Deutsch, vereinfachtem Chinesisch, brasilianischem Portugiesisch und Japanisch. Repilot übernimmt die Anzeigesprache von Windows, sofern du in der App keine andere wählst.\n\nERSTE SCHRITTE\nWähle Repilot Key unter Windows-Einstellungen > Bluetooth und Geräte > Tastatur > Copilot-Taste anpassen. Lege danach deine Aktion in Repilot fest.\n\nErfordert Windows 11. Funktioniert mit der Copilot-Taste und Windows + C.",
       "features": [
         "Belege die Copilot-Taste oder Windows + C mit der Aktion deiner Wahl",
@@ -142,19 +142,19 @@
       ],
       "screenshotCaptions": [
         "Ein Tastenkurzbefehl, Text, eine App oder ein Link oder eine Windows-Funktion.",
-        "Wählen Sie, was die Copilot-Taste tut, und sehen Sie, dass Windows sie Repilot zugewiesen hat.",
-        "Zeichnen Sie jeden Tastenkurzbefehl auf, auch Systemkürzel wie Alt+Tab.",
-        "Geben Sie mit einem Tastendruck ein Zeichen oder einen Satz ein, unabhängig vom Tastaturlayout.",
-        "Öffnen Sie eine installierte App, eine Datei, eine Website oder eine Seite der Windows-Einstellungen.",
-        "Finden Sie Taskansicht, Andocklayouts, PC sperren, Bildschirmlupe und mehr über den Namen."
+        "Wähle, was die Copilot-Taste tut, und sieh, dass Windows sie Repilot zugewiesen hat.",
+        "Zeichne jeden Tastenkurzbefehl auf, auch Systemkürzel wie Alt+Tab.",
+        "Gib mit einem Tastendruck ein Zeichen oder einen Satz ein, unabhängig vom Tastaturlayout.",
+        "Öffne eine installierte App, eine Datei, eine Website oder eine Seite der Windows-Einstellungen.",
+        "Finde Taskansicht, Andocklayouts, PC sperren, Bildschirmlupe und mehr über den Namen."
       ],
-      "heroHeadline": "Belegen Sie die Copilot-Taste nach Ihren Wünschen.",
+      "heroHeadline": "Belege die Copilot-Taste nach deinen Wünschen.",
       "heroSubline": "Ein Tastenkurzbefehl, Text, eine App oder ein Link oder eine Windows-Funktion."
     },
     "zh-CN": {
       "title": "Repilot",
       "shortDescription": "将 Windows 11 的 Copilot 键改为执行你想要的操作：快捷键、文本、应用或链接，或内置的 Windows 功能。",
-      "fullDescription": "让 Copilot 键执行你想要的操作。\n\n选择专用 Copilot 键或 Windows + C 的操作：发送键盘快捷键、输入文本、打开应用、文件或网站、运行 Windows 功能，或不执行任何操作。\n\n你的按键，你的操作\n• 键盘快捷键：录制 Alt+Tab、Windows+Tab、Ctrl+Shift+Esc 等组合键。\n• 文本：输入字符或短语，不受键盘布局影响。\n• 应用、文件或链接：搜索已安装的应用，或输入文件路径、网址或 Windows 设置链接。\n• Windows 功能：按名称查找任务视图、贴靠布局、虚拟桌面、锁定电脑、屏幕截图、放大镜、剪贴板历史记录、快速设置等功能。\n• 不执行任何操作：关闭此键，误按时不会打断你。\n\n后台不运行任何程序\nRepilot 没有服务、托盘图标或启动任务。按下按键时，一个小型进程会执行你的操作，然后退出。设置应用仅在你打开时运行。\n\n私密而简单\n无需帐户或登录。你的设置保存在你的电脑上，Repilot 不收集任何遥测数据。\n\n你的语言\n提供英语、西班牙语、法语、德语、简体中文、巴西葡萄牙语和日语版本。Repilot 跟随 Windows 显示语言，你也可以在应用中另选一种。\n\n开始使用\n在 Windows 设置 > 蓝牙和设备 > 键盘 > 自定义 Copilot 键中选择 Repilot Key，然后在 Repilot 中选择操作。\n\n需要 Windows 11。支持专用 Copilot 键和 Windows + C。",
+      "fullDescription": "让 Copilot 键听你指挥。\n\n选择专用 Copilot 键或 Windows + C 的操作：发送键盘快捷键、输入文本、打开应用、文件或网站、运行 Windows 功能，或不执行任何操作。\n\n你的按键，你的操作\n• 键盘快捷键：录制 Alt+Tab、Windows+Tab、Ctrl+Shift+Esc 等组合键。\n• 文本：输入字符或短语，不受键盘布局影响。\n• 应用、文件或链接：搜索已安装的应用，或输入文件路径、网址或 Windows 设置链接。\n• Windows 功能：按名称查找任务视图、贴靠布局、虚拟桌面、锁定电脑、屏幕截图、放大镜、剪贴板历史记录、快速设置等功能。\n• 不执行任何操作：关闭此键，误按时不会打断你。\n\n后台不运行任何程序\nRepilot 没有服务、托盘图标或启动任务。按下按键时，一个小型进程会执行你的操作，然后退出。设置应用仅在你打开时运行。\n\n私密而简单\n无需帐户或登录。你的设置保存在你的电脑上，Repilot 不收集任何遥测数据。\n\n你的语言\n提供英语、西班牙语、法语、德语、简体中文、巴西葡萄牙语和日语版本。Repilot 跟随 Windows 显示语言，你也可以在应用中另选一种。\n\n开始使用\n在 Windows 设置 > 蓝牙和设备 > 键盘 > 自定义 Copilot 键中选择 Repilot Key，然后在 Repilot 中选择操作。\n\n需要 Windows 11。支持专用 Copilot 键和 Windows + C。",
       "features": [
         "将 Copilot 键或 Windows + C 设为你选择的操作",
         "后台不运行任何程序：没有服务、托盘图标或启动任务",
@@ -184,8 +184,8 @@
         "打开已安装的应用、文件、网站或 Windows 设置页面。",
         "按名称查找任务视图、贴靠布局、锁定电脑、放大镜等功能。"
       ],
-      "heroHeadline": "让 Copilot 键执行你想要的操作。",
-      "heroSubline": "快捷键、文本、应用或链接，或 Windows 功能。"
+      "heroHeadline": "让 Copilot 键\n听你指挥。",
+      "heroSubline": "快捷键、文本、应用或链接，\n或 Windows 功能。"
     },
     "pt-BR": {
       "title": "Repilot",
@@ -257,7 +257,7 @@
         "タスクビュー、スナップレイアウト、PC をロック、拡大鏡などを名前で検索できます。"
       ],
       "heroHeadline": "Copilot キーを、\n好きな動作に。",
-      "heroSubline": "ショートカット、テキスト、アプリまたはリンク、Windows の機能。"
+      "heroSubline": "ショートカット、テキスト、\nアプリまたはリンク、Windows の機能。"
     }
   }
 }

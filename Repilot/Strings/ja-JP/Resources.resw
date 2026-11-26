@@ -76,7 +76,7 @@
     <value>例：ç</value>
   </data>
   <data name="ShortcutInstructions.Text" xml:space="preserve">
-    <value>記録をクリックして、使いたいショートカット（例：Alt+Tab）を押します。ここではキーを記録するだけで実行しません。Esc でキャンセルします。</value>
+    <value>記録をクリックして、使いたいシ⁠ョ⁠ー⁠ト⁠カ⁠ッ⁠ト（例：Alt+Tab）を押⁠し⁠ま⁠す⁠。ここではキーを記録するだけで実⁠行⁠し⁠ま⁠せ⁠ん⁠。Esc でキ⁠ャ⁠ン⁠セ⁠ル⁠し⁠ま⁠す⁠。</value>
   </data>
   <data name="NotSet" xml:space="preserve">
     <value>（未設定）</value>

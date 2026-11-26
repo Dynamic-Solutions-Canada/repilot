@@ -22,7 +22,7 @@
     <value>Aktion der Copilot-Taste</value>
   </data>
   <data name="HomeDescription.Text" xml:space="preserve">
-    <value>Wählen Sie, was die Copilot-Taste Ihrer Tastatur tut.</value>
+    <value>Wähle, was die Copilot-Taste deiner Tastatur tut.</value>
   </data>
   <data name="AssignInSettings.Content" xml:space="preserve">
     <value>In Windows-Einstellungen zuweisen</value>
@@ -37,19 +37,19 @@
     <value>Jetzt testen</value>
   </data>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Wählen Sie, was die Copilot-Taste Ihrer Tastatur tut: einen eigenen Tastenkurzbefehl senden, Text eingeben, eine App oder einen Link öffnen oder eine Windows-Funktion ausführen.</value>
+    <value>Wähle, was die Copilot-Taste deiner Tastatur tut: einen eigenen Tastenkurzbefehl senden, Text eingeben, eine App oder einen Link öffnen oder eine Windows-Funktion ausführen.</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>Funktionsweise</value>
   </data>
   <data name="HowItWorksDescription" xml:space="preserve">
-    <value>Registriert sich als offizieller Anbieter für die Microsoft Copilot-Hardwaretaste. Ein Tastendruck startet ein kleines Programm, das Ihre Aktion ausführt und sich beendet. Kein Hintergrunddienst, kein Taskleistensymbol und kein dauerhaft laufender Prozess.</value>
+    <value>Registriert sich als offizieller Anbieter für die Microsoft Copilot-Hardwaretaste. Ein Tastendruck startet ein kleines Programm, das deine Aktion ausführt und sich beendet. Kein Hintergrunddienst, kein Taskleistensymbol und kein dauerhaft laufender Prozess.</value>
   </data>
   <data name="NoBackground.Title" xml:space="preserve">
     <value>Kein Hintergrundprozess</value>
   </data>
   <data name="NoBackground.Message" xml:space="preserve">
-    <value>Repilot läuft nicht im Hintergrund. Beim Drücken der Copilot-Taste startet Windows kurz ein kleines Programm, das Ihre Aktion ausführt und sich beendet. Dieses Fenster dient nur der Konfiguration.</value>
+    <value>Repilot läuft nicht im Hintergrund. Beim Drücken der Copilot-Taste startet Windows kurz ein kleines Programm, das deine Aktion ausführt und sich beendet. Dieses Fenster dient nur der Konfiguration.</value>
   </data>
   <data name="ActionShortcut.Text" xml:space="preserve">
     <value>Tastenkurzbefehl</value>
@@ -67,7 +67,7 @@
     <value>Keine</value>
   </data>
   <data name="TextInstructions.Text" xml:space="preserve">
-    <value>Geben Sie das zu tippende Zeichen oder den Text ein, zum Beispiel ç. Drücken Sie die Copilot-Taste, während ein Textfeld in einer anderen App den Fokus hat. Dies funktioniert unabhängig vom Tastaturlayout.</value>
+    <value>Gib das zu tippende Zeichen oder den Text ein, zum Beispiel ç. Drücke die Copilot-Taste, während ein Textfeld in einer anderen App den Fokus hat. Das funktioniert unabhängig vom Tastaturlayout.</value>
   </data>
   <data name="TextToType.Header" xml:space="preserve">
     <value>Zu tippender Text</value>
@@ -76,7 +76,7 @@
     <value>z. B. ç</value>
   </data>
   <data name="ShortcutInstructions.Text" xml:space="preserve">
-    <value>Klicken Sie auf Aufzeichnen und drücken Sie den gewünschten Tastenkurzbefehl (z. B. Alt+Tab). Die Tasten werden hier erfasst, ohne die Aktion auszulösen. Drücken Sie Esc zum Abbrechen.</value>
+    <value>Klicke auf Aufzeichnen und drücke den gewünschten Tastenkurzbefehl (z. B. Alt+Tab). Die Tasten werden hier erfasst, ohne die Aktion auszulösen. Drücke Esc zum Abbrechen.</value>
   </data>
   <data name="NotSet" xml:space="preserve">
     <value>(nicht festgelegt)</value>
@@ -121,7 +121,7 @@
     <value>Zugewiesen</value>
   </data>
   <data name="StatusAssignedDescription" xml:space="preserve">
-    <value>Repilot ist Ihrer Copilot-Taste zugewiesen. Drücken Sie die Taste, um Ihre Aktion auszuführen.</value>
+    <value>Repilot ist deiner Copilot-Taste zugewiesen. Drücke die Taste, um deine Aktion auszuführen.</value>
   </data>
   <data name="ChangeAssignment" xml:space="preserve">
     <value>In Windows-Einstellungen ändern</value>
@@ -130,7 +130,7 @@
     <value>Die Copilot-Taste ist einer anderen App zugewiesen</value>
   </data>
   <data name="StatusChooseRepilot" xml:space="preserve">
-    <value>Öffnen Sie die Windows-Einstellungen und wählen Sie Repilot, um die folgende Aktion zu verwenden.</value>
+    <value>Öffne die Windows-Einstellungen und wähle Repilot, um die folgende Aktion zu verwenden.</value>
   </data>
   <data name="StatusSearch" xml:space="preserve">
     <value>Die Copilot-Taste öffnet die Suche</value>
@@ -139,7 +139,7 @@
     <value>Noch nicht zugewiesen</value>
   </data>
   <data name="StatusAssignInstructions" xml:space="preserve">
-    <value>Öffnen Sie Windows-Einstellungen → Copilot-Taste anpassen, wählen Sie „Benutzerdefiniert“ und dann Repilot.</value>
+    <value>Öffne Windows-Einstellungen → Copilot-Taste anpassen, wähle „Benutzerdefiniert“ und dann Repilot.</value>
   </data>
   <data name="RecordPrompt" xml:space="preserve">
     <value>Tastenkurzbefehl drücken…</value>
@@ -187,7 +187,7 @@
     <value>Windows folgen</value>
   </data>
   <data name="LanguageRestartPending" xml:space="preserve">
-    <value>Sprache gespeichert. Schließen und öffnen Sie die Repilot-Einstellungs-App erneut, um sie anzuwenden.</value>
+    <value>Sprache gespeichert. Schließe die Repilot-Einstellungs-App und öffne sie erneut, um sie anzuwenden.</value>
   </data>
   <data name="Function_task-view_Name" xml:space="preserve">
     <value>Taskansicht</value>
@@ -445,7 +445,7 @@
     <value>Einstellungen</value>
   </data>
   <data name="ResetKeptNote" xml:space="preserve">
-    <value>Die Copilot-Taste bleibt in den Windows-Einstellungen Repilot zugewiesen; wählen Sie danach hier erneut ihre Aktion.</value>
+    <value>Die Copilot-Taste bleibt in den Windows-Einstellungen Repilot zugewiesen; wähle danach hier erneut deine Aktion.</value>
   </data>
   <data name="SettingsAppearanceHeader.Text" xml:space="preserve">
     <value>Darstellung</value>
