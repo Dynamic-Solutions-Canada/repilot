@@ -1,0 +1,12 @@
+{
+  "about": "The synthetic data the Store screenshots show, in each listing language (LIST-8), read by capture.ps1: the phrase the Text action types, and for the App or link shot the search typed into the installed-apps list and the app chosen from it. The app names are Windows' own names for Notepad in that display language, which capture.ps1 matches in the list; check them on the first capture in each language. en-CA and fr-CA reuse en-US and fr-FR, as their listings do.",
+  "locales": {
+    "en-US": { "text": "Thanks, talk soon!", "appSearch": "Note", "appName": "Notepad" },
+    "es-ES": { "text": "¡Gracias, hablamos pronto!", "appSearch": "Bloc", "appName": "Bloc de notas" },
+    "fr-FR": { "text": "Merci, à bientôt !", "appSearch": "Bloc", "appName": "Bloc-notes" },
+    "de-DE": { "text": "Danke, bis bald!", "appSearch": "Editor", "appName": "Editor" },
+    "zh-CN": { "text": "谢谢，回头聊！", "appSearch": "记事本", "appName": "记事本" },
+    "pt-BR": { "text": "Valeu, até logo!", "appSearch": "Bloco", "appName": "Bloco de Notas" },
+    "ja-JP": { "text": "ありがとう、またね！", "appSearch": "メモ", "appName": "メモ帳" }
+  }
+}

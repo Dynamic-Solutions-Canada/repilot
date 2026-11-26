@@ -3,6 +3,7 @@ using Repilot.Classes.Settings;
 using Repilot.Pages;
 using Repilot.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using WinUIAppKit.Pages;
 using WinUIAppKit.Windowing;
@@ -35,18 +36,8 @@ public sealed partial class SettingsWindow : Window
 
         Shell.Caption = "Repilot";
         Shell.IconPngPath = App.IconPngPath;
-        Shell.MenuItems.Add(new NavigationViewItem
-        {
-            Content = UiStrings.Get("NavHome"),
-            Tag = HomeTag,
-            Icon = new SymbolIcon(Symbol.Home),
-        });
-        Shell.MenuItems.Add(new NavigationViewItem
-        {
-            Content = UiStrings.Get("NavAction"),
-            Tag = ActionTag,
-            Icon = new FontIcon { Glyph = "\uE765" },
-        });
+        Shell.MenuItems.Add(CreateNavItem(HomeTag, "NavHome", new SymbolIcon(Symbol.Home)));
+        Shell.MenuItems.Add(CreateNavItem(ActionTag, "NavAction", new FontIcon { Glyph = "\uE765" }));
 
         // Mica, the custom title bar, sharp icons, a minimum size, the saved placement (or the default
         // size, centred) and the theme, from the kit's shared settings-window setup.
@@ -65,6 +56,27 @@ public sealed partial class SettingsWindow : Window
     }
 
     public static SettingsWindow? GetCurrent() => _instance;
+
+    /// <summary>
+    /// One navigation item built in code. Its automation ID is its string key (<c>NavHome</c>,
+    /// <c>NavAction</c>): unlike XAML elements it has no <c>x:Name</c> to supply one, and UI automation
+    /// (the Store screenshot capture) must find it by something that does not change with the
+    /// interface language.
+    /// </summary>
+    /// <param name="tag">The page's navigation tag.</param>
+    /// <param name="key">The string key of its label, also its automation ID.</param>
+    /// <param name="icon">Its icon.</param>
+    private static NavigationViewItem CreateNavItem(string tag, string key, IconElement icon)
+    {
+        var item = new NavigationViewItem
+        {
+            Content = UiStrings.Get(key),
+            Tag = tag,
+            Icon = icon,
+        };
+        AutomationProperties.SetAutomationId(item, key);
+        return item;
+    }
 
     /// <summary>Opens the Action page and selects its menu item, for the Home page's "Change" button.</summary>
     public void ShowActionPage() => Shell.Select(ActionTag);
