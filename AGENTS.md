@@ -85,7 +85,7 @@ Use the `release` skill; a `v*` tag fails without the committed `release-notes/`
 | A file, service or page added, moved or removed | The Architecture table above |
 | A file linked into the handler | The Architecture table; keep it WinUI-free and trim-safe |
 | A UI pattern or page layout | `.agents/guides/ui-conventions.md` |
-| An npm command | The Commands table above, `docs/development.md`, the `desktop` skill, `paseo.json` |
+| An npm command | The Commands table above, `docs/development.md`, the `desktop` skill |
 | A Windows function | The catalog, every `Resources.resw` (see the key handler guide) |
 | A setting's shape | A step in `SettingsMigrations.cs` and a scenario in `tests/Repilot.Settings.Tests/`; `Action` is read by the handler too |
 | A language | `.agents/guides/localization.md`, the manifest, `Classes/AppLanguage.cs`, the localization harness's list |
